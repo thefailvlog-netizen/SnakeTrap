@@ -1,140 +1,141 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⛳ The Course — Golf Tournament Tracker</title>
+  <title>⛳ SnakesTrap App</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { min-height: 100vh; background: linear-gradient(170deg, #031a0e 0%, #052e16 30%, #0d3320 60%, #14532d 100%); color: #fff; font-family: 'DM Sans', sans-serif; }
 
-    @keyframes fall { 0% { transform: translateY(-60px) rotate(0deg); opacity: 0; } 8% { opacity: 0.10; } 92% { opacity: 0.10; } 100% { transform: translateY(110vh) rotate(45deg); opacity: 0; } }
-    @keyframes pulseLive { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.75); } 50% { box-shadow: 0 0 0 10px rgba(239,68,68,0); } }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes spinIn { from { opacity:0; transform:scale(0.85) rotate(-4deg); } to { opacity:1; transform:scale(1) rotate(0); } }
-    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+```
+@keyframes fall      { 0% { transform:translateY(-60px) rotate(0deg); opacity:0; } 8% { opacity:.10; } 92% { opacity:.10; } 100% { transform:translateY(110vh) rotate(45deg); opacity:0; } }
+@keyframes pulseLive { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.75); } 50% { box-shadow:0 0 0 10px rgba(239,68,68,0); } }
+@keyframes fadeUp    { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spinIn    { from { opacity:0; transform:scale(.85) rotate(-4deg); } to { opacity:1; transform:scale(1) rotate(0); } }
+@keyframes blink     { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+@keyframes popIn     { 0% { transform:scale(.7); opacity:0; } 70% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
 
-    .fade-up  { animation: fadeUp  0.35s ease both; }
-    .spin-in  { animation: spinIn  0.40s ease both; }
+.fade-up { animation:fadeUp .35s ease both; }
+.spin-in { animation:spinIn .40s ease both; }
 
-    /* Emoji rain */
-    .rain-wrap { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
-    .raindrop  { position:absolute; top:0; animation:fall linear infinite; user-select:none; }
+.rain-wrap { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+.raindrop  { position:absolute; top:0; animation:fall linear infinite; user-select:none; }
 
-    /* Header */
-    header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,0.97),rgba(20,83,45,0.97)); border-bottom:2px solid rgba(202,138,4,0.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
-    .header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-    .logo { display:flex; align-items:center; gap:11px; }
-    .logo-icon { font-size:28px; filter:drop-shadow(0 2px 8px rgba(202,138,4,0.5)); }
-    .logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:18px; font-weight:800; }
-    .logo p  { color:#4ade80; font-size:10px; letter-spacing:.1em; margin-top:1px; }
-    .header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    .live-badge { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
-    .live-dot   { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
-    .user-chip  { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,0.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; }
-    .admin-tag  { color:#fbbf24; font-size:9px; font-weight:700; }
-    .btn-signout { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
+header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
+.header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.logo { display:flex; align-items:center; gap:11px; }
+.logo-icon { font-size:28px; filter:drop-shadow(0 2px 8px rgba(202,138,4,.5)); }
+.logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:18px; font-weight:800; }
+.logo p  { color:#4ade80; font-size:10px; letter-spacing:.1em; margin-top:1px; }
+.header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.live-badge  { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
+.live-dot    { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
+.user-chip   { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; }
+.admin-tag   { color:#fbbf24; font-size:9px; font-weight:700; }
+.btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
 
-    /* Nav */
-    nav { position:relative; z-index:10; background:rgba(0,0,0,0.5); border-bottom:1px solid rgba(202,138,4,0.2); }
-    .nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
-    .nav-btn { padding:13px 18px; background:transparent; border:none; border-bottom:2.5px solid transparent; color:#6b7280; font-weight:500; font-size:13px; cursor:pointer; white-space:nowrap; font-family:inherit; transition:all .2s; }
-    .nav-btn.active { color:#fbbf24; border-bottom-color:#fbbf24; font-weight:700; }
+nav { position:relative; z-index:10; background:rgba(0,0,0,.5); border-bottom:1px solid rgba(202,138,4,.2); }
+.nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
+.nav-btn { padding:13px 18px; background:transparent; border:none; border-bottom:2.5px solid transparent; color:#6b7280; font-weight:500; font-size:13px; cursor:pointer; white-space:nowrap; font-family:inherit; transition:all .2s; }
+.nav-btn.active { color:#fbbf24; border-bottom-color:#fbbf24; font-weight:700; }
 
-    main { max-width:960px; margin:0 auto; padding:24px 20px 80px; position:relative; z-index:1; }
+main { max-width:960px; margin:0 auto; padding:24px 20px 80px; position:relative; z-index:1; }
 
-    /* Cards */
-    .card { background:rgba(0,0,0,0.38); border:1px solid rgba(255,255,255,0.07); border-radius:16px; overflow:hidden; }
-    .card-gold { background:linear-gradient(135deg,rgba(20,83,45,0.55),rgba(5,46,22,0.7)); border:1px solid rgba(202,138,4,0.4); border-radius:20px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+.card      { background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; }
+.card-gold { background:linear-gradient(135deg,rgba(20,83,45,.55),rgba(5,46,22,.7)); border:1px solid rgba(202,138,4,.4); border-radius:20px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
 
-    /* Forms */
-    .form-group  { margin-bottom:16px; }
-    .form-label  { display:block; color:#86efac; font-size:11px; font-weight:700; margin-bottom:6px; letter-spacing:.08em; }
-    .form-input, .form-select { width:100%; background:rgba(255,255,255,0.08); border:1px solid rgba(202,138,4,0.35); border-radius:10px; padding:10px 14px; color:#fff; font-size:14px; font-family:inherit; outline:none; }
-    .form-select { cursor:pointer; }
-    .form-select option { background:#1a3a2a; }
+.form-group  { margin-bottom:16px; }
+.form-label  { display:block; color:#86efac; font-size:11px; font-weight:700; margin-bottom:6px; letter-spacing:.08em; }
+.form-input, .form-select { width:100%; background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:10px; padding:10px 14px; color:#fff; font-size:14px; font-family:inherit; outline:none; }
+.form-select { cursor:pointer; }
+.form-select option { background:#1a3a2a; }
 
-    /* Buttons */
-    .btn { border:none; border-radius:11px; padding:12px 24px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s; }
-    .btn-gold  { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; box-shadow:0 4px 16px rgba(202,138,4,0.4); }
-    .btn-gold:hover:not(:disabled) { transform:translateY(-1px); }
-    .btn-green { background:#16a34a; color:#fff; }
-    .btn-red   { background:#dc2626; color:#fff; }
-    .btn-ghost { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); color:#9ca3af; }
-    .btn-full  { width:100%; padding:13px; font-size:15px; }
-    .btn:disabled { background:rgba(255,255,255,0.06)!important; color:#374151!important; cursor:not-allowed!important; box-shadow:none!important; transform:none!important; }
+.btn       { border:none; border-radius:11px; padding:12px 24px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s; }
+.btn-gold  { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; box-shadow:0 4px 16px rgba(202,138,4,.4); }
+.btn-gold:hover:not(:disabled) { transform:translateY(-1px); }
+.btn-green { background:#16a34a; color:#fff; }
+.btn-red   { background:#dc2626; color:#fff; }
+.btn-ghost { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:#9ca3af; }
+.btn-full  { width:100%; padding:13px; font-size:15px; }
+.btn:disabled { background:rgba(255,255,255,.06)!important; color:#374151!important; cursor:not-allowed!important; box-shadow:none!important; transform:none!important; }
 
-    /* Leaderboard */
-    .lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
-    .lb-header  { background:rgba(202,138,4,0.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,0.15); }
-    .lb-row     { border-top:1px solid rgba(255,255,255,0.05); font-size:14px; }
-    .lb-row.gold { background:rgba(202,138,4,0.06); }
+/* PIN display */
+.pin-block    { background:rgba(0,0,0,.45); border:1px solid rgba(202,138,4,.4); border-radius:16px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.pin-code     { font-family:'DM Sans',sans-serif; font-size:32px; font-weight:800; letter-spacing:.18em; color:#fef08a; -webkit-user-select:all; user-select:all; cursor:text; }
+.pin-copy-btn { display:flex; align-items:center; gap:7px; background:rgba(202,138,4,.18); border:1px solid rgba(202,138,4,.45); border-radius:10px; padding:10px 16px; color:#fbbf24; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .2s; white-space:nowrap; min-height:44px; }
+.pin-copy-btn:active  { transform:scale(.96); }
+.pin-copy-btn.copied  { background:rgba(22,163,74,.25); border-color:rgba(22,163,74,.5); color:#4ade80; animation:popIn .3s ease; }
 
-    /* Score colors */
-    .under { color:#4ade80!important; }
-    .over  { color:#f87171!important; }
-    .even  { color:#facc15!important; }
+/* PIN entry */
+.pin-entry-wrap { display:flex; gap:8px; }
+.pin-entry { flex:1; background:rgba(255,255,255,.1); border:2px solid rgba(202,138,4,.45); border-radius:12px; padding:12px 16px; color:#fef08a; font-size:22px; font-weight:800; font-family:inherit; letter-spacing:.15em; outline:none; text-transform:uppercase; text-align:center; }
+.pin-entry::placeholder { color:rgba(254,240,138,.25); font-size:16px; letter-spacing:.04em; font-weight:500; text-transform:none; }
 
-    /* Stat grid */
-    .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-    .stat-box  { background:rgba(0,0,0,0.3); border-radius:14px; padding:16px; text-align:center; }
+.lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
+.lb-header { background:rgba(202,138,4,.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,.15); }
+.lb-row    { border-top:1px solid rgba(255,255,255,.05); font-size:14px; }
+.lb-row.gold { background:rgba(202,138,4,.06); }
 
-    /* Login */
-    .login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(155deg,#031a0e 0%,#052e16 40%,#0f3d22 70%,#14532d 100%); position:relative; overflow:hidden; }
-    .login-card { position:relative; z-index:10; background:rgba(5,20,12,0.78); border:1px solid rgba(202,138,4,0.45); border-radius:20px; padding:36px; width:100%; max-width:380px; backdrop-filter:blur(20px); box-shadow:0 40px 100px rgba(0,0,0,0.7); }
-    .login-logo { text-align:center; margin-bottom:26px; }
-    .login-logo .icon { font-size:54px; filter:drop-shadow(0 4px 12px rgba(202,138,4,0.5)); }
-    .login-logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:28px; font-weight:800; margin-top:8px; }
-    .login-logo p  { color:#86efac; font-size:12px; letter-spacing:.12em; margin-top:4px; }
-    .login-logo .divider { width:56px; height:2px; background:linear-gradient(90deg,transparent,#ca8a04,transparent); margin:12px auto 0; }
-    .tab-toggle { display:flex; gap:6px; background:rgba(255,255,255,0.05); border-radius:10px; padding:4px; margin-bottom:18px; }
-    .tab-btn { flex:1; padding:9px; border-radius:8px; border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
-    .tab-btn.active { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; }
-    .tab-btn:not(.active) { background:transparent; color:#86efac; }
-    .error-msg { color:#fca5a5; font-size:12px; margin-bottom:12px; }
+.under { color:#4ade80!important; }
+.over  { color:#f87171!important; }
+.even  { color:#facc15!important; }
 
-    /* Stepper */
-    .stepper  { display:flex; align-items:center; gap:10px; }
-    .step-btn { width:40px; height:40px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:inherit; }
-    .step-val { background:rgba(255,255,255,0.08); border:1px solid rgba(202,138,4,0.35); border-radius:12px; padding:8px; color:#fff; font-size:26px; font-weight:800; width:80px; text-align:center; font-family:inherit; outline:none; }
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.stat-box  { background:rgba(0,0,0,.3); border-radius:14px; padding:16px; text-align:center; }
 
-    /* Two-col */
-    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+.login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(155deg,#031a0e 0%,#052e16 40%,#0f3d22 70%,#14532d 100%); position:relative; overflow:hidden; }
+.login-card { position:relative; z-index:10; background:rgba(5,20,12,.78); border:1px solid rgba(202,138,4,.45); border-radius:20px; padding:36px; width:100%; max-width:380px; backdrop-filter:blur(20px); box-shadow:0 40px 100px rgba(0,0,0,.7); }
+.login-logo { text-align:center; margin-bottom:26px; }
+.login-logo .icon { font-size:54px; filter:drop-shadow(0 4px 12px rgba(202,138,4,.5)); }
+.login-logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:28px; font-weight:800; margin-top:8px; }
+.login-logo p  { color:#86efac; font-size:12px; letter-spacing:.12em; margin-top:4px; }
+.login-logo .divider { width:56px; height:2px; background:linear-gradient(90deg,transparent,#ca8a04,transparent); margin:12px auto 0; }
+.tab-toggle { display:flex; gap:6px; background:rgba(255,255,255,.05); border-radius:10px; padding:4px; margin-bottom:18px; }
+.tab-btn { flex:1; padding:9px; border-radius:8px; border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
+.tab-btn.active { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; }
+.tab-btn:not(.active) { background:transparent; color:#86efac; }
+.error-msg { color:#fca5a5; font-size:12px; margin-bottom:12px; }
 
-    /* Scorecard */
-    .sc-row { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
-    .sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,0.05); }
-    .sc-body { border-top:1px solid rgba(255,255,255,0.04); font-size:13px; }
-    .sc-foot { border-top:2px solid rgba(202,138,4,0.25); background:rgba(202,138,4,0.07); font-size:13px; }
+.stepper  { display:flex; align-items:center; gap:10px; }
+.step-btn { width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:inherit; }
+.step-val { background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:12px; padding:8px; color:#fff; font-size:26px; font-weight:800; width:80px; text-align:center; font-family:inherit; outline:none; }
 
-    /* Game rows */
-    .game-row { background:rgba(0,0,0,0.38); border-radius:16px; padding:16px 20px; border:1px solid rgba(255,255,255,0.07); margin-bottom:12px; }
-    .game-row.live-row { border-color:rgba(239,68,68,0.4); }
-    .status-badge { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
-    .status-pending  { background:rgba(202,138,4,0.2); color:#fbbf24; }
-    .status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
-    .status-finished { background:rgba(255,255,255,0.08); color:#6b7280; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
 
-    /* Empty state */
-    .empty { text-align:center; padding:56px 20px; color:#374151; }
-    .empty .icon { font-size:52px; margin-bottom:14px; }
-    .empty h2 { font-family:'Playfair Display',serif; color:#fef08a; font-size:20px; margin-bottom:8px; }
+.sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
+.sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.05); }
+.sc-body { border-top:1px solid rgba(255,255,255,.04); font-size:13px; }
+.sc-foot { border-top:2px solid rgba(202,138,4,.25); background:rgba(202,138,4,.07); font-size:13px; }
 
-    /* Sync toast */
-    #sync-bar { position:fixed; bottom:0; left:0; right:0; background:rgba(202,138,4,0.92); color:#fff; text-align:center; padding:10px; font-size:13px; font-weight:600; z-index:999; transform:translateY(100%); transition:transform .3s; }
-    #sync-bar.show  { transform:translateY(0); }
-    #sync-bar.ok    { background:rgba(22,163,74,0.92); }
-    #sync-bar.err   { background:rgba(220,38,38,0.92); }
+.game-row      { background:rgba(0,0,0,.38); border-radius:16px; padding:16px 20px; border:1px solid rgba(255,255,255,.07); margin-bottom:12px; }
+.game-row.live-row { border-color:rgba(239,68,68,.4); }
+.status-badge    { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
+.status-pending  { background:rgba(202,138,4,.2); color:#fbbf24; }
+.status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
+.status-finished { background:rgba(255,255,255,.08); color:#6b7280; }
 
-    /* Loading */
-    #loading { display:flex; align-items:center; justify-content:center; min-height:100vh; gap:12px; font-size:16px; color:#86efac; }
+.empty { text-align:center; padding:56px 20px; color:#374151; }
+.empty .icon { font-size:52px; margin-bottom:14px; }
+.empty h2 { font-family:'Playfair Display',serif; color:#fef08a; font-size:20px; margin-bottom:8px; }
 
-    @media (max-width:600px) {
-      .two-col  { grid-template-columns:1fr; }
-      .stat-grid { grid-template-columns:repeat(2,1fr); }
-      .lb-header,.lb-row { grid-template-columns:36px 1fr 46px 58px 58px; padding:8px 12px; font-size:12px; }
-    }
+#sync-bar { position:fixed; bottom:0; left:0; right:0; background:rgba(202,138,4,.92); color:#fff; text-align:center; padding:10px; font-size:13px; font-weight:600; z-index:999; transform:translateY(100%); transition:transform .3s; }
+#sync-bar.show { transform:translateY(0); }
+#sync-bar.ok   { background:rgba(22,163,74,.92); }
+#sync-bar.err  { background:rgba(220,38,38,.92); }
+
+#loading { display:flex; align-items:center; justify-content:center; min-height:100vh; gap:12px; font-size:16px; color:#86efac; }
+
+@media (max-width:600px) {
+  .two-col   { grid-template-columns:1fr; }
+  .stat-grid { grid-template-columns:repeat(2,1fr); }
+  .lb-header,.lb-row { grid-template-columns:36px 1fr 46px 58px 58px; padding:8px 12px; font-size:12px; }
+  .pin-code  { font-size:26px; }
+}
+```
+
   </style>
 </head>
 <body>
@@ -144,14 +145,14 @@
 <div id="sync-bar"></div>
 
 <script>
-// ══════════════════════════════════════════════════════════════════
-//  ⚙️  STEP 1: Paste your Apps Script Web App URL below
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+//  ⚙️  Paste your Apps Script Web App URL here when ready
+// ══════════════════════════════════════════════════════════════
 const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 //  STATE
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 const S = {
   users:       JSON.parse(localStorage.getItem('gtf_users')  || '[]'),
   games:       JSON.parse(localStorage.getItem('gtf_games')  || '[]'),
@@ -160,45 +161,73 @@ const S = {
   page:        'leaderboard',
   loading:     true,
 };
-
-// ── Login form state ──
 let loginMode = 'login';
-
-// ── Score entry form state ──
 let SF = { gameId:'', hole:'', strokes:'', loaded:false };
-
-// ── Admin form state ──
 let AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
 
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 //  EMOJI RAIN
-// ══════════════════════════════════════════════════════════════════
-(function initRain() {
+// ══════════════════════════════════════════════════════════════
+(function() {
   const wrap = document.getElementById('rain');
-  const emojis = ['⛳','🏌️','⛳','🍀','🟢','🏆','🌿','⛳','🏅','⛳','🏌️','⛳'];
+  const list = ['⛳','🏌️','⛳','🍀','🟢','🏆','🌿','⛳','🏅','⛳','🏌️','⛳'];
   for (let i = 0; i < 28; i++) {
     const el = document.createElement('span');
     el.className = 'raindrop';
-    el.textContent = emojis[i % emojis.length];
+    el.textContent = list[i % list.length];
     el.style.cssText = `left:${((i*3.61)%100).toFixed(1)}%;font-size:${14+(i*2)%22}px;animation-duration:${(8+(i*.3)%6).toFixed(1)}s;animation-delay:${((i*.48)%11).toFixed(1)}s`;
     wrap.appendChild(el);
   }
 })();
 
-// ══════════════════════════════════════════════════════════════════
-//  GOOGLE SHEETS SYNC
-// ══════════════════════════════════════════════════════════════════
-async function loadFromSheets() {
-  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
-    S.loading = false; render(); return;
+// ══════════════════════════════════════════════════════════════
+//  PIN HELPERS
+// ══════════════════════════════════════════════════════════════
+// No ambiguous chars (0/O, 1/I, etc.)
+const PIN_CHARS = 'ACDEFGHJKMNPQRTUVWXY3479';
+
+function genPin() {
+  let p = '';
+  for (let i = 0; i < 5; i++) p += PIN_CHARS[Math.floor(Math.random() * PIN_CHARS.length)];
+  return p;
+}
+
+function copyPin(pin, btnId) {
+  const btn = document.getElementById(btnId);
+  const done = () => {
+    if (!btn) return;
+    btn.classList.add('copied');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋 Copy PIN'; }, 2200);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(pin).then(done).catch(() => legacyCopy(pin, done));
+  } else {
+    legacyCopy(pin, done);
   }
+}
+
+function legacyCopy(text, cb) {
+  const el = Object.assign(document.createElement('textarea'), { value:text });
+  el.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+  document.body.appendChild(el);
+  el.focus(); el.select();
+  try { document.execCommand('copy'); cb(); } catch(e) {}
+  document.body.removeChild(el);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  GOOGLE SHEETS SYNC
+// ══════════════════════════════════════════════════════════════
+async function loadFromSheets() {
+  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') { S.loading=false; render(); return; }
   try {
-    const res  = await fetch(SCRIPT_URL + '?action=getData');
-    const data = await res.json();
-    if (Array.isArray(data.users))  { S.users  = data.users;  ls('gtf_users',  data.users);  }
-    if (Array.isArray(data.games))  { S.games  = data.games;  ls('gtf_games',  data.games);  }
-    if (Array.isArray(data.scores)) { S.scores = data.scores; ls('gtf_scores', data.scores); }
-  } catch(e) { console.warn('Sheet load failed, using cache', e); }
+    const r = await fetch(SCRIPT_URL + '?action=getData');
+    const d = await r.json();
+    if (Array.isArray(d.users))  { S.users  = d.users;  ls('gtf_users',  d.users);  }
+    if (Array.isArray(d.games))  { S.games  = d.games;  ls('gtf_games',  d.games);  }
+    if (Array.isArray(d.scores)) { S.scores = d.scores; ls('gtf_scores', d.scores); }
+  } catch(e) { console.warn('Sheet load failed, using cache'); }
   S.loading = false; render();
 }
 
@@ -206,112 +235,91 @@ async function saveToSheets() {
   if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
   toast('saving');
   try {
-    await fetch(SCRIPT_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'text/plain'},
-      body: JSON.stringify({ users:S.users, games:S.games, scores:S.scores })
-    });
+    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify({ users:S.users, games:S.games, scores:S.scores }) });
     toast('ok');
   } catch(e) { toast('err'); }
 }
 
-function ls(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
-function saveAll() {
-  ls('gtf_users', S.users); ls('gtf_games', S.games); ls('gtf_scores', S.scores);
-  saveToSheets();
-}
+function ls(k,v) { localStorage.setItem(k, JSON.stringify(v)); }
+function saveAll() { ls('gtf_users',S.users); ls('gtf_games',S.games); ls('gtf_scores',S.scores); saveToSheets(); }
 
-let _toastTimer;
-function toast(status) {
+let _tt;
+function toast(s) {
   const b = document.getElementById('sync-bar');
-  b.className = 'show ' + (status==='ok'?'ok':status==='err'?'err':'');
-  b.textContent = status==='saving' ? '☁️  Saving to Google Sheets…' : status==='ok' ? '✅  Saved to Google Sheets' : '⚠️  Sync failed — saved locally';
-  clearTimeout(_toastTimer);
-  if (status !== 'saving') _toastTimer = setTimeout(() => b.className = '', 2800);
+  b.className = 'show '+(s==='ok'?'ok':s==='err'?'err':'');
+  b.textContent = s==='saving' ? '☁️  Saving to Google Sheets…' : s==='ok' ? '✅  Saved to Google Sheets' : '⚠️  Sync failed — saved locally';
+  clearTimeout(_tt);
+  if (s !== 'saving') _tt = setTimeout(() => b.className='', 2800);
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  HELPERS
-// ══════════════════════════════════════════════════════════════════
-const fmtScore  = r => r===0 ? 'E' : r>0 ? '+'+r : ''+r;
-const relClass  = r => r<0 ? 'under' : r>0 ? 'over' : 'even';
-const getPars   = g => { try { return typeof g.pars==='string' ? JSON.parse(g.pars) : (g.pars||[]); } catch{return [];} }
-const fmtDate   = iso => { if(!iso)return''; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
-const esc       = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ══════════════════════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════════════════════
+const fmtScore = r => r===0?'E':r>0?'+'+r:''+r;
+const relClass = r => r<0?'under':r>0?'over':'even';
+const getPars  = g => { try { return typeof g.pars==='string'?JSON.parse(g.pars):(g.pars||[]); } catch{ return []; } };
+const fmtDate  = iso => { if(!iso)return''; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+const esc      = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 function calcBoard(game) {
   const pars = getPars(game);
-  const gs   = S.scores.filter(s => s.gameId === game.id);
-  return S.users
-    .map(user => {
-      const us = gs.filter(s => s.userId === user.id);
-      const strokes = us.reduce((a,s) => a + Number(s.strokes), 0);
-      const par     = us.reduce((a,s) => a + (pars[s.hole-1]||4), 0);
-      return { user, strokes, par, holes: us.length, rel: strokes-par };
-    })
-    .filter(p => p.holes > 0)
-    .sort((a,b) => a.rel - b.rel || a.strokes - b.strokes);
+  return S.users.map(user => {
+    const us = S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
+    const strokes = us.reduce((a,s)=>a+Number(s.strokes),0);
+    const par     = us.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    return { user, strokes, par, holes:us.length, rel:strokes-par };
+  }).filter(p=>p.holes>0).sort((a,b)=>a.rel-b.rel||a.strokes-b.strokes);
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  MAIN RENDER
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+//  RENDER ROOT
+// ══════════════════════════════════════════════════════════════
 function render() {
   const root = document.getElementById('root');
-
-  if (S.loading) { root.innerHTML = '<div id="loading"><span>⛳</span> Loading…</div>'; return; }
-
+  if (S.loading) { root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>'; return; }
   if (!S.currentUser) { renderLogin(); return; }
-
-  const live = S.games.find(g => g.status==='live');
-
+  const live = S.games.find(g=>g.status==='live');
   root.innerHTML = `
     <header>
       <div class="header-inner">
         <div class="logo">
           <span class="logo-icon">⛳</span>
-          <div><h1>The Course</h1><p>GOLF TOURNAMENT TRACKER</p></div>
+          <div><h1>SnakesTrap</h1><p>GOLF TOURNAMENT TRACKER</p></div>
         </div>
         <div class="header-right">
-          ${live ? '<div class="live-badge"><span class="live-dot"></span>LIVE</div>' : ''}
+          ${live?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':''}
           <div class="user-chip">🏌️ ${esc(S.currentUser.username)} ${S.currentUser.isAdmin?'<span class="admin-tag">ADMIN</span>':''}</div>
           <button class="btn-signout" onclick="signOut()">Sign out</button>
         </div>
       </div>
     </header>
-    <nav>
-      <div class="nav-inner">
-        ${nb('leaderboard','🏆 Leaderboard')}
-        ${nb('score','✏️ Score Entry')}
-        ${nb('profile','👤 Profile')}
-        ${S.currentUser.isAdmin ? nb('games','⚙️ Games') : ''}
-      </div>
-    </nav>
+    <nav><div class="nav-inner">
+      ${nb('leaderboard','🏆 Leaderboard')}
+      ${nb('score','✏️ Score Entry')}
+      ${nb('profile','👤 Profile')}
+      ${S.currentUser.isAdmin?nb('games','⚙️ Games'):''}
+    </div></nav>
     <main id="page"></main>`;
-
-  const page = document.getElementById('page');
-  if (S.page==='leaderboard') renderLeaderboard(page);
-  else if (S.page==='score')  renderScore(page);
-  else if (S.page==='profile')renderProfile(page);
-  else if (S.page==='games' && S.currentUser.isAdmin) renderAdmin(page);
+  const pg = document.getElementById('page');
+  if      (S.page==='leaderboard')                    renderLeaderboard(pg);
+  else if (S.page==='score')                          renderScore(pg);
+  else if (S.page==='profile')                        renderProfile(pg);
+  else if (S.page==='games'&&S.currentUser.isAdmin)   renderAdmin(pg);
 }
-
-function nb(id, label) {
-  return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${label}</button>`;
-}
-function nav(p) { S.page=p; SF={gameId:'',hole:'',strokes:'',loaded:false}; render(); }
+function nb(id,lbl) { return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${lbl}</button>`; }
+function nav(p)  { S.page=p; SF={gameId:'',hole:'',strokes:'',loaded:false}; render(); }
 function signOut() { S.currentUser=null; S.page='leaderboard'; render(); }
 
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 //  LOGIN
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderLogin() {
   document.getElementById('root').innerHTML = `
     <div class="login-page">
       <div class="spin-in login-card">
         <div class="login-logo">
           <div class="icon">⛳</div>
-          <h1>The Course</h1>
+          <h1>SnakesTrap</h1>
           <p>GOLF TOURNAMENT TRACKER</p>
           <div class="divider"></div>
         </div>
@@ -321,17 +329,51 @@ function renderLogin() {
         </div>
         <div id="lerr"></div>
         <div class="form-group">
-          <input class="form-input" id="uname" placeholder="Your username" style="font-size:15px;padding:12px 16px;border-radius:12px" onkeydown="if(event.key==='Enter')doAuth()">
+          <input class="form-input" id="uname" placeholder="Your username"
+            style="font-size:15px;padding:12px 16px;border-radius:12px"
+            onkeydown="if(event.key==='Enter')doAuth()">
         </div>
         <button class="btn btn-gold btn-full" onclick="doAuth()">
-          ${loginMode==='login' ? '🏌️  Tee Off' : '⛳  Join Tournament'}
+          ${loginMode==='login'?'🏌️  Tee Off':'⛳  Join Tournament'}
         </button>
         <p style="color:#6b7280;font-size:11px;text-align:center;margin-top:14px">
-          ${S.users.length===0&&loginMode==='register' ? 'First player automatically becomes admin ⚙️' : S.users.length>0&&loginMode==='register' ? S.users.length+' player'+(S.users.length>1?'s':'')+' registered' : ''}
+          ${S.users.length===0&&loginMode==='register'?'First player automatically becomes admin ⚙️':S.users.length>0&&loginMode==='register'?S.users.length+' player'+(S.users.length>1?'s':'')+' registered':''}
         </p>
       </div>
     </div>`;
-  setTimeout(() => document.getElementById('uname')?.focus(), 80);
+  setTimeout(()=>document.getElementById('uname')?.focus(), 80);
+}
+
+function renderPinJoin() {
+  document.getElementById('root').innerHTML = `
+    <div class="login-page">
+      <div class="spin-in login-card">
+        <div class="login-logo">
+          <div class="icon">⛳</div>
+          <h1>SnakesTrap</h1>
+          <p>GOLF TOURNAMENT TRACKER</p>
+          <div class="divider"></div>
+        </div>
+        <p style="color:#86efac;font-size:13px;text-align:center;margin-bottom:22px;line-height:1.7">
+          Welcome, <strong style="color:#fef08a">${esc(S.currentUser.username)}</strong>!<br>
+          Got a game PIN? Enter it to jump straight in.
+        </p>
+        <div id="perr"></div>
+        <div class="form-group">
+          <label class="form-label">🔑 GAME PIN</label>
+          <div class="pin-entry-wrap">
+            <input class="pin-entry" id="pin-input" maxlength="5" placeholder="XXXXX"
+              oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
+              onkeydown="if(event.key==='Enter')doJoinPin()">
+            <button class="btn btn-gold" style="flex-shrink:0;padding:12px 18px;font-size:15px" onclick="doJoinPin()">Go →</button>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-full" style="margin-top:6px" onclick="skipPin()">
+          Skip — take me to the leaderboard
+        </button>
+      </div>
+    </div>`;
+  setTimeout(()=>document.getElementById('pin-input')?.focus(), 80);
 }
 
 function switchMode(m) { loginMode=m; renderLogin(); setTimeout(()=>document.getElementById('uname')?.focus(),50); }
@@ -345,24 +387,41 @@ function doAuth() {
     if (!u) { err.innerHTML='<div class="error-msg">⚠️ Username not found — try registering!</div>'; return; }
     S.currentUser = u;
   } else {
-    if (S.users.find(u=>u.username.toLowerCase()===name.toLowerCase())) { err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>'; return; }
+    if (S.users.find(u=>u.username.toLowerCase()===name.toLowerCase())) {
+      err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>'; return;
+    }
     const user = { id:Date.now().toString(), username:name, isAdmin:S.users.length===0, createdAt:new Date().toISOString() };
     S.users = [...S.users, user];
     S.currentUser = user;
     saveAll();
   }
+  renderPinJoin();
+}
+
+function doJoinPin() {
+  const pin = (document.getElementById('pin-input')?.value||'').trim().toUpperCase();
+  if (!pin) { skipPin(); return; }
+  const game = S.games.find(g => String(g.pin).toUpperCase() === pin);
+  if (!game) {
+    document.getElementById('perr').innerHTML='<div class="error-msg">⚠️ No game found with that PIN — check with your admin.</div>';
+    return;
+  }
+  S.page = 'score';
+  SF = { gameId:game.id, hole:'', strokes:'', loaded:false };
   render();
 }
 
-// ══════════════════════════════════════════════════════════════════
+function skipPin() { S.page='leaderboard'; render(); }
+
+// ══════════════════════════════════════════════════════════════
 //  LEADERBOARD
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderLeaderboard(el) {
-  const live  = S.games.find(g=>g.status==='live');
-  const past  = S.games.filter(g=>g.status==='finished').slice(-3).reverse();
+  const live = S.games.find(g=>g.status==='live');
+  const past = S.games.filter(g=>g.status==='finished').slice(-3).reverse();
   let html = `<div class="fade-up" style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
-    ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,0.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
+    ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
   </div>`;
   if (!live && !past.length) {
     html += `<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game before scores appear here.</p></div>`;
@@ -373,21 +432,30 @@ function renderLeaderboard(el) {
 }
 
 function buildBoard(game, isLive) {
-  const board    = calcBoard(game);
-  const pars     = getPars(game);
-  const parTotal = pars.reduce((a,b)=>a+b,0);
+  const board = calcBoard(game);
+  const pars  = getPars(game);
+  const pt    = pars.reduce((a,b)=>a+b,0);
   let html = `<div style="margin-bottom:30px">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
       <div>
         <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:3px">${esc(game.name)}</h2>
-        <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${parTotal}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
+        <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
       </div>
-      ${isLive
-        ? '<div class="live-badge"><span class="live-dot"></span>LIVE</div>'
-        : '<div style="background:rgba(255,255,255,0.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#6b7280;font-weight:700">FINAL</div>'}
+      ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#6b7280;font-weight:700">FINAL</div>'}
     </div>`;
+
+  if (isLive && game.pin) {
+    html += `<div style="margin-bottom:14px;background:rgba(0,0,0,.3);border:1px solid rgba(202,138,4,.25);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:5px">🔑 GAME PIN — share with friends</div>
+        <span class="pin-code">${esc(game.pin)}</span>
+      </div>
+      <button class="pin-copy-btn" id="lb-copy-${game.id}" onclick="copyPin('${esc(game.pin)}','lb-copy-${game.id}')">📋 Copy PIN</button>
+    </div>`;
+  }
+
   if (!board.length) {
-    html += `<div style="background:rgba(0,0,0,0.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,0.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
+    html += `<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
   } else {
     html += `<div class="card"><div class="lb-header"><span>POS</span><span>PLAYER</span><span style="text-align:center">HOLES</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>`;
     board.forEach((p,i) => {
@@ -405,48 +473,44 @@ function buildBoard(game, isLive) {
   return html + `</div>`;
 }
 
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 //  SCORE ENTRY
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderScore(el) {
   const liveGames = S.games.filter(g=>g.status==='live');
   if (!liveGames.length) {
-    el.innerHTML = `<h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">✏️ Score Entry</h1>
-      <div class="empty" style="background:rgba(0,0,0,0.2);border-radius:16px;border:1px dashed rgba(255,255,255,0.08)">
+    el.innerHTML=`<h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">✏️ Score Entry</h1>
+      <div class="empty" style="background:rgba(0,0,0,.2);border-radius:16px;border:1px dashed rgba(255,255,255,.08)">
         <div class="icon">🏌️</div><p style="color:#6b7280;line-height:1.7">No live games right now.<br>An admin needs to start a game first.</p>
       </div>`; return;
   }
-
   const selGame = S.games.find(g=>g.id===SF.gameId);
   const pars    = selGame ? getPars(selGame) : [];
   const myS     = selGame ? S.scores.filter(s=>s.gameId===SF.gameId&&s.userId===S.currentUser.id).sort((a,b)=>a.hole-b.hole) : [];
   const exist   = SF.hole ? myS.find(s=>s.hole===Number(SF.hole)) : null;
   if (exist && !SF.loaded) { SF.strokes=String(exist.strokes); SF.loaded=true; }
-
   const par = SF.hole && pars[Number(SF.hole)-1] ? pars[Number(SF.hole)-1] : null;
   const rel = (par && SF.strokes) ? Number(SF.strokes)-par : null;
 
-  // Scorecard HTML
   let scHtml = '';
   if (selGame && myS.length) {
-    const tot = myS.reduce((a,s)=>a+s.strokes,0);
-    const ptr = myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    scHtml = `<div class="card">
-      <div style="padding:14px 18px;background:rgba(202,138,4,0.1);border-bottom:1px solid rgba(202,138,4,0.15)">
+    const tot=myS.reduce((a,s)=>a+s.strokes,0), ptr=myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    scHtml=`<div class="card">
+      <div style="padding:14px 18px;background:rgba(202,138,4,.1);border-bottom:1px solid rgba(202,138,4,.15)">
         <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:15px">My Scorecard</div>
         <div style="color:#86efac;font-size:11px;margin-top:2px">${esc(selGame.name)}</div>
       </div>
       <div class="sc-row sc-head"><span>HOLE</span><span style="text-align:center">PAR</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>
       <div style="max-height:250px;overflow-y:auto">
-        ${myS.map(s=>{const p=pars[s.hole-1];const r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
+        ${myS.map(s=>{const p=pars[s.hole-1],r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
       </div>
       <div class="sc-row sc-foot"><span style="color:#fef08a;font-weight:800">TOTAL</span><span style="text-align:center;color:#ca8a04;font-weight:700">${ptr}</span><span style="text-align:center;font-weight:800">${tot}</span><span style="text-align:right;font-weight:900;font-size:15px" class="${relClass(tot-ptr)}">${fmtScore(tot-ptr)}</span></div>
     </div>`;
   } else {
-    scHtml = `<div style="background:rgba(0,0,0,0.2);border-radius:16px;padding:40px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,0.07)"><div style="font-size:36px;margin-bottom:10px">${selGame?'📋 No holes entered yet':'📋 Select a game first'}</div></div>`;
+    scHtml=`<div style="background:rgba(0,0,0,.2);border-radius:16px;padding:40px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:36px;margin-bottom:10px">${selGame?'📋 No holes entered yet':'📋 Select a game first'}</div></div>`;
   }
 
-  el.innerHTML = `
+  el.innerHTML=`
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">✏️ Score Entry</h1>
     <div class="two-col">
       <div class="card fade-up" style="padding:20px">
@@ -461,7 +525,7 @@ function renderScore(el) {
         ${selGame?`<div class="form-group"><label class="form-label">HOLE</label>
           <select class="form-select" onchange="sfHole(this.value)">
             <option value="">Select hole…</option>
-            ${pars.map((p,i)=>{const h=i+1;const done=myS.find(s=>s.hole===h);return`<option value="${h}"${SF.hole==h?' selected':''}>Hole ${h} · Par ${p}${done?' ✓':''}</option>`;}).join('')}
+            ${pars.map((p,i)=>{const h=i+1,done=myS.find(s=>s.hole===h);return`<option value="${h}"${SF.hole==h?' selected':''}>Hole ${h} · Par ${p}${done?' ✓':''}</option>`;}).join('')}
           </select></div>`:''}
         ${selGame&&SF.hole?`<div class="form-group">
           <label class="form-label">STROKES ${exist?'<span style="color:#fbbf24">(editing)</span>':''}</label>
@@ -471,9 +535,7 @@ function renderScore(el) {
             <button class="step-btn" onclick="adjS(1)">+</button>
             ${rel!==null?`<div style="display:flex;flex-direction:column"><span style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</span><span style="color:#4b5563;font-size:10px">vs par ${par}</span></div>`:''}
           </div></div>`:''}
-        <button id="save-btn" class="btn btn-gold btn-full" onclick="submitScore()" ${!SF.hole||!SF.strokes?'disabled':''}>
-          💾  Save Score
-        </button>
+        <button id="save-btn" class="btn btn-gold btn-full" onclick="submitScore()" ${!SF.hole||!SF.strokes?'disabled':''}>💾  Save Score</button>
       </div>
       <div>${scHtml}</div>
     </div>`;
@@ -482,134 +544,112 @@ function renderScore(el) {
 function sfGame(id) { SF={gameId:id,hole:'',strokes:'',loaded:false}; renderScore(document.getElementById('page')); }
 function sfHole(h)  { SF.hole=h; SF.strokes=''; SF.loaded=false; renderScore(document.getElementById('page')); }
 function adjS(d) {
-  SF.strokes = String(Math.max(1, Number(SF.strokes||1)+d));
-  const inp = document.getElementById('sv'); if (inp) inp.value=SF.strokes;
+  SF.strokes=String(Math.max(1,Number(SF.strokes||1)+d));
+  const i=document.getElementById('sv'); if(i)i.value=SF.strokes;
   renderScore(document.getElementById('page'));
 }
 function submitScore() {
   if (!SF.gameId||!SF.hole||!SF.strokes||Number(SF.strokes)<1) return;
-  S.scores = [...S.scores.filter(s=>!(s.gameId===SF.gameId&&s.userId===S.currentUser.id&&s.hole===Number(SF.hole))),
-    { gameId:SF.gameId, userId:S.currentUser.id, hole:Number(SF.hole), strokes:Number(SF.strokes), timestamp:new Date().toISOString() }];
-  saveAll();
-  SF.hole=''; SF.strokes=''; SF.loaded=false;
-  const btn = document.getElementById('save-btn');
-  if (btn) { btn.textContent='✅  Saved!'; btn.style.background='#16a34a'; btn.style.boxShadow='none'; }
-  setTimeout(()=>renderScore(document.getElementById('page')), 900);
+  S.scores=[...S.scores.filter(s=>!(s.gameId===SF.gameId&&s.userId===S.currentUser.id&&s.hole===Number(SF.hole))),
+    {gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:Number(SF.strokes),timestamp:new Date().toISOString()}];
+  saveAll(); SF.hole=''; SF.strokes=''; SF.loaded=false;
+  const btn=document.getElementById('save-btn');
+  if(btn){btn.textContent='✅  Saved!';btn.style.background='#16a34a';btn.style.boxShadow='none';}
+  setTimeout(()=>renderScore(document.getElementById('page')),900);
 }
 
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 //  PROFILE
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderProfile(el) {
-  const my    = S.scores.filter(s=>s.userId===S.currentUser.id);
-  const played = [...new Set(my.map(s=>s.gameId))].length;
-  const stats  = S.games.filter(g=>g.status==='finished'&&my.some(s=>s.gameId===g.id)).map(g=>{
-    const pars = getPars(g);
-    const gs   = my.filter(s=>s.gameId===g.id);
-    const tot  = gs.reduce((a,s)=>a+s.strokes,0);
-    const par  = gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    const pos  = calcBoard(g).findIndex(p=>p.user.id===S.currentUser.id)+1;
-    return { game:g, tot, par, rel:tot-par, pos, holes:gs.length };
+  const my=S.scores.filter(s=>s.userId===S.currentUser.id);
+  const played=[...new Set(my.map(s=>s.gameId))].length;
+  const stats=S.games.filter(g=>g.status==='finished'&&my.some(s=>s.gameId===g.id)).map(g=>{
+    const pars=getPars(g),gs=my.filter(s=>s.gameId===g.id);
+    const tot=gs.reduce((a,s)=>a+s.strokes,0),par=gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    return{game:g,tot,par,rel:tot-par,pos:calcBoard(g).findIndex(p=>p.user.id===S.currentUser.id)+1,holes:gs.length};
   });
-  const best = stats.length ? stats.reduce((b,g)=>g.rel<b.rel?g:b) : null;
-  const avg  = stats.length ? Math.round(stats.reduce((a,g)=>a+g.rel,0)/stats.length) : null;
-  const wins = stats.filter(g=>g.pos===1).length;
-
-  el.innerHTML = `
+  const best=stats.length?stats.reduce((b,g)=>g.rel<b.rel?g:b):null;
+  const avg=stats.length?Math.round(stats.reduce((a,g)=>a+g.rel,0)/stats.length):null;
+  const wins=stats.filter(g=>g.pos===1).length;
+  el.innerHTML=`
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">👤 Profile</h1>
     <div class="card-gold fade-up" style="margin-bottom:24px">
       <div style="display:flex;align-items:center;gap:18px;margin-bottom:22px">
-        <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,rgba(202,138,4,0.25),rgba(20,83,45,0.5));border:2px solid #ca8a04;display:flex;align-items:center;justify-content:center;font-size:30px">🏌️</div>
+        <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,rgba(202,138,4,.25),rgba(20,83,45,.5));border:2px solid #ca8a04;display:flex;align-items:center;justify-content:center;font-size:30px">🏌️</div>
         <div>
           <div style="font-family:'Playfair Display',serif;color:#fff;font-size:21px;font-weight:700">${esc(S.currentUser.username)}</div>
-          <div style="color:${S.currentUser.isAdmin?'#fbbf24':'#86efac'};font-size:12px;margin-top:4px;font-weight:600;letter-spacing:.06em">${S.currentUser.isAdmin?'⚙️  TOURNAMENT ADMIN':'🏌️  PLAYER'}</div>
+          <div style="color:${S.currentUser.isAdmin?'#fbbf24':'#86efac'};font-size:12px;margin-top:4px;font-weight:600">${S.currentUser.isAdmin?'⚙️  TOURNAMENT ADMIN':'🏌️  PLAYER'}</div>
         </div>
       </div>
       <div class="stat-grid">
-        ${[['🏆','GAMES',played],['🥇','WINS',wins],['📊','AVG',avg!==null?fmtScore(avg):'—'],['⭐','BEST',best?fmtScore(best.rel):'—']].map(([icon,lbl,val],i)=>`
+        ${[['🏆','GAMES',played,null],['🥇','WINS',wins,null],['📊','AVG',avg!==null?fmtScore(avg):'—',avg],['⭐','BEST',best?fmtScore(best.rel):'—',best?best.rel:null]].map(([icon,lbl,val,rv])=>`
           <div class="stat-box"><div style="font-size:22px;margin-bottom:6px">${icon}</div>
-          <div style="font-size:20px;font-weight:900;line-height:1${i===3&&best?' class='+relClass(best.rel):''}" ${i===3&&best?`class="${relClass(best.rel)}"`:``}>${val}</div>
+          <div style="font-size:20px;font-weight:900;line-height:1" ${rv!==null&&rv!==undefined?`class="${relClass(rv)}"`:''}>${val}</div>
           <div style="color:#4b5563;font-size:11px;margin-top:4px;letter-spacing:.06em">${lbl}</div></div>`).join('')}
       </div>
       ${my.length?`<button class="btn btn-ghost" style="margin-top:18px;padding:9px 18px;font-size:13px" onclick="exportCSV()">📥  Export My Scores (CSV)</button>`:''}
     </div>
-    ${stats.length ? `<h3 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:17px;margin-bottom:14px">Game History</h3>
-      ${stats.map(({game,rel,pos,tot,holes})=>`
-        <div style="background:rgba(0,0,0,0.32);border-radius:14px;padding:14px 18px;border:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
-          <div>
-            <div style="color:#e5e7eb;font-weight:700;font-size:15px">${esc(game.name)}</div>
-            <div style="color:#4b5563;font-size:12px;margin-top:2px">${esc(game.course)} · ${holes}/${game.holes} holes${game.startTime?' · '+fmtDate(game.startTime):''}</div>
-          </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
-            <div style="color:#6b7280;font-size:12px;margin-top:3px">#${pos} · ${tot} strokes</div>
-          </div>
-        </div>`).join('')}`
-    : `<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No completed games yet — start playing!</p></div>`}`;
+    ${stats.length?`<h3 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:17px;margin-bottom:14px">Game History</h3>
+      ${stats.map(({game,rel,pos,tot,holes})=>`<div style="background:rgba(0,0,0,.32);border-radius:14px;padding:14px 18px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
+        <div><div style="color:#e5e7eb;font-weight:700;font-size:15px">${esc(game.name)}</div>
+        <div style="color:#4b5563;font-size:12px;margin-top:2px">${esc(game.course)} · ${holes}/${game.holes} holes${game.startTime?' · '+fmtDate(game.startTime):''}</div></div>
+        <div style="text-align:right;flex-shrink:0"><div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
+        <div style="color:#6b7280;font-size:12px;margin-top:3px">#${pos} · ${tot} strokes</div></div>
+      </div>`).join('')}`:`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No completed games yet — start playing!</p></div>`}`;
 }
 
 function exportCSV() {
-  const my = S.scores.filter(s=>s.userId===S.currentUser.id);
-  const rows = [['Game','Course','Date','Hole','Par','Strokes','Score']];
-  S.games.forEach(g=>{
-    const pars = getPars(g);
-    my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{
-      const p=pars[s.hole-1]||4;
-      rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,fmtScore(s.strokes-p)]);
-    });
-  });
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));
-  a.download=S.currentUser.username+'-scores.csv'; a.click();
+  const my=S.scores.filter(s=>s.userId===S.currentUser.id);
+  const rows=[['Game','Course','Date','Hole','Par','Strokes','Score']];
+  S.games.forEach(g=>{const pars=getPars(g);my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{const p=pars[s.hole-1]||4;rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,fmtScore(s.strokes-p)]);});});
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));a.download=S.currentUser.username+'-scores.csv';a.click();
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  ADMIN — GAMES
-// ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+//  ADMIN
+// ══════════════════════════════════════════════════════════════
 function renderAdmin(el) {
-  let form = '';
+  let form='';
   if (AF.open) {
-    form = `<div class="card-gold fade-up" style="margin-bottom:24px">
+    form=`<div class="card-gold fade-up" style="margin-bottom:24px">
       <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:18px">Create New Game</div>
       <div class="two-col" style="margin-bottom:14px">
-        <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">GAME NAME</label>
-          <input class="form-input" id="af-name" value="${esc(AF.name)}" placeholder="e.g. Annual Summer Classic" oninput="AF.name=this.value">
-        </div>
-        <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">COURSE</label>
-          <input class="form-input" id="af-course" value="${esc(AF.course)}" placeholder="e.g. Pebble Beach" oninput="AF.course=this.value">
-        </div>
+        <div class="form-group" style="margin-bottom:0"><label class="form-label">GAME NAME</label>
+          <input class="form-input" id="af-name" value="${esc(AF.name)}" placeholder="e.g. Annual Summer Classic" oninput="AF.name=this.value"></div>
+        <div class="form-group" style="margin-bottom:0"><label class="form-label">COURSE</label>
+          <input class="form-input" id="af-course" value="${esc(AF.course)}" placeholder="e.g. Pebble Beach" oninput="AF.course=this.value"></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">HOLES</label>
+      <div class="form-group"><label class="form-label">HOLES</label>
         <select class="form-select" style="max-width:160px" onchange="setHoles(this.value)">
           <option value="9"${AF.holes===9?' selected':''}>9 holes</option>
           <option value="18"${AF.holes===18?' selected':''}>18 holes</option>
-        </select>
-      </div>
-      <div>
-        <label class="form-label">PAR PER HOLE</label>
+        </select></div>
+      <div><label class="form-label">PAR PER HOLE</label>
         <div style="display:grid;grid-template-columns:repeat(9,1fr);gap:6px">
-          ${AF.pars.slice(0,AF.holes).map((p,i)=>`
-            <div style="text-align:center">
-              <div style="color:#4b5563;font-size:10px;margin-bottom:3px;font-weight:600">H${i+1}</div>
-              <select style="width:100%;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.12);border-radius:7px;padding:6px 2px;color:#fff;font-size:13px;cursor:pointer;font-family:inherit" onchange="setPar(${i},this.value)">
-                ${[3,4,5].map(v=>`<option value="${v}"${p===v?' selected':''}>${v}</option>`).join('')}
-              </select>
-            </div>`).join('')}
-        </div>
-      </div>
+          ${AF.pars.slice(0,AF.holes).map((p,i)=>`<div style="text-align:center">
+            <div style="color:#4b5563;font-size:10px;margin-bottom:3px;font-weight:600">H${i+1}</div>
+            <select style="width:100%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:6px 2px;color:#fff;font-size:13px;cursor:pointer;font-family:inherit" onchange="setPar(${i},this.value)">
+              ${[3,4,5].map(v=>`<option value="${v}"${p===v?' selected':''}>${v}</option>`).join('')}
+            </select></div>`).join('')}
+        </div></div>
       <div style="margin-top:18px;display:flex;align-items:center;gap:12px">
         <button class="btn btn-gold" onclick="createGame()">⛳  Create Game</button>
-        <span style="color:#374151;font-size:12px">Par total: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)}</span>
+        <span style="color:#374151;font-size:12px">Par: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)} · A PIN will be auto-generated</span>
       </div>
     </div>`;
   }
 
-  const list = [...S.games].reverse().map(g=>{
-    const pars=getPars(g); const pt=pars.reduce((a,b)=>a+b,0);
-    return `<div class="game-row${g.status==='live'?' live-row':''} fade-up">
+  const list=[...S.games].reverse().map(g=>{
+    const pars=getPars(g),pt=pars.reduce((a,b)=>a+b,0);
+    const pinBlock=g.pin?`<div class="pin-block" style="margin-top:14px">
+      <div>
+        <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:5px">🔑 GAME PIN — share this with your friends</div>
+        <span class="pin-code">${esc(g.pin)}</span>
+      </div>
+      <button class="pin-copy-btn" id="copy-${g.id}" onclick="copyPin('${esc(g.pin)}','copy-${g.id}')">📋 Copy PIN</button>
+    </div>`:'';
+    return`<div class="game-row${g.status==='live'?' live-row':''} fade-up">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
         <div>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:5px">
@@ -624,16 +664,17 @@ function renderAdmin(el) {
           ${g.status==='finished'?`<span style="color:#374151;font-size:12px;align-self:center">Completed</span>`:''}
         </div>
       </div>
+      ${pinBlock}
     </div>`;
   }).join('');
 
-  el.innerHTML = `
+  el.innerHTML=`
     <div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
       <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">⚙️ Game Management</h1>
       <button class="btn ${AF.open?'btn-ghost':'btn-gold'}" onclick="toggleForm()">${AF.open?'✕  Cancel':'＋  New Game'}</button>
     </div>
     ${form}
-    ${!S.games.length&&!AF.open?`<div class="empty" style="border:1px dashed rgba(255,255,255,0.07);border-radius:16px"><div class="icon">🏌️</div><p style="color:#4b5563">No games yet — create your first one!</p></div>`:list}`;
+    ${!S.games.length&&!AF.open?`<div class="empty" style="border:1px dashed rgba(255,255,255,.07);border-radius:16px"><div class="icon">🏌️</div><p style="color:#4b5563">No games yet — create your first one!</p></div>`:list}`;
 }
 
 function toggleForm() { AF.open=!AF.open; renderAdmin(document.getElementById('page')); }
@@ -641,35 +682,31 @@ function setHoles(n)  { AF.holes=Number(n); AF.pars=Array(Number(n)).fill(0).map
 function setPar(i,v)  { AF.pars[i]=Number(v); }
 
 function createGame() {
-  const name   = (document.getElementById('af-name')?.value   || AF.name).trim();
-  const course = (document.getElementById('af-course')?.value || AF.course).trim();
+  const name  =(document.getElementById('af-name')?.value  ||AF.name).trim();
+  const course=(document.getElementById('af-course')?.value||AF.course).trim();
   if (!name||!course) { alert('Please fill in game name and course.'); return; }
-  S.games = [...S.games, {
-    id: Date.now().toString(), name, course, holes: AF.holes,
-    pars: JSON.stringify(AF.pars.slice(0,AF.holes)),
-    status:'pending', createdBy: S.currentUser.id,
-    createdAt: new Date().toISOString(), startTime:null, endTime:null
-  }];
-  AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
-  saveAll();
-  renderAdmin(document.getElementById('page'));
-}
-
-function setStatus(id, status) {
-  S.games = S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
-  saveAll(); render();
-}
-function delGame(id) {
-  if (!confirm('Delete this game?')) return;
-  S.games = S.games.filter(g=>g.id!==id);
+  S.games=[...S.games,{id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
+    pin:genPin(),status:'pending',createdBy:S.currentUser.id,createdAt:new Date().toISOString(),startTime:null,endTime:null}];
+  AF={open:false,name:'',course:'',holes:18,pars:Array(18).fill(4)};
   saveAll(); renderAdmin(document.getElementById('page'));
 }
 
-// ══════════════════════════════════════════════════════════════════
+function setStatus(id,status) {
+  S.games=S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
+  saveAll(); render();
+}
+function delGame(id) {
+  if(!confirm('Delete this game?'))return;
+  S.games=S.games.filter(g=>g.id!==id);
+  saveAll(); renderAdmin(document.getElementById('page'));
+}
+
+// ══════════════════════════════════════════════════════════════
 //  BOOT
-// ══════════════════════════════════════════════════════════════════
-render();         // show cached data instantly
-loadFromSheets(); // then sync from Sheets in background
+// ══════════════════════════════════════════════════════════════
+render();
+loadFromSheets();
 </script>
+
 </body>
 </html>
