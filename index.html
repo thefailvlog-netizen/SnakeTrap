@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,137 +9,159 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { min-height: 100vh; background: linear-gradient(170deg, #031a0e 0%, #052e16 30%, #0d3320 60%, #14532d 100%); color: #fff; font-family: 'DM Sans', sans-serif; }
 
-```
-@keyframes fall      { 0% { transform:translateY(-60px) rotate(0deg); opacity:0; } 8% { opacity:.10; } 92% { opacity:.10; } 100% { transform:translateY(110vh) rotate(45deg); opacity:0; } }
-@keyframes pulseLive { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.75); } 50% { box-shadow:0 0 0 10px rgba(239,68,68,0); } }
-@keyframes fadeUp    { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-@keyframes spinIn    { from { opacity:0; transform:scale(.85) rotate(-4deg); } to { opacity:1; transform:scale(1) rotate(0); } }
-@keyframes blink     { 0%,100% { opacity:1; } 50% { opacity:.3; } }
-@keyframes popIn     { 0% { transform:scale(.7); opacity:0; } 70% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
+    /* ── Animations ── */
+    @keyframes floatUp   { 0% { transform:translateY(110vh) rotate(0deg); opacity:0; } 8% { opacity:.11; } 92% { opacity:.11; } 100% { transform:translateY(-80px) rotate(-25deg); opacity:0; } }
+    @keyframes pulseLive { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.75); } 50% { box-shadow:0 0 0 10px rgba(239,68,68,0); } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes spinIn    { from { opacity:0; transform:scale(.85) rotate(-4deg); } to { opacity:1; transform:scale(1) rotate(0); } }
+    @keyframes blink     { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+    @keyframes popIn     { 0% { transform:scale(.7); opacity:0; } 70% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
 
-.fade-up { animation:fadeUp .35s ease both; }
-.spin-in { animation:spinIn .40s ease both; }
+    .fade-up { animation:fadeUp .35s ease both; }
+    .spin-in { animation:spinIn .40s ease both; }
 
-.rain-wrap { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
-.raindrop  { position:absolute; top:0; animation:fall linear infinite; user-select:none; }
+    /* ── Login emoji rain (float UP, login screen only) ── */
+    .login-rain { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+    .login-rain span { position:absolute; bottom:-20px; animation:floatUp linear infinite; user-select:none; }
 
-header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
-.header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-.logo { display:flex; align-items:center; gap:11px; }
-.logo-icon { font-size:28px; filter:drop-shadow(0 2px 8px rgba(202,138,4,.5)); }
-.logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:18px; font-weight:800; }
-.logo p  { color:#4ade80; font-size:10px; letter-spacing:.1em; margin-top:1px; }
-.header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-.live-badge  { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
-.live-dot    { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
-.user-chip   { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; }
-.admin-tag   { color:#fbbf24; font-size:9px; font-weight:700; }
-.btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
+    /* ── Header ── */
+    header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
+    .header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .logo { display:flex; align-items:center; gap:11px; }
+    .logo-icon { font-size:28px; filter:drop-shadow(0 2px 8px rgba(202,138,4,.5)); }
+    .logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:18px; font-weight:800; }
+    .logo p  { color:#4ade80; font-size:10px; letter-spacing:.1em; margin-top:1px; }
+    .header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .live-badge { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
+    .live-dot   { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
+    /* User chip is now clickable — acts as Profile button */
+    .user-chip  { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; cursor:pointer; border:1px solid transparent; transition:border-color .2s; user-select:none; }
+    .user-chip:hover  { border-color:rgba(202,138,4,.4); }
+    .user-chip.active { border-color:#ca8a04; background:rgba(202,138,4,.12); }
+    .admin-tag  { color:#fbbf24; font-size:9px; font-weight:700; }
+    .btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
 
-nav { position:relative; z-index:10; background:rgba(0,0,0,.5); border-bottom:1px solid rgba(202,138,4,.2); }
-.nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
-.nav-btn { padding:13px 18px; background:transparent; border:none; border-bottom:2.5px solid transparent; color:#6b7280; font-weight:500; font-size:13px; cursor:pointer; white-space:nowrap; font-family:inherit; transition:all .2s; }
-.nav-btn.active { color:#fbbf24; border-bottom-color:#fbbf24; font-weight:700; }
+    /* ── Nav ── */
+    nav { position:relative; z-index:10; background:rgba(0,0,0,.5); border-bottom:1px solid rgba(202,138,4,.2); }
+    .nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
+    .nav-btn { padding:13px 18px; background:transparent; border:none; border-bottom:2.5px solid transparent; color:#6b7280; font-weight:500; font-size:13px; cursor:pointer; white-space:nowrap; font-family:inherit; transition:all .2s; }
+    .nav-btn.active { color:#fbbf24; border-bottom-color:#fbbf24; font-weight:700; }
 
-main { max-width:960px; margin:0 auto; padding:24px 20px 80px; position:relative; z-index:1; }
+    main { max-width:960px; margin:0 auto; padding:24px 20px 80px; position:relative; z-index:1; }
 
-.card      { background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; }
-.card-gold { background:linear-gradient(135deg,rgba(20,83,45,.55),rgba(5,46,22,.7)); border:1px solid rgba(202,138,4,.4); border-radius:20px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
+    /* ── Cards ── */
+    .card      { background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; }
+    .card-gold { background:linear-gradient(135deg,rgba(20,83,45,.55),rgba(5,46,22,.7)); border:1px solid rgba(202,138,4,.4); border-radius:20px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
 
-.form-group  { margin-bottom:16px; }
-.form-label  { display:block; color:#86efac; font-size:11px; font-weight:700; margin-bottom:6px; letter-spacing:.08em; }
-.form-input, .form-select { width:100%; background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:10px; padding:10px 14px; color:#fff; font-size:14px; font-family:inherit; outline:none; }
-.form-select { cursor:pointer; }
-.form-select option { background:#1a3a2a; }
+    /* ── Forms ── */
+    .form-group  { margin-bottom:16px; }
+    .form-label  { display:block; color:#86efac; font-size:11px; font-weight:700; margin-bottom:6px; letter-spacing:.08em; }
+    .form-input, .form-select { width:100%; background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:10px; padding:10px 14px; color:#fff; font-size:14px; font-family:inherit; outline:none; }
+    .form-select { cursor:pointer; }
+    .form-select option { background:#1a3a2a; }
 
-.btn       { border:none; border-radius:11px; padding:12px 24px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s; }
-.btn-gold  { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; box-shadow:0 4px 16px rgba(202,138,4,.4); }
-.btn-gold:hover:not(:disabled) { transform:translateY(-1px); }
-.btn-green { background:#16a34a; color:#fff; }
-.btn-red   { background:#dc2626; color:#fff; }
-.btn-ghost { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:#9ca3af; }
-.btn-full  { width:100%; padding:13px; font-size:15px; }
-.btn:disabled { background:rgba(255,255,255,.06)!important; color:#374151!important; cursor:not-allowed!important; box-shadow:none!important; transform:none!important; }
+    /* ── Buttons ── */
+    .btn       { border:none; border-radius:11px; padding:12px 24px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s; }
+    .btn-gold  { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; box-shadow:0 4px 16px rgba(202,138,4,.4); }
+    .btn-gold:hover:not(:disabled) { transform:translateY(-1px); }
+    .btn-green { background:#16a34a; color:#fff; }
+    .btn-red   { background:#dc2626; color:#fff; }
+    .btn-ghost { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:#9ca3af; }
+    .btn-full  { width:100%; padding:13px; font-size:15px; }
+    .btn:disabled { background:rgba(255,255,255,.06)!important; color:#374151!important; cursor:not-allowed!important; box-shadow:none!important; transform:none!important; }
 
-/* PIN display */
-.pin-block    { background:rgba(0,0,0,.45); border:1px solid rgba(202,138,4,.4); border-radius:16px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
-.pin-code     { font-family:'DM Sans',sans-serif; font-size:32px; font-weight:800; letter-spacing:.18em; color:#fef08a; -webkit-user-select:all; user-select:all; cursor:text; }
-.pin-copy-btn { display:flex; align-items:center; gap:7px; background:rgba(202,138,4,.18); border:1px solid rgba(202,138,4,.45); border-radius:10px; padding:10px 16px; color:#fbbf24; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .2s; white-space:nowrap; min-height:44px; }
-.pin-copy-btn:active  { transform:scale(.96); }
-.pin-copy-btn.copied  { background:rgba(22,163,74,.25); border-color:rgba(22,163,74,.5); color:#4ade80; animation:popIn .3s ease; }
+    /* ── PIN subtle inline display (leaderboard) ── */
+    .pin-inline { display:inline-flex; align-items:center; gap:5px; color:#6b7280; font-size:11px; }
+    .pin-inline .pin-val { color:#ca8a04; font-weight:700; letter-spacing:.1em; -webkit-user-select:all; user-select:all; }
+    .pin-mini-copy { background:none; border:none; color:#6b7280; cursor:pointer; font-size:11px; padding:0 2px; font-family:inherit; transition:color .15s; }
+    .pin-mini-copy:hover { color:#ca8a04; }
 
-/* PIN entry */
-.pin-entry-wrap { display:flex; gap:8px; }
-.pin-entry { flex:1; background:rgba(255,255,255,.1); border:2px solid rgba(202,138,4,.45); border-radius:12px; padding:12px 16px; color:#fef08a; font-size:22px; font-weight:800; font-family:inherit; letter-spacing:.15em; outline:none; text-transform:uppercase; text-align:center; }
-.pin-entry::placeholder { color:rgba(254,240,138,.25); font-size:16px; letter-spacing:.04em; font-weight:500; text-transform:none; }
+    /* ── PIN display block (admin) ── */
+    .pin-block    { background:rgba(0,0,0,.3); border:1px solid rgba(202,138,4,.25); border-radius:12px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:12px; }
+    .pin-code     { font-family:'DM Sans',sans-serif; font-size:26px; font-weight:800; letter-spacing:.18em; color:#fef08a; -webkit-user-select:all; user-select:all; cursor:text; }
+    .pin-copy-btn { display:flex; align-items:center; gap:6px; background:rgba(202,138,4,.15); border:1px solid rgba(202,138,4,.4); border-radius:9px; padding:9px 14px; color:#fbbf24; font-family:inherit; font-weight:700; font-size:13px; cursor:pointer; transition:all .2s; white-space:nowrap; min-height:40px; }
+    .pin-copy-btn:active { transform:scale(.96); }
+    .pin-copy-btn.copied { background:rgba(22,163,74,.25); border-color:rgba(22,163,74,.5); color:#4ade80; animation:popIn .3s ease; }
 
-.lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
-.lb-header { background:rgba(202,138,4,.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,.15); }
-.lb-row    { border-top:1px solid rgba(255,255,255,.05); font-size:14px; }
-.lb-row.gold { background:rgba(202,138,4,.06); }
+    /* ── PIN entry (join screen & games tab) ── */
+    .pin-join-row { display:flex; gap:10px; align-items:stretch; }
+    .pin-entry    { flex:1; min-width:0; background:rgba(255,255,255,.1); border:2px solid rgba(202,138,4,.45); border-radius:12px; padding:12px 14px; color:#fef08a; font-size:20px; font-weight:800; font-family:inherit; letter-spacing:.12em; outline:none; text-transform:uppercase; text-align:center; width:100%; }
+    .pin-entry::placeholder { color:rgba(254,240,138,.2); font-size:14px; letter-spacing:.04em; font-weight:500; text-transform:none; }
 
-.under { color:#4ade80!important; }
-.over  { color:#f87171!important; }
-.even  { color:#facc15!important; }
+    /* ── Leaderboard ── */
+    .lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
+    .lb-header { background:rgba(202,138,4,.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,.15); }
+    .lb-row    { border-top:1px solid rgba(255,255,255,.05); font-size:14px; }
+    .lb-row.gold { background:rgba(202,138,4,.06); }
 
-.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-.stat-box  { background:rgba(0,0,0,.3); border-radius:14px; padding:16px; text-align:center; }
+    .under { color:#4ade80!important; }
+    .over  { color:#f87171!important; }
+    .even  { color:#facc15!important; }
 
-.login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(155deg,#031a0e 0%,#052e16 40%,#0f3d22 70%,#14532d 100%); position:relative; overflow:hidden; }
-.login-card { position:relative; z-index:10; background:rgba(5,20,12,.78); border:1px solid rgba(202,138,4,.45); border-radius:20px; padding:36px; width:100%; max-width:380px; backdrop-filter:blur(20px); box-shadow:0 40px 100px rgba(0,0,0,.7); }
-.login-logo { text-align:center; margin-bottom:26px; }
-.login-logo .icon { font-size:54px; filter:drop-shadow(0 4px 12px rgba(202,138,4,.5)); }
-.login-logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:28px; font-weight:800; margin-top:8px; }
-.login-logo p  { color:#86efac; font-size:12px; letter-spacing:.12em; margin-top:4px; }
-.login-logo .divider { width:56px; height:2px; background:linear-gradient(90deg,transparent,#ca8a04,transparent); margin:12px auto 0; }
-.tab-toggle { display:flex; gap:6px; background:rgba(255,255,255,.05); border-radius:10px; padding:4px; margin-bottom:18px; }
-.tab-btn { flex:1; padding:9px; border-radius:8px; border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
-.tab-btn.active { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; }
-.tab-btn:not(.active) { background:transparent; color:#86efac; }
-.error-msg { color:#fca5a5; font-size:12px; margin-bottom:12px; }
+    /* ── Profile stats ── */
+    .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .stat-box  { background:rgba(0,0,0,.3); border-radius:14px; padding:16px; text-align:center; }
 
-.stepper  { display:flex; align-items:center; gap:10px; }
-.step-btn { width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:inherit; }
-.step-val { background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:12px; padding:8px; color:#fff; font-size:26px; font-weight:800; width:80px; text-align:center; font-family:inherit; outline:none; }
+    /* ── Login page ── */
+    .login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(155deg,#031a0e 0%,#052e16 40%,#0f3d22 70%,#14532d 100%); position:relative; overflow:hidden; }
+    .login-card { position:relative; z-index:10; background:rgba(5,20,12,.82); border:1px solid rgba(202,138,4,.45); border-radius:20px; padding:32px 28px; width:calc(100% - 32px); max-width:370px; backdrop-filter:blur(20px); box-shadow:0 40px 100px rgba(0,0,0,.7); }
+    .login-logo { text-align:center; margin-bottom:22px; }
+    .login-logo .icon { font-size:50px; filter:drop-shadow(0 4px 12px rgba(202,138,4,.5)); }
+    .login-logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:26px; font-weight:800; margin-top:8px; }
+    .login-logo p  { color:#86efac; font-size:11px; letter-spacing:.12em; margin-top:4px; }
+    .login-logo .divider { width:52px; height:2px; background:linear-gradient(90deg,transparent,#ca8a04,transparent); margin:10px auto 0; }
+    .tab-toggle { display:flex; gap:6px; background:rgba(255,255,255,.05); border-radius:10px; padding:4px; margin-bottom:16px; }
+    .tab-btn { flex:1; padding:9px; border-radius:8px; border:none; cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
+    .tab-btn.active { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; }
+    .tab-btn:not(.active) { background:transparent; color:#86efac; }
+    .error-msg { color:#fca5a5; font-size:12px; margin-bottom:12px; }
 
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    /* ── Stepper ── */
+    .stepper  { display:flex; align-items:center; gap:10px; }
+    .step-btn { width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:inherit; }
+    .step-val { background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:12px; padding:8px; color:#fff; font-size:26px; font-weight:800; width:80px; text-align:center; font-family:inherit; outline:none; }
 
-.sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
-.sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.05); }
-.sc-body { border-top:1px solid rgba(255,255,255,.04); font-size:13px; }
-.sc-foot { border-top:2px solid rgba(202,138,4,.25); background:rgba(202,138,4,.07); font-size:13px; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
 
-.game-row      { background:rgba(0,0,0,.38); border-radius:16px; padding:16px 20px; border:1px solid rgba(255,255,255,.07); margin-bottom:12px; }
-.game-row.live-row { border-color:rgba(239,68,68,.4); }
-.status-badge    { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
-.status-pending  { background:rgba(202,138,4,.2); color:#fbbf24; }
-.status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
-.status-finished { background:rgba(255,255,255,.08); color:#6b7280; }
+    /* ── Scorecard ── */
+    .sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
+    .sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.05); }
+    .sc-body { border-top:1px solid rgba(255,255,255,.04); font-size:13px; }
+    .sc-foot { border-top:2px solid rgba(202,138,4,.25); background:rgba(202,138,4,.07); font-size:13px; }
 
-.empty { text-align:center; padding:56px 20px; color:#374151; }
-.empty .icon { font-size:52px; margin-bottom:14px; }
-.empty h2 { font-family:'Playfair Display',serif; color:#fef08a; font-size:20px; margin-bottom:8px; }
+    /* ── Game rows ── */
+    .game-row      { background:rgba(0,0,0,.38); border-radius:16px; padding:16px 20px; border:1px solid rgba(255,255,255,.07); margin-bottom:12px; }
+    .game-row.live-row { border-color:rgba(239,68,68,.4); }
+    .status-badge    { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
+    .status-pending  { background:rgba(202,138,4,.2); color:#fbbf24; }
+    .status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
+    .status-finished { background:rgba(255,255,255,.08); color:#6b7280; }
 
-#sync-bar { position:fixed; bottom:0; left:0; right:0; background:rgba(202,138,4,.92); color:#fff; text-align:center; padding:10px; font-size:13px; font-weight:600; z-index:999; transform:translateY(100%); transition:transform .3s; }
-#sync-bar.show { transform:translateY(0); }
-#sync-bar.ok   { background:rgba(22,163,74,.92); }
-#sync-bar.err  { background:rgba(220,38,38,.92); }
+    /* ── Join Game card ── */
+    .join-card { background:rgba(0,0,0,.3); border:1px solid rgba(202,138,4,.2); border-radius:16px; padding:22px; margin-bottom:28px; }
 
-#loading { display:flex; align-items:center; justify-content:center; min-height:100vh; gap:12px; font-size:16px; color:#86efac; }
+    .empty { text-align:center; padding:56px 20px; color:#374151; }
+    .empty .icon { font-size:52px; margin-bottom:14px; }
+    .empty h2 { font-family:'Playfair Display',serif; color:#fef08a; font-size:20px; margin-bottom:8px; }
 
-@media (max-width:600px) {
-  .two-col   { grid-template-columns:1fr; }
-  .stat-grid { grid-template-columns:repeat(2,1fr); }
-  .lb-header,.lb-row { grid-template-columns:36px 1fr 46px 58px 58px; padding:8px 12px; font-size:12px; }
-  .pin-code  { font-size:26px; }
-}
-```
+    #sync-bar { position:fixed; bottom:0; left:0; right:0; background:rgba(202,138,4,.92); color:#fff; text-align:center; padding:10px; font-size:13px; font-weight:600; z-index:999; transform:translateY(100%); transition:transform .3s; }
+    #sync-bar.show { transform:translateY(0); }
+    #sync-bar.ok   { background:rgba(22,163,74,.92); }
+    #sync-bar.err  { background:rgba(220,38,38,.92); }
 
+    #loading { display:flex; align-items:center; justify-content:center; min-height:100vh; gap:12px; font-size:16px; color:#86efac; }
+
+    /* ── Responsive ── */
+    @media (max-width:600px) {
+      .two-col   { grid-template-columns:1fr; }
+      .stat-grid { grid-template-columns:repeat(2,1fr); }
+      .lb-header,.lb-row { grid-template-columns:36px 1fr 46px 58px 58px; padding:8px 12px; font-size:12px; }
+      .login-card { padding:28px 20px; }
+    }
   </style>
 </head>
 <body>
 
-<div class="rain-wrap" id="rain"></div>
 <div id="root"></div>
 <div id="sync-bar"></div>
 
@@ -166,24 +187,24 @@ let SF = { gameId:'', hole:'', strokes:'', loaded:false };
 let AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
 
 // ══════════════════════════════════════════════════════════════
-//  EMOJI RAIN
+//  LOGIN-ONLY EMOJI RAIN (floats UP)
 // ══════════════════════════════════════════════════════════════
-(function() {
-  const wrap = document.getElementById('rain');
+function buildRainHTML() {
   const list = ['⛳','🏌️','⛳','🍀','🟢','🏆','🌿','⛳','🏅','⛳','🏌️','⛳'];
-  for (let i = 0; i < 28; i++) {
-    const el = document.createElement('span');
-    el.className = 'raindrop';
-    el.textContent = list[i % list.length];
-    el.style.cssText = `left:${((i*3.61)%100).toFixed(1)}%;font-size:${14+(i*2)%22}px;animation-duration:${(8+(i*.3)%6).toFixed(1)}s;animation-delay:${((i*.48)%11).toFixed(1)}s`;
-    wrap.appendChild(el);
+  let spans = '';
+  for (let i = 0; i < 24; i++) {
+    const left  = ((i * 4.17) % 100).toFixed(1);
+    const size  = 13 + (i * 2) % 20;
+    const dur   = (9 + (i * 0.31) % 6).toFixed(1);
+    const delay = ((i * 0.52) % 10).toFixed(1);
+    spans += `<span style="left:${left}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:${delay}s">${list[i % list.length]}</span>`;
   }
-})();
+  return `<div class="login-rain">${spans}</div>`;
+}
 
 // ══════════════════════════════════════════════════════════════
 //  PIN HELPERS
 // ══════════════════════════════════════════════════════════════
-// No ambiguous chars (0/O, 1/I, etc.)
 const PIN_CHARS = 'ACDEFGHJKMNPQRTUVWXY3479';
 
 function genPin() {
@@ -193,7 +214,7 @@ function genPin() {
 }
 
 function copyPin(pin, btnId) {
-  const btn = document.getElementById(btnId);
+  const btn  = document.getElementById(btnId);
   const done = () => {
     if (!btn) return;
     btn.classList.add('copied');
@@ -202,9 +223,19 @@ function copyPin(pin, btnId) {
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(pin).then(done).catch(() => legacyCopy(pin, done));
-  } else {
-    legacyCopy(pin, done);
-  }
+  } else { legacyCopy(pin, done); }
+}
+
+function copyPinMini(pin, btnId) {
+  const btn  = document.getElementById(btnId);
+  const done = () => {
+    if (!btn) return;
+    btn.textContent = '✅';
+    setTimeout(() => { btn.textContent = '📋'; }, 2000);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(pin).then(done).catch(() => legacyCopy(pin, done));
+  } else { legacyCopy(pin, done); }
 }
 
 function legacyCopy(text, cb) {
@@ -264,7 +295,7 @@ const esc      = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 function calcBoard(game) {
   const pars = getPars(game);
   return S.users.map(user => {
-    const us = S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
+    const us      = S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
     const strokes = us.reduce((a,s)=>a+Number(s.strokes),0);
     const par     = us.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
     return { user, strokes, par, holes:us.length, rel:strokes-par };
@@ -278,7 +309,11 @@ function render() {
   const root = document.getElementById('root');
   if (S.loading) { root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>'; return; }
   if (!S.currentUser) { renderLogin(); return; }
-  const live = S.games.find(g=>g.status==='live');
+
+  const live        = S.games.find(g=>g.status==='live');
+  const onProfile   = S.page==='profile';
+  const isAdmin     = S.currentUser.isAdmin;
+
   root.innerHTML = `
     <header>
       <div class="header-inner">
@@ -288,7 +323,10 @@ function render() {
         </div>
         <div class="header-right">
           ${live?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':''}
-          <div class="user-chip">🏌️ ${esc(S.currentUser.username)} ${S.currentUser.isAdmin?'<span class="admin-tag">ADMIN</span>':''}</div>
+          <div class="user-chip${onProfile?' active':''}" onclick="nav('profile')" title="View profile">
+            🏌️ ${esc(S.currentUser.username)}
+            ${isAdmin?'<span class="admin-tag">ADMIN</span>':''}
+          </div>
           <button class="btn-signout" onclick="signOut()">Sign out</button>
         </div>
       </div>
@@ -296,19 +334,20 @@ function render() {
     <nav><div class="nav-inner">
       ${nb('leaderboard','🏆 Leaderboard')}
       ${nb('score','✏️ Score Entry')}
-      ${nb('profile','👤 Profile')}
-      ${S.currentUser.isAdmin?nb('games','⚙️ Games'):''}
+      ${nb('games', isAdmin ? '⚙️ Games' : '🎮 Games')}
     </div></nav>
     <main id="page"></main>`;
+
   const pg = document.getElementById('page');
-  if      (S.page==='leaderboard')                    renderLeaderboard(pg);
-  else if (S.page==='score')                          renderScore(pg);
-  else if (S.page==='profile')                        renderProfile(pg);
-  else if (S.page==='games'&&S.currentUser.isAdmin)   renderAdmin(pg);
+  if      (S.page==='leaderboard')  renderLeaderboard(pg);
+  else if (S.page==='score')        renderScore(pg);
+  else if (S.page==='profile')      renderProfile(pg);
+  else if (S.page==='games')        renderGames(pg);
 }
+
 function nb(id,lbl) { return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${lbl}</button>`; }
-function nav(p)  { S.page=p; SF={gameId:'',hole:'',strokes:'',loaded:false}; render(); }
-function signOut() { S.currentUser=null; S.page='leaderboard'; render(); }
+function nav(p)     { S.page=p; SF={gameId:'',hole:'',strokes:'',loaded:false}; render(); }
+function signOut()  { S.currentUser=null; S.page='leaderboard'; render(); }
 
 // ══════════════════════════════════════════════════════════════
 //  LOGIN
@@ -316,6 +355,7 @@ function signOut() { S.currentUser=null; S.page='leaderboard'; render(); }
 function renderLogin() {
   document.getElementById('root').innerHTML = `
     <div class="login-page">
+      ${buildRainHTML()}
       <div class="spin-in login-card">
         <div class="login-logo">
           <div class="icon">⛳</div>
@@ -337,16 +377,22 @@ function renderLogin() {
           ${loginMode==='login'?'🏌️  Tee Off':'⛳  Join Tournament'}
         </button>
         <p style="color:#6b7280;font-size:11px;text-align:center;margin-top:14px">
-          ${S.users.length===0&&loginMode==='register'?'First player automatically becomes admin ⚙️':S.users.length>0&&loginMode==='register'?S.users.length+' player'+(S.users.length>1?'s':'')+' registered':''}
+          ${S.users.length===0&&loginMode==='register'
+            ? 'First player automatically becomes admin ⚙️'
+            : S.users.length>0&&loginMode==='register'
+              ? S.users.length+' player'+(S.users.length>1?'s':'')+' registered'
+              : ''}
         </p>
       </div>
     </div>`;
   setTimeout(()=>document.getElementById('uname')?.focus(), 80);
 }
 
+// PIN join screen — shown after login if player wants to jump into a game
 function renderPinJoin() {
   document.getElementById('root').innerHTML = `
     <div class="login-page">
+      ${buildRainHTML()}
       <div class="spin-in login-card">
         <div class="login-logo">
           <div class="icon">⛳</div>
@@ -354,23 +400,25 @@ function renderPinJoin() {
           <p>GOLF TOURNAMENT TRACKER</p>
           <div class="divider"></div>
         </div>
-        <p style="color:#86efac;font-size:13px;text-align:center;margin-bottom:22px;line-height:1.7">
+        <p style="color:#86efac;font-size:13px;text-align:center;margin-bottom:20px;line-height:1.7">
           Welcome, <strong style="color:#fef08a">${esc(S.currentUser.username)}</strong>!<br>
           Got a game PIN? Enter it to jump straight in.
         </p>
         <div id="perr"></div>
         <div class="form-group">
-          <label class="form-label">🔑 GAME PIN</label>
-          <div class="pin-entry-wrap">
-            <input class="pin-entry" id="pin-input" maxlength="5" placeholder="XXXXX"
+          <label class="form-label">🔑 GAME PIN (optional)</label>
+          <div class="pin-join-row">
+            <input class="pin-entry" id="pin-input" maxlength="5" placeholder="e.g. FX4KM"
               oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
               onkeydown="if(event.key==='Enter')doJoinPin()">
-            <button class="btn btn-gold" style="flex-shrink:0;padding:12px 18px;font-size:15px" onclick="doJoinPin()">Go →</button>
+            <button class="btn btn-gold" style="flex-shrink:0;padding:12px 18px;white-space:nowrap" onclick="doJoinPin()">Go →</button>
           </div>
         </div>
-        <button class="btn btn-ghost btn-full" style="margin-top:6px" onclick="skipPin()">
-          Skip — take me to the leaderboard
-        </button>
+        <div style="margin-top:16px">
+          <button class="btn btn-ghost btn-full" onclick="skipPin()">
+            Skip — take me to the leaderboard
+          </button>
+        </div>
       </div>
     </div>`;
   setTimeout(()=>document.getElementById('pin-input')?.focus(), 80);
@@ -399,7 +447,7 @@ function doAuth() {
 }
 
 function doJoinPin() {
-  const pin = (document.getElementById('pin-input')?.value||'').trim().toUpperCase();
+  const pin  = (document.getElementById('pin-input')?.value||'').trim().toUpperCase();
   if (!pin) { skipPin(); return; }
   const game = S.games.find(g => String(g.pin).toUpperCase() === pin);
   if (!game) {
@@ -424,7 +472,7 @@ function renderLeaderboard(el) {
     ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
   </div>`;
   if (!live && !past.length) {
-    html += `<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game before scores appear here.</p></div>`;
+    html += `<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game.</p></div>`;
   }
   if (live) html += buildBoard(live, true);
   past.forEach(g => html += buildBoard(g, false));
@@ -435,24 +483,19 @@ function buildBoard(game, isLive) {
   const board = calcBoard(game);
   const pars  = getPars(game);
   const pt    = pars.reduce((a,b)=>a+b,0);
+  // PIN shown subtly inline next to course details — only when live
+  const pinInline = (isLive && game.pin)
+    ? ` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`
+    : '';
+
   let html = `<div style="margin-bottom:30px">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
       <div>
-        <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:3px">${esc(game.name)}</h2>
-        <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
+        <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)}</h2>
+        <p style="color:#86efac;font-size:12px;line-height:1.6">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}${pinInline}</p>
       </div>
       ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#6b7280;font-weight:700">FINAL</div>'}
     </div>`;
-
-  if (isLive && game.pin) {
-    html += `<div style="margin-bottom:14px;background:rgba(0,0,0,.3);border:1px solid rgba(202,138,4,.25);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-      <div>
-        <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:5px">🔑 GAME PIN — share with friends</div>
-        <span class="pin-code">${esc(game.pin)}</span>
-      </div>
-      <button class="pin-copy-btn" id="lb-copy-${game.id}" onclick="copyPin('${esc(game.pin)}','lb-copy-${game.id}')">📋 Copy PIN</button>
-    </div>`;
-  }
 
   if (!board.length) {
     html += `<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
@@ -545,7 +588,7 @@ function sfGame(id) { SF={gameId:id,hole:'',strokes:'',loaded:false}; renderScor
 function sfHole(h)  { SF.hole=h; SF.strokes=''; SF.loaded=false; renderScore(document.getElementById('page')); }
 function adjS(d) {
   SF.strokes=String(Math.max(1,Number(SF.strokes||1)+d));
-  const i=document.getElementById('sv'); if(i)i.value=SF.strokes;
+  const i=document.getElementById('sv'); if(i) i.value=SF.strokes;
   renderScore(document.getElementById('page'));
 }
 function submitScore() {
@@ -559,19 +602,20 @@ function submitScore() {
 }
 
 // ══════════════════════════════════════════════════════════════
-//  PROFILE
+//  PROFILE  (accessed via username chip in header)
 // ══════════════════════════════════════════════════════════════
 function renderProfile(el) {
-  const my=S.scores.filter(s=>s.userId===S.currentUser.id);
-  const played=[...new Set(my.map(s=>s.gameId))].length;
-  const stats=S.games.filter(g=>g.status==='finished'&&my.some(s=>s.gameId===g.id)).map(g=>{
+  const my    = S.scores.filter(s=>s.userId===S.currentUser.id);
+  const played = [...new Set(my.map(s=>s.gameId))].length;
+  const stats  = S.games.filter(g=>g.status==='finished'&&my.some(s=>s.gameId===g.id)).map(g=>{
     const pars=getPars(g),gs=my.filter(s=>s.gameId===g.id);
     const tot=gs.reduce((a,s)=>a+s.strokes,0),par=gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
     return{game:g,tot,par,rel:tot-par,pos:calcBoard(g).findIndex(p=>p.user.id===S.currentUser.id)+1,holes:gs.length};
   });
-  const best=stats.length?stats.reduce((b,g)=>g.rel<b.rel?g:b):null;
-  const avg=stats.length?Math.round(stats.reduce((a,g)=>a+g.rel,0)/stats.length):null;
-  const wins=stats.filter(g=>g.pos===1).length;
+  const best = stats.length?stats.reduce((b,g)=>g.rel<b.rel?g:b):null;
+  const avg  = stats.length?Math.round(stats.reduce((a,g)=>a+g.rel,0)/stats.length):null;
+  const wins = stats.filter(g=>g.pos===1).length;
+
   el.innerHTML=`
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">👤 Profile</h1>
     <div class="card-gold fade-up" style="margin-bottom:24px">
@@ -594,23 +638,57 @@ function renderProfile(el) {
       ${stats.map(({game,rel,pos,tot,holes})=>`<div style="background:rgba(0,0,0,.32);border-radius:14px;padding:14px 18px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
         <div><div style="color:#e5e7eb;font-weight:700;font-size:15px">${esc(game.name)}</div>
         <div style="color:#4b5563;font-size:12px;margin-top:2px">${esc(game.course)} · ${holes}/${game.holes} holes${game.startTime?' · '+fmtDate(game.startTime):''}</div></div>
-        <div style="text-align:right;flex-shrink:0"><div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
-        <div style="color:#6b7280;font-size:12px;margin-top:3px">#${pos} · ${tot} strokes</div></div>
-      </div>`).join('')}`:`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No completed games yet — start playing!</p></div>`}`;
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
+          <div style="color:#6b7280;font-size:12px;margin-top:3px">#${pos} · ${tot} strokes</div>
+        </div>
+      </div>`).join('')}`
+    :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No completed games yet — start playing!</p></div>`}`;
 }
 
 function exportCSV() {
   const my=S.scores.filter(s=>s.userId===S.currentUser.id);
   const rows=[['Game','Course','Date','Hole','Par','Strokes','Score']];
   S.games.forEach(g=>{const pars=getPars(g);my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{const p=pars[s.hole-1]||4;rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,fmtScore(s.strokes-p)]);});});
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));a.download=S.currentUser.username+'-scores.csv';a.click();
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));
+  a.download=S.currentUser.username+'-scores.csv'; a.click();
 }
 
 // ══════════════════════════════════════════════════════════════
-//  ADMIN
+//  GAMES TAB  (visible to ALL users)
+//  — All users see "Join a Game"
+//  — Admins additionally see game management
 // ══════════════════════════════════════════════════════════════
-function renderAdmin(el) {
-  let form='';
+function renderGames(el) {
+  const isAdmin = S.currentUser.isAdmin;
+
+  // ── Join a Game section (everyone) ──
+  const joinSection = `
+    <div class="join-card fade-up">
+      <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:6px">🔑 Join a Game</h2>
+      <p style="color:#86efac;font-size:12px;margin-bottom:16px">Enter the PIN your admin shared to jump straight into score entry.</p>
+      <div id="jerr"></div>
+      <div class="pin-join-row" style="margin-bottom:0">
+        <input class="pin-entry" id="join-pin" maxlength="5" placeholder="Enter PIN"
+          oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
+          onkeydown="if(event.key==='Enter')joinByPin()">
+        <button class="btn btn-gold" style="flex-shrink:0;padding:12px 20px;white-space:nowrap" onclick="joinByPin()">Join →</button>
+      </div>
+    </div>`;
+
+  if (!isAdmin) {
+    el.innerHTML = `
+      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">🎮 Games</h1>
+      ${joinSection}
+      <div class="empty" style="padding:32px 20px">
+        <p style="color:#4b5563;font-size:13px">Your admin will start a game and share a PIN with you.</p>
+      </div>`;
+    return;
+  }
+
+  // ── Admin: create game form ──
+  let form = '';
   if (AF.open) {
     form=`<div class="card-gold fade-up" style="margin-bottom:24px">
       <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:18px">Create New Game</div>
@@ -633,18 +711,19 @@ function renderAdmin(el) {
               ${[3,4,5].map(v=>`<option value="${v}"${p===v?' selected':''}>${v}</option>`).join('')}
             </select></div>`).join('')}
         </div></div>
-      <div style="margin-top:18px;display:flex;align-items:center;gap:12px">
+      <div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <button class="btn btn-gold" onclick="createGame()">⛳  Create Game</button>
-        <span style="color:#374151;font-size:12px">Par: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)} · A PIN will be auto-generated</span>
+        <span style="color:#374151;font-size:12px">Par: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)} · PIN auto-generated on create</span>
       </div>
     </div>`;
   }
 
+  // ── Admin: game list ──
   const list=[...S.games].reverse().map(g=>{
     const pars=getPars(g),pt=pars.reduce((a,b)=>a+b,0);
-    const pinBlock=g.pin?`<div class="pin-block" style="margin-top:14px">
+    const pinBlock=g.pin?`<div class="pin-block">
       <div>
-        <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:5px">🔑 GAME PIN — share this with your friends</div>
+        <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:5px">🔑 GAME PIN — share with friends</div>
         <span class="pin-code">${esc(g.pin)}</span>
       </div>
       <button class="pin-copy-btn" id="copy-${g.id}" onclick="copyPin('${esc(g.pin)}','copy-${g.id}')">📋 Copy PIN</button>
@@ -673,12 +752,25 @@ function renderAdmin(el) {
       <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">⚙️ Game Management</h1>
       <button class="btn ${AF.open?'btn-ghost':'btn-gold'}" onclick="toggleForm()">${AF.open?'✕  Cancel':'＋  New Game'}</button>
     </div>
+    ${joinSection}
     ${form}
     ${!S.games.length&&!AF.open?`<div class="empty" style="border:1px dashed rgba(255,255,255,.07);border-radius:16px"><div class="icon">🏌️</div><p style="color:#4b5563">No games yet — create your first one!</p></div>`:list}`;
 }
 
-function toggleForm() { AF.open=!AF.open; renderAdmin(document.getElementById('page')); }
-function setHoles(n)  { AF.holes=Number(n); AF.pars=Array(Number(n)).fill(0).map((_,i)=>AF.pars[i]||4); renderAdmin(document.getElementById('page')); }
+// Join by PIN from the Games tab
+function joinByPin() {
+  const pin  = (document.getElementById('join-pin')?.value||'').trim().toUpperCase();
+  const err  = document.getElementById('jerr');
+  if (!pin) { err.innerHTML='<div class="error-msg">⚠️ Please enter a PIN</div>'; return; }
+  const game = S.games.find(g=>String(g.pin).toUpperCase()===pin);
+  if (!game) { err.innerHTML='<div class="error-msg">⚠️ No game found with that PIN</div>'; return; }
+  S.page = 'score';
+  SF = { gameId:game.id, hole:'', strokes:'', loaded:false };
+  render();
+}
+
+function toggleForm() { AF.open=!AF.open; renderGames(document.getElementById('page')); }
+function setHoles(n)  { AF.holes=Number(n); AF.pars=Array(Number(n)).fill(0).map((_,i)=>AF.pars[i]||4); renderGames(document.getElementById('page')); }
 function setPar(i,v)  { AF.pars[i]=Number(v); }
 
 function createGame() {
@@ -688,7 +780,7 @@ function createGame() {
   S.games=[...S.games,{id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
     pin:genPin(),status:'pending',createdBy:S.currentUser.id,createdAt:new Date().toISOString(),startTime:null,endTime:null}];
   AF={open:false,name:'',course:'',holes:18,pars:Array(18).fill(4)};
-  saveAll(); renderAdmin(document.getElementById('page'));
+  saveAll(); renderGames(document.getElementById('page'));
 }
 
 function setStatus(id,status) {
@@ -698,7 +790,7 @@ function setStatus(id,status) {
 function delGame(id) {
   if(!confirm('Delete this game?'))return;
   S.games=S.games.filter(g=>g.id!==id);
-  saveAll(); renderAdmin(document.getElementById('page'));
+  saveAll(); renderGames(document.getElementById('page'));
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -707,6 +799,5 @@ function delGame(id) {
 render();
 loadFromSheets();
 </script>
-
 </body>
 </html>
