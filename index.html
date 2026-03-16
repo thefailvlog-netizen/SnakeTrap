@@ -167,17 +167,24 @@
 
 <script>
 // ══════════════════════════════════════════════════════════════
-//  ⚙️  Paste your Apps Script Web App URL here when ready
+//  ⚙️  SUPABASE CONFIG
 // ══════════════════════════════════════════════════════════════
-const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const SB_URL = 'https://rnmnanbnhdskgzoqpuwt.supabase.co';
+const SB_KEY = 'sb_publishable_n3sreNtRxoKFPGUtYwmt9A_tTUrcFRA';
+const SB_HEADERS = {
+  'apikey':        SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type':  'application/json',
+  'Prefer':        'resolution=merge-duplicates,return=minimal'
+};
 
 // ══════════════════════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════════════════════
 const S = {
-  users:       JSON.parse(localStorage.getItem('gtf_users')  || '[]'),
-  games:       JSON.parse(localStorage.getItem('gtf_games')  || '[]'),
-  scores:      JSON.parse(localStorage.getItem('gtf_scores') || '[]'),
+  users:       [],
+  games:       [],
+  scores:      [],
   currentUser: null,
   page:        'leaderboard',
   loading:     true,
@@ -248,37 +255,131 @@ function legacyCopy(text, cb) {
 }
 
 // ══════════════════════════════════════════════════════════════
-//  GOOGLE SHEETS SYNC
+//  SUPABASE DATA LAYER
 // ══════════════════════════════════════════════════════════════
-async function loadFromSheets() {
-  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') { S.loading=false; render(); return; }
-  try {
-    const r = await fetch(SCRIPT_URL + '?action=getData');
-    const d = await r.json();
-    if (Array.isArray(d.users))  { S.users  = d.users;  ls('gtf_users',  d.users);  }
-    if (Array.isArray(d.games))  { S.games  = d.games;  ls('gtf_games',  d.games);  }
-    if (Array.isArray(d.scores)) { S.scores = d.scores; ls('gtf_scores', d.scores); }
-  } catch(e) { console.warn('Sheet load failed, using cache'); }
-  S.loading = false; render();
+
+// ── Fetch all rows from a table ──
+async function sbGet(table) {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?select=*`, {
+    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+  });
+  if (!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
+  return r.json();
 }
 
-async function saveToSheets() {
-  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
+// ── Upsert one or many rows (merge on primary key) ──
+async function sbUpsert(table, rows) {
+  const body = Array.isArray(rows) ? rows : [rows];
+  if (!body.length) return;
+  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
+    method:  'POST',
+    headers: SB_HEADERS,
+    body:    JSON.stringify(body)
+  });
+  if (!r.ok) { const t = await r.text(); throw new Error(`UPSERT ${table} failed: ${t}`); }
+}
+
+// ── Delete a specific row ──
+async function sbDelete(table, match) {
+  const params = Object.entries(match).map(([k,v])=>`${k}=eq.${encodeURIComponent(v)}`).join('&');
+  await fetch(`${SB_URL}/rest/v1/${table}?${params}`, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+  });
+}
+
+// ── Load everything from Supabase on boot ──
+async function loadAll() {
+  try {
+    const [users, games, scores] = await Promise.all([
+      sbGet('users'), sbGet('games'), sbGet('scores')
+    ]);
+    if (Array.isArray(users))  S.users  = users;
+    if (Array.isArray(games))  S.games  = games;
+    if (Array.isArray(scores)) S.scores = scores;
+  } catch(e) { console.warn('Supabase load failed:', e); }
+  S.loading = false;
+  render();
+}
+
+// ── Silent background refresh (keeps leaderboard live across devices) ──
+async function silentRefresh() {
+  try {
+    const [users, games, scores] = await Promise.all([
+      sbGet('users'), sbGet('games'), sbGet('scores')
+    ]);
+    if (Array.isArray(users))  S.users  = users;
+    if (Array.isArray(games))  S.games  = games;
+    if (Array.isArray(scores)) S.scores = scores;
+    // Only re-render leaderboard silently so we don't interrupt score entry
+    if (S.currentUser && S.page === 'leaderboard') {
+      const pg = document.getElementById('page');
+      if (pg) renderLeaderboard(pg);
+    }
+    // Refresh live badge in header
+    const live = S.games.find(g=>g.status==='live');
+    const badge = document.querySelector('.live-badge');
+    const hdr   = document.querySelector('.header-right');
+    if (live && !badge && hdr) {
+      const d = document.createElement('div');
+      d.className = 'live-badge';
+      d.innerHTML = '<span class="live-dot"></span>LIVE';
+      hdr.prepend(d);
+    } else if (!live && badge) {
+      badge.remove();
+    }
+  } catch(e) { /* silent — don't bother the user */ }
+}
+setInterval(silentRefresh, 15000); // refresh every 15 seconds
+
+// ── Save a user ──
+async function saveUser(user) {
+  S.users = [...S.users.filter(u=>u.id!==user.id), user];
+  toast('saving');
+  try { await sbUpsert('users', user); toast('ok'); }
+  catch(e) { toast('err'); }
+}
+
+// ── Save a game ──
+async function saveGame(game) {
+  S.games = S.games.map(g=>g.id===game.id?game:g);
+  if (!S.games.find(g=>g.id===game.id)) S.games = [...S.games, game];
+  toast('saving');
+  try { await sbUpsert('games', game); toast('ok'); }
+  catch(e) { toast('err'); }
+}
+
+// ── Save a score (upsert on gameId+userId+hole primary key) ──
+async function saveScore(score) {
+  S.scores = [...S.scores.filter(s=>!(s.gameId===score.gameId&&s.userId===score.userId&&s.hole===score.hole)), score];
+  toast('saving');
+  try { await sbUpsert('scores', score); toast('ok'); }
+  catch(e) { toast('err'); }
+}
+
+// ── Persist game list changes (create / status update / delete) ──
+async function persistGames(newGames) {
+  // Find deleted games
+  const deleted = S.games.filter(g=>!newGames.find(n=>n.id===g.id));
+  // Find new or changed games
+  const upserted = newGames.filter(n=>{
+    const old = S.games.find(g=>g.id===n.id);
+    return !old || JSON.stringify(old)!==JSON.stringify(n);
+  });
+  S.games = newGames;
   toast('saving');
   try {
-    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify({ users:S.users, games:S.games, scores:S.scores }) });
+    if (upserted.length) await sbUpsert('games', upserted);
+    for (const g of deleted) await sbDelete('games', { id: g.id });
     toast('ok');
   } catch(e) { toast('err'); }
 }
-
-function ls(k,v) { localStorage.setItem(k, JSON.stringify(v)); }
-function saveAll() { ls('gtf_users',S.users); ls('gtf_games',S.games); ls('gtf_scores',S.scores); saveToSheets(); }
 
 let _tt;
 function toast(s) {
   const b = document.getElementById('sync-bar');
   b.className = 'show '+(s==='ok'?'ok':s==='err'?'err':'');
-  b.textContent = s==='saving' ? '☁️  Saving to Google Sheets…' : s==='ok' ? '✅  Saved to Google Sheets' : '⚠️  Sync failed — saved locally';
+  b.textContent = s==='saving' ? '☁️  Saving…' : s==='ok' ? '✅  Saved to Supabase' : '⚠️  Save failed — check connection';
   clearTimeout(_tt);
   if (s !== 'saving') _tt = setTimeout(() => b.className='', 2800);
 }
@@ -439,9 +540,8 @@ function doAuth() {
       err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>'; return;
     }
     const user = { id:Date.now().toString(), username:name, isAdmin:S.users.length===0, createdAt:new Date().toISOString() };
-    S.users = [...S.users, user];
     S.currentUser = user;
-    saveAll();
+    saveUser(user);
   }
   renderPinJoin();
 }
@@ -592,10 +692,13 @@ function adjS(d) {
   renderScore(document.getElementById('page'));
 }
 function submitScore() {
-  if (!SF.gameId||!SF.hole||!SF.strokes||Number(SF.strokes)<1) return;
-  S.scores=[...S.scores.filter(s=>!(s.gameId===SF.gameId&&s.userId===S.currentUser.id&&s.hole===Number(SF.hole))),
-    {gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:Number(SF.strokes),timestamp:new Date().toISOString()}];
-  saveAll(); SF.hole=''; SF.strokes=''; SF.loaded=false;
+  const inp = document.getElementById('sv');
+  if (inp) SF.strokes = inp.value;
+  const n = parseInt(SF.strokes, 10);
+  if (!SF.gameId||!SF.hole||isNaN(n)||n<1) return;
+  const score = {gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:n,timestamp:new Date().toISOString()};
+  saveScore(score);
+  SF.hole=''; SF.strokes=''; SF.loaded=false;
   const btn=document.getElementById('save-btn');
   if(btn){btn.textContent='✅  Saved!';btn.style.background='#16a34a';btn.style.boxShadow='none';}
   setTimeout(()=>renderScore(document.getElementById('page')),900);
@@ -777,27 +880,28 @@ function createGame() {
   const name  =(document.getElementById('af-name')?.value  ||AF.name).trim();
   const course=(document.getElementById('af-course')?.value||AF.course).trim();
   if (!name||!course) { alert('Please fill in game name and course.'); return; }
-  S.games=[...S.games,{id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
-    pin:genPin(),status:'pending',createdBy:S.currentUser.id,createdAt:new Date().toISOString(),startTime:null,endTime:null}];
+  const newGame = {id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
+    pin:genPin(),status:'pending',createdBy:S.currentUser.id,createdAt:new Date().toISOString(),startTime:null,endTime:null};
   AF={open:false,name:'',course:'',holes:18,pars:Array(18).fill(4)};
-  saveAll(); renderGames(document.getElementById('page'));
+  persistGames([...S.games, newGame]);
+  renderGames(document.getElementById('page'));
 }
 
 function setStatus(id,status) {
-  S.games=S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
-  saveAll(); render();
+  const updated = S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
+  persistGames(updated); render();
 }
 function delGame(id) {
   if(!confirm('Delete this game?'))return;
-  S.games=S.games.filter(g=>g.id!==id);
-  saveAll(); renderGames(document.getElementById('page'));
+  persistGames(S.games.filter(g=>g.id!==id));
+  renderGames(document.getElementById('page'));
 }
 
 // ══════════════════════════════════════════════════════════════
 //  BOOT
 // ══════════════════════════════════════════════════════════════
 render();
-loadFromSheets();
+loadAll();
 </script>
 </body>
 </html>
