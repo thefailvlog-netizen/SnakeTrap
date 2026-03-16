@@ -10,7 +10,11 @@
     body { min-height: 100vh; background: linear-gradient(170deg, #031a0e 0%, #052e16 30%, #0d3320 60%, #14532d 100%); color: #fff; font-family: 'DM Sans', sans-serif; }
 
     /* ── Animations ── */
-    @keyframes floatUp   { 0% { transform:translateY(110vh) rotate(0deg); opacity:0; } 8% { opacity:.11; } 92% { opacity:.11; } 100% { transform:translateY(-80px) rotate(-25deg); opacity:0; } }
+    @keyframes floatUp0  { 0% { transform:translateY(120vh) rotate(0deg);    opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(15deg);   opacity:0; } }
+    @keyframes floatUp1  { 0% { transform:translateY(120vh) rotate(-20deg);  opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(10deg);   opacity:0; } }
+    @keyframes floatUp2  { 0% { transform:translateY(120vh) rotate(45deg);   opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(-20deg);  opacity:0; } }
+    @keyframes floatUp3  { 0% { transform:translateY(120vh) rotate(-45deg);  opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(30deg);   opacity:0; } }
+    @keyframes floatUp4  { 0% { transform:translateY(120vh) rotate(90deg);   opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(60deg);   opacity:0; } }
     @keyframes pulseLive { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.75); } 50% { box-shadow:0 0 0 10px rgba(239,68,68,0); } }
     @keyframes fadeUp    { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
     @keyframes spinIn    { from { opacity:0; transform:scale(.85) rotate(-4deg); } to { opacity:1; transform:scale(1) rotate(0); } }
@@ -22,7 +26,7 @@
 
     /* ── Login emoji rain (float UP, login screen only) ── */
     .login-rain { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
-    .login-rain span { position:absolute; bottom:-20px; animation:floatUp linear infinite; user-select:none; }
+    .login-rain span { position:absolute; bottom:0; user-select:none; line-height:1; }
 
     /* ── Header ── */
     header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
@@ -197,14 +201,16 @@ let AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
 //  LOGIN-ONLY EMOJI RAIN (floats UP)
 // ══════════════════════════════════════════════════════════════
 function buildRainHTML() {
-  const list = ['⛳','🏌️','⛳','🍀','🟢','🏆','🌿','⛳','🏅','⛳','🏌️','⛳'];
+  const list = ['⛳','🏌️','⛳','🏌️‍♀️','🍺','🍾','🥂','⛳','🏌️','⛳','🍺','🥊','⛳','🏆','🍾'];
+  const anims = ['floatUp0','floatUp1','floatUp2','floatUp3','floatUp4'];
   let spans = '';
-  for (let i = 0; i < 24; i++) {
-    const left  = ((i * 4.17) % 100).toFixed(1);
-    const size  = 13 + (i * 2) % 20;
-    const dur   = (9 + (i * 0.31) % 6).toFixed(1);
-    const delay = ((i * 0.52) % 10).toFixed(1);
-    spans += `<span style="left:${left}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:${delay}s">${list[i % list.length]}</span>`;
+  for (let i = 0; i < 26; i++) {
+    const left  = ((i * 3.94) % 100).toFixed(1);
+    const size  = 14 + (i * 2) % 22;
+    const dur   = (9 + (i * 0.33) % 7).toFixed(1);
+    const delay = ((i * 0.61) % 11).toFixed(1);
+    const anim  = anims[i % anims.length];
+    spans += `<span style="left:${left}%;font-size:${size}px;animation-name:${anim};animation-duration:${dur}s;animation-delay:-${delay}s;animation-iteration-count:infinite;animation-timing-function:linear">${list[i % list.length]}</span>`;
   }
   return `<div class="login-rain">${spans}</div>`;
 }
@@ -411,9 +417,8 @@ function render() {
   if (S.loading) { root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>'; return; }
   if (!S.currentUser) { renderLogin(); return; }
 
-  const live        = S.games.find(g=>g.status==='live');
-  const onProfile   = S.page==='profile';
-  const isAdmin     = S.currentUser.isAdmin;
+  const live      = S.games.find(g=>g.status==='live');
+  const onProfile = S.page==='profile';
 
   root.innerHTML = `
     <header>
@@ -426,7 +431,6 @@ function render() {
           ${live?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':''}
           <div class="user-chip${onProfile?' active':''}" onclick="nav('profile')" title="View profile">
             🏌️ ${esc(S.currentUser.username)}
-            ${isAdmin?'<span class="admin-tag">ADMIN</span>':''}
           </div>
           <button class="btn-signout" onclick="signOut()">Sign out</button>
         </div>
@@ -435,7 +439,7 @@ function render() {
     <nav><div class="nav-inner">
       ${nb('leaderboard','🏆 Leaderboard')}
       ${nb('score','✏️ Score Entry')}
-      ${nb('games', isAdmin ? '⚙️ Games' : '🎮 Games')}
+      ${nb('games','⚙️ Games')}
     </div></nav>
     <main id="page"></main>`;
 
@@ -708,16 +712,29 @@ function submitScore() {
 //  PROFILE  (accessed via username chip in header)
 // ══════════════════════════════════════════════════════════════
 function renderProfile(el) {
-  const my    = S.scores.filter(s=>s.userId===S.currentUser.id);
-  const played = [...new Set(my.map(s=>s.gameId))].length;
-  const stats  = S.games.filter(g=>g.status==='finished'&&my.some(s=>s.gameId===g.id)).map(g=>{
-    const pars=getPars(g),gs=my.filter(s=>s.gameId===g.id);
-    const tot=gs.reduce((a,s)=>a+s.strokes,0),par=gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    return{game:g,tot,par,rel:tot-par,pos:calcBoard(g).findIndex(p=>p.user.id===S.currentUser.id)+1,holes:gs.length};
+  const uid    = S.currentUser.id;
+  const my     = S.scores.filter(s=>s.userId===uid);
+  // Games the user participated in (has scores) OR created
+  const myGameIds = new Set([
+    ...my.map(s=>s.gameId),
+    ...S.games.filter(g=>g.createdBy===uid).map(g=>g.id)
+  ]);
+  const played = myGameIds.size;
+  const stats  = S.games.filter(g=>g.status==='finished'&&myGameIds.has(g.id)).map(g=>{
+    const pars    = getPars(g);
+    const gs      = my.filter(s=>s.gameId===g.id);
+    const tot     = gs.reduce((a,s)=>a+s.strokes,0);
+    const par     = gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    const isOwner = g.createdBy===uid;
+    const board   = calcBoard(g);
+    const pos     = gs.length ? board.findIndex(p=>p.user.id===uid)+1 : null;
+    return {game:g,tot,par,rel:gs.length?tot-par:null,pos,holes:gs.length,isOwner};
   });
-  const best = stats.length?stats.reduce((b,g)=>g.rel<b.rel?g:b):null;
-  const avg  = stats.length?Math.round(stats.reduce((a,g)=>a+g.rel,0)/stats.length):null;
-  const wins = stats.filter(g=>g.pos===1).length;
+  const playedStats = stats.filter(s=>s.holes>0);
+  const best = playedStats.length?playedStats.reduce((b,g)=>g.rel<b.rel?g:b):null;
+  const avg  = playedStats.length?Math.round(playedStats.reduce((a,g)=>a+g.rel,0)/playedStats.length):null;
+  const wins = playedStats.filter(g=>g.pos===1).length;
+  const isCreator = S.games.some(g=>g.createdBy===uid);
 
   el.innerHTML=`
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">👤 Profile</h1>
@@ -726,7 +743,7 @@ function renderProfile(el) {
         <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,rgba(202,138,4,.25),rgba(20,83,45,.5));border:2px solid #ca8a04;display:flex;align-items:center;justify-content:center;font-size:30px">🏌️</div>
         <div>
           <div style="font-family:'Playfair Display',serif;color:#fff;font-size:21px;font-weight:700">${esc(S.currentUser.username)}</div>
-          <div style="color:${S.currentUser.isAdmin?'#fbbf24':'#86efac'};font-size:12px;margin-top:4px;font-weight:600">${S.currentUser.isAdmin?'⚙️  TOURNAMENT ADMIN':'🏌️  PLAYER'}</div>
+          <div style="color:${isCreator?'#fbbf24':'#86efac'};font-size:12px;margin-top:4px;font-weight:600">${isCreator?'⚙️  GAME ORGANISER':'🏌️  PLAYER'}</div>
         </div>
       </div>
       <div class="stat-grid">
@@ -738,15 +755,21 @@ function renderProfile(el) {
       ${my.length?`<button class="btn btn-ghost" style="margin-top:18px;padding:9px 18px;font-size:13px" onclick="exportCSV()">📥  Export My Scores (CSV)</button>`:''}
     </div>
     ${stats.length?`<h3 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:17px;margin-bottom:14px">Game History</h3>
-      ${stats.map(({game,rel,pos,tot,holes})=>`<div style="background:rgba(0,0,0,.32);border-radius:14px;padding:14px 18px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
-        <div><div style="color:#e5e7eb;font-weight:700;font-size:15px">${esc(game.name)}</div>
-        <div style="color:#4b5563;font-size:12px;margin-top:2px">${esc(game.course)} · ${holes}/${game.holes} holes${game.startTime?' · '+fmtDate(game.startTime):''}</div></div>
+      ${stats.map(({game,rel,pos,tot,holes,isOwner})=>`<div style="background:rgba(0,0,0,.32);border-radius:14px;padding:14px 18px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="color:#e5e7eb;font-weight:700;font-size:15px">${esc(game.name)}</span>
+            ${isOwner?'<span style="background:rgba(202,138,4,.2);color:#fbbf24;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.06em">ORGANISER</span>':''}
+          </div>
+          <div style="color:#4b5563;font-size:12px;margin-top:3px">${esc(game.course)} · ${holes}/${game.holes} holes${game.startTime?' · '+fmtDate(game.startTime):''}</div>
+        </div>
         <div style="text-align:right;flex-shrink:0">
-          <div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
-          <div style="color:#6b7280;font-size:12px;margin-top:3px">#${pos} · ${tot} strokes</div>
+          ${rel!==null?`<div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div>
+          <div style="color:#6b7280;font-size:12px;margin-top:3px">${pos?'#'+pos+' · ':' '}${tot} strokes</div>`
+          :`<div style="color:#6b7280;font-size:12px">Organiser only</div>`}
         </div>
       </div>`).join('')}`
-    :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No completed games yet — start playing!</p></div>`}`;
+    :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No games yet — get out there!</p></div>`}`;
 }
 
 function exportCSV() {
@@ -759,18 +782,16 @@ function exportCSV() {
 }
 
 // ══════════════════════════════════════════════════════════════
-//  GAMES TAB  (visible to ALL users)
-//  — All users see "Join a Game"
-//  — Admins additionally see game management
+//  GAMES TAB  — everyone can create; only creator can manage theirs
 // ══════════════════════════════════════════════════════════════
 function renderGames(el) {
-  const isAdmin = S.currentUser.isAdmin;
+  const uid = S.currentUser.id;
 
   // ── Join a Game section (everyone) ──
   const joinSection = `
     <div class="join-card fade-up">
       <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:6px">🔑 Join a Game</h2>
-      <p style="color:#86efac;font-size:12px;margin-bottom:16px">Enter the PIN your admin shared to jump straight into score entry.</p>
+      <p style="color:#86efac;font-size:12px;margin-bottom:16px">Enter the PIN shared by the game organiser to jump straight into score entry.</p>
       <div id="jerr"></div>
       <div class="pin-join-row" style="margin-bottom:0">
         <input class="pin-entry" id="join-pin" maxlength="5" placeholder="Enter PIN"
@@ -780,17 +801,7 @@ function renderGames(el) {
       </div>
     </div>`;
 
-  if (!isAdmin) {
-    el.innerHTML = `
-      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">🎮 Games</h1>
-      ${joinSection}
-      <div class="empty" style="padding:32px 20px">
-        <p style="color:#4b5563;font-size:13px">Your admin will start a game and share a PIN with you.</p>
-      </div>`;
-    return;
-  }
-
-  // ── Admin: create game form ──
+  // ── Create game form ──
   let form = '';
   if (AF.open) {
     form=`<div class="card-gold fade-up" style="margin-bottom:24px">
@@ -816,15 +827,16 @@ function renderGames(el) {
         </div></div>
       <div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <button class="btn btn-gold" onclick="createGame()">⛳  Create Game</button>
-        <span style="color:#374151;font-size:12px">Par: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)} · PIN auto-generated on create</span>
+        <span style="color:#374151;font-size:12px">Par: ${AF.pars.slice(0,AF.holes).reduce((a,b)=>a+b,0)} · PIN auto-generated</span>
       </div>
     </div>`;
   }
 
-  // ── Admin: game list ──
+  // ── Game list — everyone sees all games; only creator gets action buttons ──
   const list=[...S.games].reverse().map(g=>{
-    const pars=getPars(g),pt=pars.reduce((a,b)=>a+b,0);
-    const pinBlock=g.pin?`<div class="pin-block">
+    const pars    = getPars(g), pt = pars.reduce((a,b)=>a+b,0);
+    const isOwner = g.createdBy === uid;
+    const pinBlock= g.pin?`<div class="pin-block">
       <div>
         <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:5px">🔑 GAME PIN — share with friends</div>
         <span class="pin-code">${esc(g.pin)}</span>
@@ -834,30 +846,33 @@ function renderGames(el) {
     return`<div class="game-row${g.status==='live'?' live-row':''} fade-up">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px">
             <span style="color:#f3f4f6;font-weight:700;font-size:16px">${esc(g.name)}</span>
             <span class="status-badge status-${g.status}">${g.status==='live'?'● LIVE':g.status.toUpperCase()}</span>
+            ${isOwner?'<span style="background:rgba(202,138,4,.15);color:#fbbf24;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.06em">YOUR GAME</span>':''}
           </div>
           <div style="color:#4b5563;font-size:12px">${esc(g.course)} · ${g.holes} holes · Par ${pt}${g.startTime?' · Started '+fmtDate(g.startTime):''}${g.endTime?' · Ended '+fmtDate(g.endTime):''}</div>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0">
-          ${g.status==='pending'?`<button class="btn btn-green" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','live')">▶ Start</button><button class="btn btn-ghost" style="padding:8px 12px;font-size:13px" onclick="delGame('${g.id}')">🗑</button>`:''}
-          ${g.status==='live'?`<button class="btn btn-red" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','finished')">⏹ End Game</button>`:''}
-          ${g.status==='finished'?`<span style="color:#374151;font-size:12px;align-self:center">Completed</span>`:''}
+        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center">
+          ${isOwner && g.status==='pending'?`<button class="btn btn-green" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','live')">▶ Start</button><button class="btn btn-ghost" style="padding:8px 12px;font-size:13px" onclick="delGame('${g.id}')">🗑</button>`:''}
+          ${isOwner && g.status==='live'?`<button class="btn btn-red" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','finished')">⏹ End Game</button>`:''}
+          ${g.status==='finished'?`<span style="color:#374151;font-size:12px">Completed</span>`:''}
         </div>
       </div>
-      ${pinBlock}
+      ${isOwner ? pinBlock : ''}
     </div>`;
   }).join('');
 
   el.innerHTML=`
     <div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">⚙️ Game Management</h1>
+      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">⚙️ Games</h1>
       <button class="btn ${AF.open?'btn-ghost':'btn-gold'}" onclick="toggleForm()">${AF.open?'✕  Cancel':'＋  New Game'}</button>
     </div>
     ${joinSection}
-    ${form}
-    ${!S.games.length&&!AF.open?`<div class="empty" style="border:1px dashed rgba(255,255,255,.07);border-radius:16px"><div class="icon">🏌️</div><p style="color:#4b5563">No games yet — create your first one!</p></div>`:list}`;
+    <div style="margin-top:24px">
+      ${form}
+      ${!S.games.length&&!AF.open?`<div class="empty" style="border:1px dashed rgba(255,255,255,.07);border-radius:16px"><div class="icon">🏌️</div><p style="color:#4b5563">No games yet — create the first one!</p></div>`:list}
+    </div>`;
 }
 
 // Join by PIN from the Games tab
