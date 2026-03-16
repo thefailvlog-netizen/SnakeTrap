@@ -9,7 +9,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { min-height: 100vh; background: linear-gradient(170deg, #031a0e 0%, #052e16 30%, #0d3320 60%, #14532d 100%); color: #fff; font-family: 'DM Sans', sans-serif; }
 
-    /* ── Animations ── */
     @keyframes floatUp0  { 0% { transform:translateY(120vh) rotate(0deg);    opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(15deg);   opacity:0; } }
     @keyframes floatUp1  { 0% { transform:translateY(120vh) rotate(-20deg);  opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(10deg);   opacity:0; } }
     @keyframes floatUp2  { 0% { transform:translateY(120vh) rotate(45deg);   opacity:0; } 10% { opacity:.22; } 90% { opacity:.22; } 100% { transform:translateY(-120vh) rotate(-20deg);  opacity:0; } }
@@ -24,11 +23,9 @@
     .fade-up { animation:fadeUp .35s ease both; }
     .spin-in { animation:spinIn .40s ease both; }
 
-    /* ── Login emoji rain (float UP, login screen only) ── */
     .login-rain { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
     .login-rain span { position:absolute; bottom:0; user-select:none; line-height:1; }
 
-    /* ── Header ── */
     header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
     .header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
     .logo { display:flex; align-items:center; gap:11px; }
@@ -38,14 +35,12 @@
     .header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .live-badge { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
     .live-dot   { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
-    /* User chip is now clickable — acts as Profile button */
     .user-chip  { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; cursor:pointer; border:1px solid transparent; transition:border-color .2s; user-select:none; }
     .user-chip:hover  { border-color:rgba(202,138,4,.4); }
     .user-chip.active { border-color:#ca8a04; background:rgba(202,138,4,.12); }
     .admin-tag  { color:#fbbf24; font-size:9px; font-weight:700; }
     .btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
 
-    /* ── Nav ── */
     nav { position:relative; z-index:10; background:rgba(0,0,0,.5); border-bottom:1px solid rgba(202,138,4,.2); }
     .nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
     .nav-btn { padding:13px 18px; background:transparent; border:none; border-bottom:2.5px solid transparent; color:#6b7280; font-weight:500; font-size:13px; cursor:pointer; white-space:nowrap; font-family:inherit; transition:all .2s; }
@@ -53,18 +48,15 @@
 
     main { max-width:960px; margin:0 auto; padding:24px 20px 80px; position:relative; z-index:1; }
 
-    /* ── Cards ── */
     .card      { background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; }
     .card-gold { background:linear-gradient(135deg,rgba(20,83,45,.55),rgba(5,46,22,.7)); border:1px solid rgba(202,138,4,.4); border-radius:20px; padding:24px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
 
-    /* ── Forms ── */
     .form-group  { margin-bottom:16px; }
     .form-label  { display:block; color:#86efac; font-size:11px; font-weight:700; margin-bottom:6px; letter-spacing:.08em; }
     .form-input, .form-select { width:100%; background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:10px; padding:10px 14px; color:#fff; font-size:14px; font-family:inherit; outline:none; }
     .form-select { cursor:pointer; }
     .form-select option { background:#1a3a2a; }
 
-    /* ── Buttons ── */
     .btn       { border:none; border-radius:11px; padding:12px 24px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:all .15s; }
     .btn-gold  { background:linear-gradient(135deg,#ca8a04,#a16207); color:#fff; box-shadow:0 4px 16px rgba(202,138,4,.4); }
     .btn-gold:hover:not(:disabled) { transform:translateY(-1px); }
@@ -74,25 +66,21 @@
     .btn-full  { width:100%; padding:13px; font-size:15px; }
     .btn:disabled { background:rgba(255,255,255,.06)!important; color:#374151!important; cursor:not-allowed!important; box-shadow:none!important; transform:none!important; }
 
-    /* ── PIN subtle inline display (leaderboard) ── */
     .pin-inline { display:inline-flex; align-items:center; gap:5px; color:#6b7280; font-size:11px; }
     .pin-inline .pin-val { color:#ca8a04; font-weight:700; letter-spacing:.1em; -webkit-user-select:all; user-select:all; }
     .pin-mini-copy { background:none; border:none; color:#6b7280; cursor:pointer; font-size:11px; padding:0 2px; font-family:inherit; transition:color .15s; }
     .pin-mini-copy:hover { color:#ca8a04; }
 
-    /* ── PIN display block (admin) ── */
     .pin-block    { background:rgba(0,0,0,.3); border:1px solid rgba(202,138,4,.25); border-radius:12px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:12px; }
     .pin-code     { font-family:'DM Sans',sans-serif; font-size:26px; font-weight:800; letter-spacing:.18em; color:#fef08a; -webkit-user-select:all; user-select:all; cursor:text; }
     .pin-copy-btn { display:flex; align-items:center; gap:6px; background:rgba(202,138,4,.15); border:1px solid rgba(202,138,4,.4); border-radius:9px; padding:9px 14px; color:#fbbf24; font-family:inherit; font-weight:700; font-size:13px; cursor:pointer; transition:all .2s; white-space:nowrap; min-height:40px; }
     .pin-copy-btn:active { transform:scale(.96); }
     .pin-copy-btn.copied { background:rgba(22,163,74,.25); border-color:rgba(22,163,74,.5); color:#4ade80; animation:popIn .3s ease; }
 
-    /* ── PIN entry (join screen & games tab) ── */
     .pin-join-row { display:flex; gap:10px; align-items:stretch; }
     .pin-entry    { flex:1; min-width:0; background:rgba(255,255,255,.1); border:2px solid rgba(202,138,4,.45); border-radius:12px; padding:12px 14px; color:#fef08a; font-size:20px; font-weight:800; font-family:inherit; letter-spacing:.12em; outline:none; text-transform:uppercase; text-align:center; width:100%; }
     .pin-entry::placeholder { color:rgba(254,240,138,.2); font-size:14px; letter-spacing:.04em; font-weight:500; text-transform:none; }
 
-    /* ── Leaderboard ── */
     .lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
     .lb-header { background:rgba(202,138,4,.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,.15); }
     .lb-row    { border-top:1px solid rgba(255,255,255,.05); font-size:14px; }
@@ -102,11 +90,9 @@
     .over  { color:#f87171!important; }
     .even  { color:#facc15!important; }
 
-    /* ── Profile stats ── */
     .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
     .stat-box  { background:rgba(0,0,0,.3); border-radius:14px; padding:16px; text-align:center; }
 
-    /* ── Login page ── */
     .login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(155deg,#031a0e 0%,#052e16 40%,#0f3d22 70%,#14532d 100%); position:relative; overflow:hidden; }
     .login-card { position:relative; z-index:10; background:rgba(5,20,12,.82); border:1px solid rgba(202,138,4,.45); border-radius:20px; padding:32px 28px; width:calc(100% - 32px); max-width:370px; backdrop-filter:blur(20px); box-shadow:0 40px 100px rgba(0,0,0,.7); }
     .login-logo { text-align:center; margin-bottom:22px; }
@@ -120,20 +106,17 @@
     .tab-btn:not(.active) { background:transparent; color:#86efac; }
     .error-msg { color:#fca5a5; font-size:12px; margin-bottom:12px; }
 
-    /* ── Stepper ── */
     .stepper  { display:flex; align-items:center; gap:10px; }
     .step-btn { width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:inherit; }
     .step-val { background:rgba(255,255,255,.08); border:1px solid rgba(202,138,4,.35); border-radius:12px; padding:8px; color:#fff; font-size:26px; font-weight:800; width:80px; text-align:center; font-family:inherit; outline:none; }
 
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
 
-    /* ── Scorecard ── */
     .sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
     .sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.05); }
     .sc-body { border-top:1px solid rgba(255,255,255,.04); font-size:13px; }
     .sc-foot { border-top:2px solid rgba(202,138,4,.25); background:rgba(202,138,4,.07); font-size:13px; }
 
-    /* ── Game rows ── */
     .game-row      { background:rgba(0,0,0,.38); border-radius:16px; padding:16px 20px; border:1px solid rgba(255,255,255,.07); margin-bottom:12px; }
     .game-row.live-row { border-color:rgba(239,68,68,.4); }
     .status-badge    { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
@@ -141,7 +124,6 @@
     .status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
     .status-finished { background:rgba(255,255,255,.08); color:#6b7280; }
 
-    /* ── Join Game card ── */
     .join-card { background:rgba(0,0,0,.3); border:1px solid rgba(202,138,4,.2); border-radius:16px; padding:22px; margin-bottom:28px; }
 
     .empty { text-align:center; padding:56px 20px; color:#374151; }
@@ -155,7 +137,6 @@
 
     #loading { display:flex; align-items:center; justify-content:center; min-height:100vh; gap:12px; font-size:16px; color:#86efac; }
 
-    /* ── Responsive ── */
     @media (max-width:600px) {
       .two-col   { grid-template-columns:1fr; }
       .stat-grid { grid-template-columns:repeat(2,1fr); }
@@ -165,14 +146,9 @@
   </style>
 </head>
 <body>
-
 <div id="root"></div>
 <div id="sync-bar"></div>
-
 <script>
-// ══════════════════════════════════════════════════════════════
-//  ⚙️  SUPABASE CONFIG
-// ══════════════════════════════════════════════════════════════
 const SB_URL = 'https://rnmnanbnhdskgzoqpuwt.supabase.co';
 const SB_KEY = 'sb_publishable_n3sreNtRxoKFPGUtYwmt9A_tTUrcFRA';
 const SB_HEADERS = {
@@ -182,14 +158,12 @@ const SB_HEADERS = {
   'Prefer':        'resolution=merge-duplicates,return=minimal'
 };
 
-// ══════════════════════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════════════════════
+// ── STATE ──
 const S = {
   users:       [],
   games:       [],
   scores:      [],
-  currentUser: null,
+  currentUser: JSON.parse(localStorage.getItem('gtf_session') || 'null'),
   page:        'leaderboard',
   loading:     true,
 };
@@ -197,239 +171,140 @@ let loginMode = 'login';
 let SF = { gameId:'', hole:'', strokes:'', loaded:false };
 let AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
 
-// ══════════════════════════════════════════════════════════════
-//  LOGIN-ONLY EMOJI RAIN (floats UP)
-// ══════════════════════════════════════════════════════════════
+// ── EMOJI RAIN ──
 function buildRainHTML() {
-  const list = ['⛳','🏌️','⛳','🏌️‍♀️','🍺','🍾','🥂','⛳','🏌️','⛳','🍺','🏆','🍾','🥂','⛳','🏌️‍♀️'];
+  const list  = ['⛳','🏌️','⛳','🏌️‍♀️','🍺','🍾','🥂','⛳','🏌️','⛳','🍺','🏆','🍾','🥂','⛳','🏌️‍♀️'];
   const anims = ['floatUp0','floatUp1','floatUp2','floatUp3','floatUp4'];
-
-  // Pre-computed positions using different prime-ish multipliers
-  // to break the grid and scatter emojis more organically
   const positions = [
      3.2, 11.7, 19.4, 27.8, 38.1, 44.6, 52.3, 61.9, 73.5, 81.2,
     88.6, 94.1,  6.8, 15.3, 23.9, 33.4, 41.0, 49.7, 57.5, 66.3,
     75.8, 83.4, 91.0,  1.5,  9.1, 17.6, 29.2, 36.8, 47.3, 55.9,
     64.4, 71.0, 79.6, 87.1, 97.3,  4.5, 13.8, 22.1, 43.3, 69.7
   ];
-
   const sizes  = [13,18,14,22,16,12,20,15,24,13,19,14,17,21,12,16,23,14,18,13,20,15,11,22,17,13,19,25,12,16,14,21,13,18,15,20,11,24,16,14];
   const speeds = [7,13,9,16,11,8,14,10,18,7,12,15,9,13,6,11,17,8,14,10,7,16,12,9,13,6,15,11,18,8,7,14,10,12,16,9,13,6,11,15];
   const delays = [0,3.2,6.8,1.5,9.1,4.7,11.3,2.4,7.6,5.0,12.8,0.8,8.3,3.9,10.5,1.1,6.2,4.3,9.7,2.1,13.4,0.5,7.1,5.8,11.9,3.6,8.9,1.8,6.5,10.2,4.1,12.1,2.9,7.4,0.3,9.3,5.5,11.7,3.0,8.1];
-
   let spans = '';
   for (let i = 0; i < 40; i++) {
-    spans += `<span style="left:${positions[i]}%;font-size:${sizes[i]}px;animation-name:${anims[i % anims.length]};animation-duration:${speeds[i]}s;animation-delay:-${delays[i]}s;animation-iteration-count:infinite;animation-timing-function:linear">${list[i % list.length]}</span>`;
+    spans += `<span style="left:${positions[i]}%;font-size:${sizes[i]}px;animation-name:${anims[i%anims.length]};animation-duration:${speeds[i]}s;animation-delay:-${delays[i]}s;animation-iteration-count:infinite;animation-timing-function:linear">${list[i%list.length]}</span>`;
   }
   return `<div class="login-rain">${spans}</div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-//  PIN HELPERS
-// ══════════════════════════════════════════════════════════════
+// ── PIN ──
 const PIN_CHARS = 'ACDEFGHJKMNPQRTUVWXY3479';
-
-function genPin() {
-  let p = '';
-  for (let i = 0; i < 5; i++) p += PIN_CHARS[Math.floor(Math.random() * PIN_CHARS.length)];
-  return p;
-}
+function genPin() { let p=''; for(let i=0;i<5;i++) p+=PIN_CHARS[Math.floor(Math.random()*PIN_CHARS.length)]; return p; }
 
 function copyPin(pin, btnId) {
-  const btn  = document.getElementById(btnId);
-  const done = () => {
-    if (!btn) return;
-    btn.classList.add('copied');
-    btn.textContent = '✅ Copied!';
-    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋 Copy PIN'; }, 2200);
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(pin).then(done).catch(() => legacyCopy(pin, done));
-  } else { legacyCopy(pin, done); }
+  const btn=document.getElementById(btnId);
+  const done=()=>{ if(!btn)return; btn.classList.add('copied'); btn.textContent='✅ Copied!'; setTimeout(()=>{btn.classList.remove('copied');btn.textContent='📋 Copy PIN';},2200); };
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
+  else legacyCopy(pin,done);
 }
-
 function copyPinMini(pin, btnId) {
-  const btn  = document.getElementById(btnId);
-  const done = () => {
-    if (!btn) return;
-    btn.textContent = '✅';
-    setTimeout(() => { btn.textContent = '📋'; }, 2000);
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(pin).then(done).catch(() => legacyCopy(pin, done));
-  } else { legacyCopy(pin, done); }
+  const btn=document.getElementById(btnId);
+  const done=()=>{ if(!btn)return; btn.textContent='✅'; setTimeout(()=>btn.textContent='📋',2000); };
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
+  else legacyCopy(pin,done);
 }
-
-function legacyCopy(text, cb) {
-  const el = Object.assign(document.createElement('textarea'), { value:text });
-  el.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
-  document.body.appendChild(el);
-  el.focus(); el.select();
-  try { document.execCommand('copy'); cb(); } catch(e) {}
+function legacyCopy(text,cb) {
+  const el=Object.assign(document.createElement('textarea'),{value:text});
+  el.style.cssText='position:fixed;top:0;left:0;opacity:0;';
+  document.body.appendChild(el); el.focus(); el.select();
+  try{document.execCommand('copy');cb();}catch(e){}
   document.body.removeChild(el);
 }
 
-// ══════════════════════════════════════════════════════════════
-//  SUPABASE DATA LAYER
-// ══════════════════════════════════════════════════════════════
-
-// ── Fetch all rows from a table ──
+// ── SUPABASE ──
 async function sbGet(table) {
-  const r = await fetch(`${SB_URL}/rest/v1/${table}?select=*`, {
-    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-  });
-  if (!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
+  const r=await fetch(`${SB_URL}/rest/v1/${table}?select=*`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+  if(!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
   return r.json();
 }
-
-// ── Upsert one or many rows (merge on primary key) ──
-async function sbUpsert(table, rows) {
-  const body = Array.isArray(rows) ? rows : [rows];
-  if (!body.length) return;
-  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
-    method:  'POST',
-    headers: SB_HEADERS,
-    body:    JSON.stringify(body)
-  });
-  if (!r.ok) { const t = await r.text(); throw new Error(`UPSERT ${table} failed: ${t}`); }
+async function sbUpsert(table,rows) {
+  const body=Array.isArray(rows)?rows:[rows]; if(!body.length)return;
+  const r=await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:SB_HEADERS,body:JSON.stringify(body)});
+  if(!r.ok){const t=await r.text();throw new Error(`UPSERT ${table} failed: ${t}`);}
+}
+async function sbDelete(table,match) {
+  const params=Object.entries(match).map(([k,v])=>`${k}=eq.${encodeURIComponent(v)}`).join('&');
+  await fetch(`${SB_URL}/rest/v1/${table}?${params}`,{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
 }
 
-// ── Delete a specific row ──
-async function sbDelete(table, match) {
-  const params = Object.entries(match).map(([k,v])=>`${k}=eq.${encodeURIComponent(v)}`).join('&');
-  await fetch(`${SB_URL}/rest/v1/${table}?${params}`, {
-    method: 'DELETE',
-    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-  });
-}
-
-// ── Load everything from Supabase on boot ──
 async function loadAll() {
   try {
-    const [users, games, scores] = await Promise.all([
-      sbGet('users'), sbGet('games'), sbGet('scores')
-    ]);
-    if (Array.isArray(users))  S.users  = users;
-    if (Array.isArray(games))  S.games  = games;
-    if (Array.isArray(scores)) S.scores = scores;
-  } catch(e) { console.warn('Supabase load failed:', e); }
-  S.loading = false;
-  render();
+    const [users,games,scores]=await Promise.all([sbGet('users'),sbGet('games'),sbGet('scores')]);
+    if(Array.isArray(users))  S.users=users;
+    if(Array.isArray(games))  S.games=games;
+    if(Array.isArray(scores)) S.scores=scores;
+  } catch(e){console.warn('Supabase load failed:',e);}
+  S.loading=false; render();
 }
 
-// ── Silent background refresh (keeps leaderboard live across devices) ──
 async function silentRefresh() {
   try {
-    const [users, games, scores] = await Promise.all([
-      sbGet('users'), sbGet('games'), sbGet('scores')
-    ]);
-    if (Array.isArray(users))  S.users  = users;
-    if (Array.isArray(games))  S.games  = games;
-    if (Array.isArray(scores)) S.scores = scores;
-    // Only re-render leaderboard silently so we don't interrupt score entry
-    if (S.currentUser && S.page === 'leaderboard') {
-      const pg = document.getElementById('page');
-      if (pg) renderLeaderboard(pg);
-    }
-    // Refresh live badge in header
-    const live = S.games.find(g=>g.status==='live');
-    const badge = document.querySelector('.live-badge');
-    const hdr   = document.querySelector('.header-right');
-    if (live && !badge && hdr) {
-      const d = document.createElement('div');
-      d.className = 'live-badge';
-      d.innerHTML = '<span class="live-dot"></span>LIVE';
-      hdr.prepend(d);
-    } else if (!live && badge) {
-      badge.remove();
-    }
-  } catch(e) { /* silent — don't bother the user */ }
+    const [users,games,scores]=await Promise.all([sbGet('users'),sbGet('games'),sbGet('scores')]);
+    if(Array.isArray(users))  S.users=users;
+    if(Array.isArray(games))  S.games=games;
+    if(Array.isArray(scores)) S.scores=scores;
+    if(S.currentUser&&S.page==='leaderboard'){const pg=document.getElementById('page');if(pg)renderLeaderboard(pg);}
+    const live=S.games.find(g=>g.status==='live');
+    const badge=document.querySelector('.live-badge');
+    const hdr=document.querySelector('.header-right');
+    if(live&&!badge&&hdr){const d=document.createElement('div');d.className='live-badge';d.innerHTML='<span class="live-dot"></span>LIVE';hdr.prepend(d);}
+    else if(!live&&badge)badge.remove();
+  } catch(e){}
 }
-setInterval(silentRefresh, 15000); // refresh every 15 seconds
+setInterval(silentRefresh,15000);
 
-// ── Save a user ──
 async function saveUser(user) {
-  S.users = [...S.users.filter(u=>u.id!==user.id), user];
-  toast('saving');
-  try { await sbUpsert('users', user); toast('ok'); }
-  catch(e) { toast('err'); }
+  S.users=[...S.users.filter(u=>u.id!==user.id),user]; toast('saving');
+  try{await sbUpsert('users',user);toast('ok');}catch(e){toast('err');}
 }
-
-// ── Save a game ──
-async function saveGame(game) {
-  S.games = S.games.map(g=>g.id===game.id?game:g);
-  if (!S.games.find(g=>g.id===game.id)) S.games = [...S.games, game];
-  toast('saving');
-  try { await sbUpsert('games', game); toast('ok'); }
-  catch(e) { toast('err'); }
-}
-
-// ── Save a score (upsert on gameId+userId+hole primary key) ──
 async function saveScore(score) {
-  S.scores = [...S.scores.filter(s=>!(s.gameId===score.gameId&&s.userId===score.userId&&s.hole===score.hole)), score];
-  toast('saving');
-  try { await sbUpsert('scores', score); toast('ok'); }
-  catch(e) { toast('err'); }
+  S.scores=[...S.scores.filter(s=>!(s.gameId===score.gameId&&s.userId===score.userId&&s.hole===score.hole)),score]; toast('saving');
+  try{await sbUpsert('scores',score);toast('ok');}catch(e){toast('err');}
 }
-
-// ── Persist game list changes (create / status update / delete) ──
 async function persistGames(newGames) {
-  // Find deleted games
-  const deleted = S.games.filter(g=>!newGames.find(n=>n.id===g.id));
-  // Find new or changed games
-  const upserted = newGames.filter(n=>{
-    const old = S.games.find(g=>g.id===n.id);
-    return !old || JSON.stringify(old)!==JSON.stringify(n);
-  });
-  S.games = newGames;
-  toast('saving');
-  try {
-    if (upserted.length) await sbUpsert('games', upserted);
-    for (const g of deleted) await sbDelete('games', { id: g.id });
-    toast('ok');
-  } catch(e) { toast('err'); }
+  const deleted=S.games.filter(g=>!newGames.find(n=>n.id===g.id));
+  const upserted=newGames.filter(n=>{const old=S.games.find(g=>g.id===n.id);return !old||JSON.stringify(old)!==JSON.stringify(n);});
+  S.games=newGames; toast('saving');
+  try{if(upserted.length)await sbUpsert('games',upserted);for(const g of deleted)await sbDelete('games',{id:g.id});toast('ok');}catch(e){toast('err');}
 }
 
 let _tt;
 function toast(s) {
-  const b = document.getElementById('sync-bar');
-  b.className = 'show '+(s==='ok'?'ok':s==='err'?'err':'');
-  b.textContent = s==='saving' ? '☁️  Saving…' : s==='ok' ? '✅  Saved to Supabase' : '⚠️  Save failed — check connection';
-  clearTimeout(_tt);
-  if (s !== 'saving') _tt = setTimeout(() => b.className='', 2800);
+  const b=document.getElementById('sync-bar');
+  b.className='show '+(s==='ok'?'ok':s==='err'?'err':'');
+  b.textContent=s==='saving'?'☁️  Saving…':s==='ok'?'✅  Saved to Supabase':'⚠️  Save failed — check connection';
+  clearTimeout(_tt); if(s!=='saving') _tt=setTimeout(()=>b.className='',2800);
 }
 
-// ══════════════════════════════════════════════════════════════
-//  UTILS
-// ══════════════════════════════════════════════════════════════
+// ── UTILS ──
 const fmtScore = r => r===0?'E':r>0?'+'+r:''+r;
 const relClass = r => r<0?'under':r>0?'over':'even';
-const getPars  = g => { try { return typeof g.pars==='string'?JSON.parse(g.pars):(g.pars||[]); } catch{ return []; } };
+const getPars  = g => { try{return typeof g.pars==='string'?JSON.parse(g.pars):(g.pars||[]);}catch{return[];} };
 const fmtDate  = iso => { if(!iso)return''; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
 const esc      = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 function calcBoard(game) {
-  const pars = getPars(game);
-  return S.users.map(user => {
-    const us      = S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
-    const strokes = us.reduce((a,s)=>a+Number(s.strokes),0);
-    const par     = us.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    return { user, strokes, par, holes:us.length, rel:strokes-par };
+  const pars=getPars(game);
+  return S.users.map(user=>{
+    const us=S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
+    const strokes=us.reduce((a,s)=>a+Number(s.strokes),0);
+    const par=us.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    return{user,strokes,par,holes:us.length,rel:strokes-par};
   }).filter(p=>p.holes>0).sort((a,b)=>a.rel-b.rel||a.strokes-b.strokes);
 }
 
-// ══════════════════════════════════════════════════════════════
-//  RENDER ROOT
-// ══════════════════════════════════════════════════════════════
+// ── RENDER ROOT ──
 function render() {
-  const root = document.getElementById('root');
-  if (S.loading) { root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>'; return; }
-  if (!S.currentUser) { renderLogin(); return; }
-
-  const live      = S.games.find(g=>g.status==='live');
-  const onProfile = S.page==='profile';
-
-  root.innerHTML = `
+  const root=document.getElementById('root');
+  if(S.loading){root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>';return;}
+  if(!S.currentUser){renderLogin();return;}
+  const live=S.games.find(g=>g.status==='live');
+  const onProfile=S.page==='profile';
+  root.innerHTML=`
     <header>
       <div class="header-inner">
         <div class="logo">
@@ -451,30 +326,24 @@ function render() {
       ${nb('games','⚙️ Games')}
     </div></nav>
     <main id="page"></main>`;
-
-  const pg = document.getElementById('page');
-  if      (S.page==='leaderboard')  renderLeaderboard(pg);
-  else if (S.page==='score')        renderScore(pg);
-  else if (S.page==='profile')      renderProfile(pg);
-  else if (S.page==='games')        renderGames(pg);
+  const pg=document.getElementById('page');
+  if     (S.page==='leaderboard') renderLeaderboard(pg);
+  else if(S.page==='score')       renderScore(pg);
+  else if(S.page==='profile')     renderProfile(pg);
+  else if(S.page==='games')       renderGames(pg);
 }
+function nb(id,lbl){return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${lbl}</button>`;}
+function nav(p){S.page=p;SF={gameId:'',hole:'',strokes:'',loaded:false};render();}
+function signOut(){S.currentUser=null;localStorage.removeItem('gtf_session');S.page='leaderboard';render();}
 
-function nb(id,lbl) { return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${lbl}</button>`; }
-function nav(p)     { S.page=p; SF={gameId:'',hole:'',strokes:'',loaded:false}; render(); }
-function signOut()  { S.currentUser=null; S.page='leaderboard'; render(); }
-
-// ══════════════════════════════════════════════════════════════
-//  LOGIN
-// ══════════════════════════════════════════════════════════════
+// ── LOGIN ──
 function renderLogin() {
-  document.getElementById('root').innerHTML = `
+  document.getElementById('root').innerHTML=`
     <div class="login-page">
       ${buildRainHTML()}
       <div class="spin-in login-card">
         <div class="login-logo">
-          <div class="icon">⛳</div>
-          <h1>SnakesTrap</h1>
-          <p>GOLF TOURNAMENT TRACKER</p>
+          <div class="icon">⛳</div><h1>SnakesTrap</h1><p>GOLF TOURNAMENT TRACKER</p>
           <div class="divider"></div>
         </div>
         <div class="tab-toggle">
@@ -491,27 +360,20 @@ function renderLogin() {
           ${loginMode==='login'?'🏌️  Tee Off':'⛳  Join Tournament'}
         </button>
         <p style="color:#6b7280;font-size:11px;text-align:center;margin-top:14px">
-          ${S.users.length===0&&loginMode==='register'
-            ? 'First player automatically becomes admin ⚙️'
-            : S.users.length>0&&loginMode==='register'
-              ? S.users.length+' player'+(S.users.length>1?'s':'')+' registered'
-              : ''}
+          ${S.users.length===0&&loginMode==='register'?'First player automatically becomes admin ⚙️':S.users.length>0&&loginMode==='register'?S.users.length+' player'+(S.users.length>1?'s':'')+' registered':''}
         </p>
       </div>
     </div>`;
-  setTimeout(()=>document.getElementById('uname')?.focus(), 80);
+  setTimeout(()=>document.getElementById('uname')?.focus(),80);
 }
 
-// PIN join screen — shown after login if player wants to jump into a game
 function renderPinJoin() {
-  document.getElementById('root').innerHTML = `
+  document.getElementById('root').innerHTML=`
     <div class="login-page">
       ${buildRainHTML()}
       <div class="spin-in login-card">
         <div class="login-logo">
-          <div class="icon">⛳</div>
-          <h1>SnakesTrap</h1>
-          <p>GOLF TOURNAMENT TRACKER</p>
+          <div class="icon">⛳</div><h1>SnakesTrap</h1><p>GOLF TOURNAMENT TRACKER</p>
           <div class="divider"></div>
         </div>
         <p style="color:#86efac;font-size:13px;text-align:center;margin-bottom:20px;line-height:1.7">
@@ -529,79 +391,72 @@ function renderPinJoin() {
           </div>
         </div>
         <div style="margin-top:16px">
-          <button class="btn btn-ghost btn-full" onclick="skipPin()">
-            Skip — take me to the leaderboard
-          </button>
+          <button class="btn btn-ghost btn-full" onclick="skipPin()">Skip — take me to the leaderboard</button>
         </div>
       </div>
     </div>`;
-  setTimeout(()=>document.getElementById('pin-input')?.focus(), 80);
+  setTimeout(()=>document.getElementById('pin-input')?.focus(),80);
 }
 
-function switchMode(m) { loginMode=m; renderLogin(); setTimeout(()=>document.getElementById('uname')?.focus(),50); }
+function switchMode(m){loginMode=m;renderLogin();setTimeout(()=>document.getElementById('uname')?.focus(),50);}
 
 function doAuth() {
-  const name = (document.getElementById('uname')?.value||'').trim();
-  const err  = document.getElementById('lerr');
-  if (!name) { err.innerHTML='<div class="error-msg">⚠️ Please enter a username</div>'; return; }
-  if (loginMode==='login') {
-    const u = S.users.find(u=>u.username.toLowerCase()===name.toLowerCase());
-    if (!u) { err.innerHTML='<div class="error-msg">⚠️ Username not found — try registering!</div>'; return; }
-    S.currentUser = u;
+  const name=(document.getElementById('uname')?.value||'').trim();
+  const err=document.getElementById('lerr');
+  if(!name){err.innerHTML='<div class="error-msg">⚠️ Please enter a username</div>';return;}
+  if(loginMode==='login'){
+    const u=S.users.find(u=>u.username.toLowerCase()===name.toLowerCase());
+    if(!u){err.innerHTML='<div class="error-msg">⚠️ Username not found — try registering!</div>';return;}
+    S.currentUser=u;
+    localStorage.setItem('gtf_session',JSON.stringify(u));
   } else {
-    if (S.users.find(u=>u.username.toLowerCase()===name.toLowerCase())) {
-      err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>'; return;
+    if(S.users.find(u=>u.username.toLowerCase()===name.toLowerCase())){
+      err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>';return;
     }
-    const user = { id:Date.now().toString(), username:name, isAdmin:S.users.length===0, createdAt:new Date().toISOString() };
-    S.currentUser = user;
+    const user={id:Date.now().toString(),username:name,isAdmin:S.users.length===0,createdAt:new Date().toISOString()};
+    S.currentUser=user;
+    localStorage.setItem('gtf_session',JSON.stringify(user));
     saveUser(user);
   }
   renderPinJoin();
 }
 
 function doJoinPin() {
-  const pin  = (document.getElementById('pin-input')?.value||'').trim().toUpperCase();
-  if (!pin) { skipPin(); return; }
-  const game = S.games.find(g => String(g.pin).toUpperCase() === pin);
-  if (!game) {
-    document.getElementById('perr').innerHTML='<div class="error-msg">⚠️ No game found with that PIN — check with your admin.</div>';
-    return;
-  }
-  S.page = 'score';
-  SF = { gameId:game.id, hole:'', strokes:'', loaded:false };
-  render();
+  const pin=(document.getElementById('pin-input')?.value||'').trim().toUpperCase();
+  if(!pin){skipPin();return;}
+  const game=S.games.find(g=>String(g.pin).toUpperCase()===pin);
+  if(!game){document.getElementById('perr').innerHTML='<div class="error-msg">⚠️ No game found with that PIN — check with your admin.</div>';return;}
+  S.page='score'; SF={gameId:game.id,hole:'',strokes:'',loaded:false}; render();
 }
+function skipPin(){S.page='leaderboard';render();}
 
-function skipPin() { S.page='leaderboard'; render(); }
-
-// ══════════════════════════════════════════════════════════════
-//  LEADERBOARD
-// ══════════════════════════════════════════════════════════════
+// ── LEADERBOARD ──
 function renderLeaderboard(el) {
-  const live = S.games.find(g=>g.status==='live');
-  const past = S.games.filter(g=>g.status==='finished').slice(-3).reverse();
-  let html = `<div class="fade-up" style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
-    <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
-    ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
+  const live=S.games.find(g=>g.status==='live');
+  const past=S.games.filter(g=>g.status==='finished').slice(-3).reverse();
+  let html=`<div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
+      ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
+    </div>
+    ${live?`<button class="btn btn-gold" style="padding:10px 20px;font-size:13px" onclick="nav('score')">✏️  Add Score</button>`:''}
   </div>`;
-  if (!live && !past.length) {
-    html += `<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game.</p></div>`;
+  if(!live&&!past.length){
+    html+=`<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game.</p></div>`;
   }
-  if (live) html += buildBoard(live, true);
-  past.forEach(g => html += buildBoard(g, false));
-  el.innerHTML = html;
+  if(live) html+=buildBoard(live,true);
+  past.forEach(g=>html+=buildBoard(g,false));
+  el.innerHTML=html;
 }
 
-function buildBoard(game, isLive) {
-  const board = calcBoard(game);
-  const pars  = getPars(game);
-  const pt    = pars.reduce((a,b)=>a+b,0);
-  // PIN shown subtly inline next to course details — only when live
-  const pinInline = (isLive && game.pin)
-    ? ` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`
-    : '';
-
-  let html = `<div style="margin-bottom:30px">
+function buildBoard(game,isLive) {
+  const board=calcBoard(game);
+  const pars=getPars(game);
+  const pt=pars.reduce((a,b)=>a+b,0);
+  const pinInline=(isLive&&game.pin)
+    ?` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`
+    :'';
+  let html=`<div style="margin-bottom:30px">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
       <div>
         <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)}</h2>
@@ -609,14 +464,13 @@ function buildBoard(game, isLive) {
       </div>
       ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#6b7280;font-weight:700">FINAL</div>'}
     </div>`;
-
-  if (!board.length) {
-    html += `<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
+  if(!board.length){
+    html+=`<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
   } else {
-    html += `<div class="card"><div class="lb-header"><span>POS</span><span>PLAYER</span><span style="text-align:center">HOLES</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>`;
-    board.forEach((p,i) => {
-      const m = i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
-      html += `<div class="lb-row${i===0?' gold':''}">
+    html+=`<div class="card"><div class="lb-header"><span>POS</span><span>PLAYER</span><span style="text-align:center">HOLES</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>`;
+    board.forEach((p,i)=>{
+      const m=i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
+      html+=`<div class="lb-row${i===0?' gold':''}">
         <span style="font-size:${i<3?18:14}px;font-weight:800;color:${i===0?'#fef08a':i===1?'#d1d5db':i===2?'#cd7f32':'#4b5563'}">${m}</span>
         <span style="font-weight:${i===0?700:500};color:${i===0?'#fff':'#d1d5db'}">${esc(p.user.username)}</span>
         <span style="text-align:center;color:#6b7280;font-size:12px">${p.holes}/${game.holes}</span>
@@ -624,33 +478,33 @@ function buildBoard(game, isLive) {
         <span style="text-align:right;font-weight:900;font-size:16px" class="${relClass(p.rel)}">${fmtScore(p.rel)}</span>
       </div>`;
     });
-    html += `</div>`;
+    html+=`</div>`;
   }
-  return html + `</div>`;
+  return html+`</div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-//  SCORE ENTRY
-// ══════════════════════════════════════════════════════════════
+// ── SCORE ENTRY ──
 function renderScore(el) {
-  const liveGames = S.games.filter(g=>g.status==='live');
-  if (!liveGames.length) {
+  const liveGames=S.games.filter(g=>g.status==='live');
+  if(!liveGames.length){
     el.innerHTML=`<h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">✏️ Score Entry</h1>
       <div class="empty" style="background:rgba(0,0,0,.2);border-radius:16px;border:1px dashed rgba(255,255,255,.08)">
         <div class="icon">🏌️</div><p style="color:#6b7280;line-height:1.7">No live games right now.<br>An admin needs to start a game first.</p>
-      </div>`; return;
+      </div>`;return;
   }
-  const selGame = S.games.find(g=>g.id===SF.gameId);
-  const pars    = selGame ? getPars(selGame) : [];
-  const myS     = selGame ? S.scores.filter(s=>s.gameId===SF.gameId&&s.userId===S.currentUser.id).sort((a,b)=>a.hole-b.hole) : [];
-  const exist   = SF.hole ? myS.find(s=>s.hole===Number(SF.hole)) : null;
-  if (exist && !SF.loaded) { SF.strokes=String(exist.strokes); SF.loaded=true; }
-  const par = SF.hole && pars[Number(SF.hole)-1] ? pars[Number(SF.hole)-1] : null;
-  const rel = (par && SF.strokes) ? Number(SF.strokes)-par : null;
+  const selGame=S.games.find(g=>g.id===SF.gameId);
+  const pars=selGame?getPars(selGame):[];
+  const myS=selGame?S.scores.filter(s=>s.gameId===SF.gameId&&s.userId===S.currentUser.id).sort((a,b)=>a.hole-b.hole):[];
+  const exist=SF.hole?myS.find(s=>s.hole===Number(SF.hole)):null;
+  if(exist&&!SF.loaded){SF.strokes=String(exist.strokes);SF.loaded=true;}
+  const par=(SF.hole&&pars[Number(SF.hole)-1])?pars[Number(SF.hole)-1]:null;
+  const numStr=parseInt(SF.strokes,10);
+  const rel=(par&&numStr>0)?numStr-par:null;
+  const canSave=!!(selGame&&SF.hole&&numStr>0);
 
-  let scHtml = '';
-  if (selGame && myS.length) {
-    const tot=myS.reduce((a,s)=>a+s.strokes,0), ptr=myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+  let scHtml='';
+  if(selGame&&myS.length){
+    const tot=myS.reduce((a,s)=>a+s.strokes,0),ptr=myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
     scHtml=`<div class="card">
       <div style="padding:14px 18px;background:rgba(202,138,4,.1);border-bottom:1px solid rgba(202,138,4,.15)">
         <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:15px">My Scorecard</div>
@@ -658,7 +512,7 @@ function renderScore(el) {
       </div>
       <div class="sc-row sc-head"><span>HOLE</span><span style="text-align:center">PAR</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>
       <div style="max-height:250px;overflow-y:auto">
-        ${myS.map(s=>{const p=pars[s.hole-1],r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
+        ${myS.map(s=>{const p=pars[s.hole-1]||4,r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
       </div>
       <div class="sc-row sc-foot"><span style="color:#fef08a;font-weight:800">TOTAL</span><span style="text-align:center;color:#ca8a04;font-weight:700">${ptr}</span><span style="text-align:center;font-weight:800">${tot}</span><span style="text-align:right;font-weight:900;font-size:15px" class="${relClass(tot-ptr)}">${fmtScore(tot-ptr)}</span></div>
     </div>`;
@@ -687,63 +541,78 @@ function renderScore(el) {
           <label class="form-label">STROKES ${exist?'<span style="color:#fbbf24">(editing)</span>':''}</label>
           <div class="stepper">
             <button class="step-btn" onclick="adjS(-1)">−</button>
-            <input class="step-val" type="number" min="1" max="20" value="${esc(SF.strokes)}" id="sv" oninput="SF.strokes=this.value">
+            <input class="step-val" type="number" min="1" max="20" value="${SF.strokes||''}" id="sv"
+              oninput="SF.strokes=this.value;SF.loaded=true;syncSaveBtn()">
             <button class="step-btn" onclick="adjS(1)">+</button>
             ${rel!==null?`<div style="display:flex;flex-direction:column"><span style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</span><span style="color:#4b5563;font-size:10px">vs par ${par}</span></div>`:''}
           </div></div>`:''}
-        <button id="save-btn" class="btn btn-gold btn-full" onclick="submitScore()" ${!SF.hole||!SF.strokes?'disabled':''}>💾  Save Score</button>
+        <button id="save-btn" class="btn btn-full" onclick="submitScore()"
+          style="margin-top:4px;font-weight:800;font-size:15px;border:none;transition:all .2s;
+          background:${canSave?'linear-gradient(135deg,#ca8a04,#a16207)':'rgba(255,255,255,.06)'};
+          color:${canSave?'#fff':'#374151'};
+          box-shadow:${canSave?'0 4px 16px rgba(202,138,4,.35)':'none'};
+          cursor:${canSave?'pointer':'not-allowed'}">
+          💾  Save Score
+        </button>
       </div>
       <div>${scHtml}</div>
     </div>`;
 }
 
-function sfGame(id) { SF={gameId:id,hole:'',strokes:'',loaded:false}; renderScore(document.getElementById('page')); }
-function sfHole(h)  { SF.hole=h; SF.strokes=''; SF.loaded=false; renderScore(document.getElementById('page')); }
+function syncSaveBtn() {
+  const inp=document.getElementById('sv');
+  if(inp) SF.strokes=inp.value;
+  const ok=!!(SF.gameId&&SF.hole&&parseInt(SF.strokes,10)>0);
+  const btn=document.getElementById('save-btn');
+  if(!btn)return;
+  btn.style.background=ok?'linear-gradient(135deg,#ca8a04,#a16207)':'rgba(255,255,255,.06)';
+  btn.style.color=ok?'#fff':'#374151';
+  btn.style.boxShadow=ok?'0 4px 16px rgba(202,138,4,.35)':'none';
+  btn.style.cursor=ok?'pointer':'not-allowed';
+}
+
+function sfGame(id){SF={gameId:id,hole:'',strokes:'',loaded:false};renderScore(document.getElementById('page'));}
+function sfHole(h){SF.hole=h;SF.strokes='';SF.loaded=false;renderScore(document.getElementById('page'));}
 function adjS(d) {
-  SF.strokes=String(Math.max(1,Number(SF.strokes||1)+d));
-  const i=document.getElementById('sv'); if(i) i.value=SF.strokes;
+  const inp=document.getElementById('sv');
+  const cur=inp?parseInt(inp.value,10):parseInt(SF.strokes,10);
+  SF.strokes=String(Math.max(1,(isNaN(cur)?1:cur)+d));
+  SF.loaded=true;
+  if(inp)inp.value=SF.strokes;
+  syncSaveBtn();
   renderScore(document.getElementById('page'));
 }
 function submitScore() {
-  const inp = document.getElementById('sv');
-  if (inp) SF.strokes = inp.value;
-  const n = parseInt(SF.strokes, 10);
-  if (!SF.gameId||!SF.hole||isNaN(n)||n<1) return;
-  const score = {gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:n,timestamp:new Date().toISOString()};
+  const inp=document.getElementById('sv');
+  if(inp) SF.strokes=inp.value;
+  const n=parseInt(SF.strokes,10);
+  if(!SF.gameId||!SF.hole||isNaN(n)||n<1)return;
+  const score={gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:n,timestamp:new Date().toISOString()};
   saveScore(score);
-  SF.hole=''; SF.strokes=''; SF.loaded=false;
+  SF.hole='';SF.strokes='';SF.loaded=false;
   const btn=document.getElementById('save-btn');
   if(btn){btn.textContent='✅  Saved!';btn.style.background='#16a34a';btn.style.boxShadow='none';}
   setTimeout(()=>renderScore(document.getElementById('page')),900);
 }
 
-// ══════════════════════════════════════════════════════════════
-//  PROFILE  (accessed via username chip in header)
-// ══════════════════════════════════════════════════════════════
+// ── PROFILE ──
 function renderProfile(el) {
-  const uid    = S.currentUser.id;
-  const my     = S.scores.filter(s=>s.userId===uid);
-  // Games the user participated in (has scores) OR created
-  const myGameIds = new Set([
-    ...my.map(s=>s.gameId),
-    ...S.games.filter(g=>g.createdBy===uid).map(g=>g.id)
-  ]);
-  const played = myGameIds.size;
-  const stats  = S.games.filter(g=>g.status==='finished'&&myGameIds.has(g.id)).map(g=>{
-    const pars    = getPars(g);
-    const gs      = my.filter(s=>s.gameId===g.id);
-    const tot     = gs.reduce((a,s)=>a+s.strokes,0);
-    const par     = gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    const isOwner = g.createdBy===uid;
-    const board   = calcBoard(g);
-    const pos     = gs.length ? board.findIndex(p=>p.user.id===uid)+1 : null;
-    return {game:g,tot,par,rel:gs.length?tot-par:null,pos,holes:gs.length,isOwner};
+  const uid=S.currentUser.id;
+  const my=S.scores.filter(s=>s.userId===uid);
+  const myGameIds=new Set([...my.map(s=>s.gameId),...S.games.filter(g=>g.createdBy===uid).map(g=>g.id)]);
+  const played=myGameIds.size;
+  const stats=S.games.filter(g=>g.status==='finished'&&myGameIds.has(g.id)).map(g=>{
+    const pars=getPars(g),gs=my.filter(s=>s.gameId===g.id);
+    const tot=gs.reduce((a,s)=>a+s.strokes,0),par=gs.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    const isOwner=g.createdBy===uid;
+    const pos=gs.length?calcBoard(g).findIndex(p=>p.user.id===uid)+1:null;
+    return{game:g,tot,par,rel:gs.length?tot-par:null,pos,holes:gs.length,isOwner};
   });
-  const playedStats = stats.filter(s=>s.holes>0);
-  const best = playedStats.length?playedStats.reduce((b,g)=>g.rel<b.rel?g:b):null;
-  const avg  = playedStats.length?Math.round(playedStats.reduce((a,g)=>a+g.rel,0)/playedStats.length):null;
-  const wins = playedStats.filter(g=>g.pos===1).length;
-  const isCreator = S.games.some(g=>g.createdBy===uid);
+  const playedStats=stats.filter(s=>s.holes>0);
+  const best=playedStats.length?playedStats.reduce((b,g)=>g.rel<b.rel?g:b):null;
+  const avg=playedStats.length?Math.round(playedStats.reduce((a,g)=>a+g.rel,0)/playedStats.length):null;
+  const wins=playedStats.filter(g=>g.pos===1).length;
+  const isCreator=S.games.some(g=>g.createdBy===uid);
 
   el.innerHTML=`
     <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">👤 Profile</h1>
@@ -787,17 +656,13 @@ function exportCSV() {
   S.games.forEach(g=>{const pars=getPars(g);my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{const p=pars[s.hole-1]||4;rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,fmtScore(s.strokes-p)]);});});
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));
-  a.download=S.currentUser.username+'-scores.csv'; a.click();
+  a.download=S.currentUser.username+'-scores.csv';a.click();
 }
 
-// ══════════════════════════════════════════════════════════════
-//  GAMES TAB  — everyone can create; only creator can manage theirs
-// ══════════════════════════════════════════════════════════════
+// ── GAMES TAB ──
 function renderGames(el) {
-  const uid = S.currentUser.id;
-
-  // ── Join a Game section (everyone) ──
-  const joinSection = `
+  const uid=S.currentUser.id;
+  const joinSection=`
     <div class="join-card fade-up">
       <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:6px">🔑 Join a Game</h2>
       <p style="color:#86efac;font-size:12px;margin-bottom:16px">Enter the PIN shared by the game organiser to jump straight into score entry.</p>
@@ -810,9 +675,8 @@ function renderGames(el) {
       </div>
     </div>`;
 
-  // ── Create game form ──
-  let form = '';
-  if (AF.open) {
+  let form='';
+  if(AF.open){
     form=`<div class="card-gold fade-up" style="margin-bottom:24px">
       <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:18px;margin-bottom:18px">Create New Game</div>
       <div class="two-col" style="margin-bottom:14px">
@@ -841,11 +705,10 @@ function renderGames(el) {
     </div>`;
   }
 
-  // ── Game list — everyone sees all games; only creator gets action buttons ──
   const list=[...S.games].reverse().map(g=>{
-    const pars    = getPars(g), pt = pars.reduce((a,b)=>a+b,0);
-    const isOwner = g.createdBy === uid;
-    const pinBlock= g.pin?`<div class="pin-block">
+    const pars=getPars(g),pt=pars.reduce((a,b)=>a+b,0);
+    const isOwner=g.createdBy===uid;
+    const pinBlock=isOwner&&g.pin?`<div class="pin-block">
       <div>
         <div style="color:#86efac;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:5px">🔑 GAME PIN — share with friends</div>
         <span class="pin-code">${esc(g.pin)}</span>
@@ -863,12 +726,12 @@ function renderGames(el) {
           <div style="color:#4b5563;font-size:12px">${esc(g.course)} · ${g.holes} holes · Par ${pt}${g.startTime?' · Started '+fmtDate(g.startTime):''}${g.endTime?' · Ended '+fmtDate(g.endTime):''}</div>
         </div>
         <div style="display:flex;gap:8px;flex-shrink:0;align-items:center">
-          ${isOwner && g.status==='pending'?`<button class="btn btn-green" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','live')">▶ Start</button><button class="btn btn-ghost" style="padding:8px 12px;font-size:13px" onclick="delGame('${g.id}')">🗑</button>`:''}
-          ${isOwner && g.status==='live'?`<button class="btn btn-red" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','finished')">⏹ End Game</button>`:''}
+          ${isOwner&&g.status==='pending'?`<button class="btn btn-green" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','live')">▶ Start</button><button class="btn btn-ghost" style="padding:8px 12px;font-size:13px" onclick="delGame('${g.id}')">🗑</button>`:''}
+          ${isOwner&&g.status==='live'?`<button class="btn btn-red" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','finished')">⏹ End Game</button>`:''}
           ${g.status==='finished'?`<span style="color:#374151;font-size:12px">Completed</span>`:''}
         </div>
       </div>
-      ${isOwner ? pinBlock : ''}
+      ${pinBlock}
     </div>`;
   }).join('');
 
@@ -884,36 +747,33 @@ function renderGames(el) {
     </div>`;
 }
 
-// Join by PIN from the Games tab
 function joinByPin() {
-  const pin  = (document.getElementById('join-pin')?.value||'').trim().toUpperCase();
-  const err  = document.getElementById('jerr');
-  if (!pin) { err.innerHTML='<div class="error-msg">⚠️ Please enter a PIN</div>'; return; }
-  const game = S.games.find(g=>String(g.pin).toUpperCase()===pin);
-  if (!game) { err.innerHTML='<div class="error-msg">⚠️ No game found with that PIN</div>'; return; }
-  S.page = 'score';
-  SF = { gameId:game.id, hole:'', strokes:'', loaded:false };
-  render();
+  const pin=(document.getElementById('join-pin')?.value||'').trim().toUpperCase();
+  const err=document.getElementById('jerr');
+  if(!pin){err.innerHTML='<div class="error-msg">⚠️ Please enter a PIN</div>';return;}
+  const game=S.games.find(g=>String(g.pin).toUpperCase()===pin);
+  if(!game){err.innerHTML='<div class="error-msg">⚠️ No game found with that PIN</div>';return;}
+  S.page='score';SF={gameId:game.id,hole:'',strokes:'',loaded:false};render();
 }
 
-function toggleForm() { AF.open=!AF.open; renderGames(document.getElementById('page')); }
-function setHoles(n)  { AF.holes=Number(n); AF.pars=Array(Number(n)).fill(0).map((_,i)=>AF.pars[i]||4); renderGames(document.getElementById('page')); }
-function setPar(i,v)  { AF.pars[i]=Number(v); }
+function toggleForm(){AF.open=!AF.open;renderGames(document.getElementById('page'));}
+function setHoles(n){AF.holes=Number(n);AF.pars=Array(Number(n)).fill(0).map((_,i)=>AF.pars[i]||4);renderGames(document.getElementById('page'));}
+function setPar(i,v){AF.pars[i]=Number(v);}
 
 function createGame() {
-  const name  =(document.getElementById('af-name')?.value  ||AF.name).trim();
+  const name=(document.getElementById('af-name')?.value||AF.name).trim();
   const course=(document.getElementById('af-course')?.value||AF.course).trim();
-  if (!name||!course) { alert('Please fill in game name and course.'); return; }
-  const newGame = {id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
+  if(!name||!course){alert('Please fill in game name and course.');return;}
+  const newGame={id:Date.now().toString(),name,course,holes:AF.holes,pars:JSON.stringify(AF.pars.slice(0,AF.holes)),
     pin:genPin(),status:'pending',createdBy:S.currentUser.id,createdAt:new Date().toISOString(),startTime:null,endTime:null};
   AF={open:false,name:'',course:'',holes:18,pars:Array(18).fill(4)};
-  persistGames([...S.games, newGame]);
+  persistGames([...S.games,newGame]);
   renderGames(document.getElementById('page'));
 }
 
 function setStatus(id,status) {
-  const updated = S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
-  persistGames(updated); render();
+  const updated=S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
+  persistGames(updated);render();
 }
 function delGame(id) {
   if(!confirm('Delete this game?'))return;
@@ -921,9 +781,7 @@ function delGame(id) {
   renderGames(document.getElementById('page'));
 }
 
-// ══════════════════════════════════════════════════════════════
-//  BOOT
-// ══════════════════════════════════════════════════════════════
+// ── BOOT ──
 render();
 loadAll();
 </script>
