@@ -26,20 +26,21 @@
     .login-rain { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
     .login-rain span { position:absolute; bottom:0; user-select:none; line-height:1; }
 
-    header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:14px 20px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
-    .header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-    .logo { display:flex; align-items:center; gap:11px; }
-    .logo-icon { font-size:28px; filter:drop-shadow(0 2px 8px rgba(202,138,4,.5)); }
-    .logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:18px; font-weight:800; }
-    .logo p  { color:#4ade80; font-size:10px; letter-spacing:.1em; margin-top:1px; }
-    .header-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    .live-badge { display:flex; align-items:center; gap:6px; background:#dc2626; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:800; letter-spacing:.1em; animation:pulseLive 1.9s ease-in-out infinite; }
-    .live-dot   { width:7px; height:7px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
-    .user-chip  { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.35); border-radius:10px; padding:6px 12px; font-size:13px; color:#d1fae5; font-weight:600; cursor:pointer; border:1px solid transparent; transition:border-color .2s; user-select:none; }
+    /* ── Header — no wrap so it stays one line on mobile ── */
+    header { position:relative; z-index:10; background:linear-gradient(135deg,rgba(5,46,22,.97),rgba(20,83,45,.97)); border-bottom:2px solid rgba(202,138,4,.5); padding:10px 16px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
+    .header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .logo { display:flex; align-items:center; gap:9px; flex-shrink:0; }
+    .logo-icon { font-size:24px; filter:drop-shadow(0 2px 8px rgba(202,138,4,.5)); }
+    .logo h1 { font-family:'Playfair Display',serif; color:#fef08a; font-size:16px; font-weight:800; white-space:nowrap; }
+    .logo p  { color:#4ade80; font-size:9px; letter-spacing:.08em; margin-top:1px; display:none; }
+    @media(min-width:480px){ .logo p { display:block; } .logo h1 { font-size:18px; } .logo-icon { font-size:28px; } }
+    .header-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+    .live-badge { display:flex; align-items:center; gap:5px; background:#dc2626; border-radius:20px; padding:4px 10px; font-size:10px; font-weight:800; letter-spacing:.08em; animation:pulseLive 1.9s ease-in-out infinite; white-space:nowrap; }
+    .live-dot   { width:6px; height:6px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
+    .user-chip  { display:flex; align-items:center; gap:5px; background:rgba(0,0,0,.35); border-radius:10px; padding:5px 10px; font-size:12px; color:#d1fae5; font-weight:600; cursor:pointer; border:1px solid transparent; transition:border-color .2s; user-select:none; white-space:nowrap; max-width:120px; overflow:hidden; text-overflow:ellipsis; }
     .user-chip:hover  { border-color:rgba(202,138,4,.4); }
     .user-chip.active { border-color:#ca8a04; background:rgba(202,138,4,.12); }
-    .admin-tag  { color:#fbbf24; font-size:9px; font-weight:700; }
-    .btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; }
+    .btn-signout { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:5px 8px; color:#6b7280; font-size:11px; cursor:pointer; font-weight:600; font-family:inherit; white-space:nowrap; flex-shrink:0; }
 
     nav { position:relative; z-index:10; background:rgba(0,0,0,.5); border-bottom:1px solid rgba(202,138,4,.2); }
     .nav-inner { max-width:960px; margin:0 auto; display:flex; overflow-x:auto; }
@@ -81,7 +82,8 @@
     .pin-entry    { flex:1; min-width:0; background:rgba(255,255,255,.1); border:2px solid rgba(202,138,4,.45); border-radius:12px; padding:12px 14px; color:#fef08a; font-size:20px; font-weight:800; font-family:inherit; letter-spacing:.12em; outline:none; text-transform:uppercase; text-align:center; width:100%; }
     .pin-entry::placeholder { color:rgba(254,240,138,.2); font-size:14px; letter-spacing:.04em; font-weight:500; text-transform:none; }
 
-    .lb-header,.lb-row { display:grid; grid-template-columns:44px 1fr 60px 70px 70px; padding:10px 18px; align-items:center; }
+    /* Leaderboard — 5 cols on desktop, tighter gaps on mobile */
+    .lb-header,.lb-row { display:grid; grid-template-columns:40px 1fr 52px 64px 64px; padding:10px 18px; align-items:center; gap:4px; }
     .lb-header { background:rgba(202,138,4,.12); font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.1em; border-bottom:1px solid rgba(202,138,4,.15); }
     .lb-row    { border-top:1px solid rgba(255,255,255,.05); font-size:14px; }
     .lb-row.gold { background:rgba(202,138,4,.06); }
@@ -112,7 +114,8 @@
 
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
 
-    .sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; }
+    /* Scorecard — 5 cols now (HOLE PAR STROKES PUTTS SCORE) */
+    .sc-row  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; padding:9px 14px; align-items:center; gap:4px; }
     .sc-head { font-size:10px; font-weight:800; color:#ca8a04; letter-spacing:.08em; border-bottom:1px solid rgba(255,255,255,.05); }
     .sc-body { border-top:1px solid rgba(255,255,255,.04); font-size:13px; }
     .sc-foot { border-top:2px solid rgba(202,138,4,.25); background:rgba(202,138,4,.07); font-size:13px; }
@@ -122,7 +125,7 @@
     .status-badge    { padding:3px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:.08em; display:inline-block; }
     .status-pending  { background:rgba(202,138,4,.2); color:#fbbf24; }
     .status-live     { background:#dc2626; color:#fff; animation:pulseLive 1.9s ease-in-out infinite; }
-    .status-finished { background:rgba(255,255,255,.08); color:#6b7280; }
+    .status-finished { background:rgba(255,255,255,.08); color:#4ade80; }
 
     .join-card { background:rgba(0,0,0,.3); border:1px solid rgba(202,138,4,.2); border-radius:16px; padding:22px; margin-bottom:28px; }
 
@@ -140,7 +143,8 @@
     @media (max-width:600px) {
       .two-col   { grid-template-columns:1fr; }
       .stat-grid { grid-template-columns:repeat(2,1fr); }
-      .lb-header,.lb-row { grid-template-columns:36px 1fr 46px 58px 58px; padding:8px 12px; font-size:12px; }
+      /* Wider column gaps on mobile leaderboard */
+      .lb-header,.lb-row { grid-template-columns:34px 1fr 48px 58px 56px; padding:8px 10px; font-size:11px; gap:6px; }
       .login-card { padding:28px 20px; }
     }
   </style>
@@ -149,6 +153,10 @@
 <div id="root"></div>
 <div id="sync-bar"></div>
 <script>
+// ══ NOTE: Before using Putts, run this SQL in Supabase SQL Editor:
+//   ALTER TABLE scores ADD COLUMN IF NOT EXISTS putts int4;
+// ════════════════════════════════════════════════════════════════
+
 const SB_URL = 'https://rnmnanbnhdskgzoqpuwt.supabase.co';
 const SB_KEY = 'sb_publishable_n3sreNtRxoKFPGUtYwmt9A_tTUrcFRA';
 const SB_HEADERS = {
@@ -158,7 +166,6 @@ const SB_HEADERS = {
   'Prefer':        'resolution=merge-duplicates,return=minimal'
 };
 
-// ── STATE ──
 const S = {
   users:       [],
   games:       [],
@@ -168,141 +175,130 @@ const S = {
   loading:     true,
 };
 let loginMode = 'login';
-let SF = { gameId:'', hole:'', strokes:'', loaded:false };
+let SF = { gameId:'', hole:'', strokes:'', putts:'', loaded:false };
 let AF = { open:false, name:'', course:'', holes:18, pars:Array(18).fill(4) };
 
 // ── EMOJI RAIN ──
 function buildRainHTML() {
   const list  = ['⛳','🏌️','⛳','🏌️‍♀️','🍺','🍾','🥂','⛳','🏌️','⛳','🍺','🏆','🍾','🥂','⛳','🏌️‍♀️'];
   const anims = ['floatUp0','floatUp1','floatUp2','floatUp3','floatUp4'];
-  const positions = [
-     3.2, 11.7, 19.4, 27.8, 38.1, 44.6, 52.3, 61.9, 73.5, 81.2,
-    88.6, 94.1,  6.8, 15.3, 23.9, 33.4, 41.0, 49.7, 57.5, 66.3,
-    75.8, 83.4, 91.0,  1.5,  9.1, 17.6, 29.2, 36.8, 47.3, 55.9,
-    64.4, 71.0, 79.6, 87.1, 97.3,  4.5, 13.8, 22.1, 43.3, 69.7
-  ];
+  const positions = [3.2,11.7,19.4,27.8,38.1,44.6,52.3,61.9,73.5,81.2,88.6,94.1,6.8,15.3,23.9,33.4,41.0,49.7,57.5,66.3,75.8,83.4,91.0,1.5,9.1,17.6,29.2,36.8,47.3,55.9,64.4,71.0,79.6,87.1,97.3,4.5,13.8,22.1,43.3,69.7];
   const sizes  = [13,18,14,22,16,12,20,15,24,13,19,14,17,21,12,16,23,14,18,13,20,15,11,22,17,13,19,25,12,16,14,21,13,18,15,20,11,24,16,14];
   const speeds = [7,13,9,16,11,8,14,10,18,7,12,15,9,13,6,11,17,8,14,10,7,16,12,9,13,6,15,11,18,8,7,14,10,12,16,9,13,6,11,15];
   const delays = [0,3.2,6.8,1.5,9.1,4.7,11.3,2.4,7.6,5.0,12.8,0.8,8.3,3.9,10.5,1.1,6.2,4.3,9.7,2.1,13.4,0.5,7.1,5.8,11.9,3.6,8.9,1.8,6.5,10.2,4.1,12.1,2.9,7.4,0.3,9.3,5.5,11.7,3.0,8.1];
-  let spans = '';
-  for (let i = 0; i < 40; i++) {
-    spans += `<span style="left:${positions[i]}%;font-size:${sizes[i]}px;animation-name:${anims[i%anims.length]};animation-duration:${speeds[i]}s;animation-delay:-${delays[i]}s;animation-iteration-count:infinite;animation-timing-function:linear">${list[i%list.length]}</span>`;
+  let spans='';
+  for(let i=0;i<40;i++){
+    spans+=`<span style="left:${positions[i]}%;font-size:${sizes[i]}px;animation-name:${anims[i%anims.length]};animation-duration:${speeds[i]}s;animation-delay:-${delays[i]}s;animation-iteration-count:infinite;animation-timing-function:linear">${list[i%list.length]}</span>`;
   }
   return `<div class="login-rain">${spans}</div>`;
 }
 
 // ── PIN ──
 const PIN_CHARS = 'ACDEFGHJKMNPQRTUVWXY3479';
-function genPin() { let p=''; for(let i=0;i<5;i++) p+=PIN_CHARS[Math.floor(Math.random()*PIN_CHARS.length)]; return p; }
-
-function copyPin(pin, btnId) {
+function genPin(){let p='';for(let i=0;i<5;i++)p+=PIN_CHARS[Math.floor(Math.random()*PIN_CHARS.length)];return p;}
+function copyPin(pin,btnId){
   const btn=document.getElementById(btnId);
-  const done=()=>{ if(!btn)return; btn.classList.add('copied'); btn.textContent='✅ Copied!'; setTimeout(()=>{btn.classList.remove('copied');btn.textContent='📋 Copy PIN';},2200); };
-  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
+  const done=()=>{if(!btn)return;btn.classList.add('copied');btn.textContent='✅ Copied!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='📋 Copy PIN';},2200);};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
   else legacyCopy(pin,done);
 }
-function copyPinMini(pin, btnId) {
+function copyPinMini(pin,btnId){
   const btn=document.getElementById(btnId);
-  const done=()=>{ if(!btn)return; btn.textContent='✅'; setTimeout(()=>btn.textContent='📋',2000); };
-  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
+  const done=()=>{if(!btn)return;btn.textContent='✅';setTimeout(()=>btn.textContent='📋',2000);};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(pin).then(done).catch(()=>legacyCopy(pin,done));
   else legacyCopy(pin,done);
 }
-function legacyCopy(text,cb) {
+function legacyCopy(text,cb){
   const el=Object.assign(document.createElement('textarea'),{value:text});
   el.style.cssText='position:fixed;top:0;left:0;opacity:0;';
-  document.body.appendChild(el); el.focus(); el.select();
+  document.body.appendChild(el);el.focus();el.select();
   try{document.execCommand('copy');cb();}catch(e){}
   document.body.removeChild(el);
 }
 
 // ── SUPABASE ──
-async function sbGet(table) {
+async function sbGet(table){
   const r=await fetch(`${SB_URL}/rest/v1/${table}?select=*`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
-  if(!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
+  if(!r.ok)throw new Error(`GET ${table} failed: ${r.status}`);
   return r.json();
 }
-async function sbUpsert(table,rows) {
-  const body=Array.isArray(rows)?rows:[rows]; if(!body.length)return;
+async function sbUpsert(table,rows){
+  const body=Array.isArray(rows)?rows:[rows];if(!body.length)return;
   const r=await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:SB_HEADERS,body:JSON.stringify(body)});
   if(!r.ok){const t=await r.text();throw new Error(`UPSERT ${table} failed: ${t}`);}
 }
-async function sbDelete(table,match) {
+async function sbDelete(table,match){
   const params=Object.entries(match).map(([k,v])=>`${k}=eq.${encodeURIComponent(v)}`).join('&');
   await fetch(`${SB_URL}/rest/v1/${table}?${params}`,{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
 }
 
-async function loadAll() {
-  try {
+async function loadAll(){
+  try{
     const [users,games,scores]=await Promise.all([sbGet('users'),sbGet('games'),sbGet('scores')]);
-    if(Array.isArray(users))  S.users=users;
-    if(Array.isArray(games))  S.games=games;
-    if(Array.isArray(scores)) S.scores=scores;
-  } catch(e){console.warn('Supabase load failed:',e);}
-  S.loading=false; render();
+    if(Array.isArray(users))S.users=users;
+    if(Array.isArray(games))S.games=games;
+    if(Array.isArray(scores))S.scores=scores;
+  }catch(e){console.warn('Supabase load failed:',e);}
+  S.loading=false;render();
 }
 
-async function silentRefresh() {
-  try {
+async function silentRefresh(){
+  try{
     const [users,games,scores]=await Promise.all([sbGet('users'),sbGet('games'),sbGet('scores')]);
-    if(Array.isArray(users))  S.users=users;
-    if(Array.isArray(games))  S.games=games;
-    if(Array.isArray(scores)) S.scores=scores;
+    if(Array.isArray(users))S.users=users;
+    if(Array.isArray(games))S.games=games;
+    if(Array.isArray(scores))S.scores=scores;
     if(S.currentUser&&S.page==='leaderboard'){const pg=document.getElementById('page');if(pg)renderLeaderboard(pg);}
-    const live=S.games.find(g=>g.status==='live');
-    const badge=document.querySelector('.live-badge');
-    const hdr=document.querySelector('.header-right');
-    if(live&&!badge&&hdr){const d=document.createElement('div');d.className='live-badge';d.innerHTML='<span class="live-dot"></span>LIVE';hdr.prepend(d);}
-    else if(!live&&badge)badge.remove();
-  } catch(e){}
+  }catch(e){}
 }
 setInterval(silentRefresh,15000);
 
-async function saveUser(user) {
-  S.users=[...S.users.filter(u=>u.id!==user.id),user]; toast('saving');
+async function saveUser(user){
+  S.users=[...S.users.filter(u=>u.id!==user.id),user];toast('saving');
   try{await sbUpsert('users',user);toast('ok');}catch(e){toast('err');}
 }
-async function saveScore(score) {
-  S.scores=[...S.scores.filter(s=>!(s.gameId===score.gameId&&s.userId===score.userId&&s.hole===score.hole)),score]; toast('saving');
+async function saveScore(score){
+  S.scores=[...S.scores.filter(s=>!(s.gameId===score.gameId&&s.userId===score.userId&&s.hole===score.hole)),score];toast('saving');
   try{await sbUpsert('scores',score);toast('ok');}catch(e){toast('err');}
 }
-async function persistGames(newGames) {
+async function persistGames(newGames){
   const deleted=S.games.filter(g=>!newGames.find(n=>n.id===g.id));
   const upserted=newGames.filter(n=>{const old=S.games.find(g=>g.id===n.id);return !old||JSON.stringify(old)!==JSON.stringify(n);});
-  S.games=newGames; toast('saving');
+  S.games=newGames;toast('saving');
   try{if(upserted.length)await sbUpsert('games',upserted);for(const g of deleted)await sbDelete('games',{id:g.id});toast('ok');}catch(e){toast('err');}
 }
 
 let _tt;
-function toast(s) {
+function toast(s){
   const b=document.getElementById('sync-bar');
   b.className='show '+(s==='ok'?'ok':s==='err'?'err':'');
   b.textContent=s==='saving'?'☁️  Saving…':s==='ok'?'✅  Saved to Supabase':'⚠️  Save failed — check connection';
-  clearTimeout(_tt); if(s!=='saving') _tt=setTimeout(()=>b.className='',2800);
+  clearTimeout(_tt);if(s!=='saving')_tt=setTimeout(()=>b.className='',2800);
 }
 
 // ── UTILS ──
-const fmtScore = r => r===0?'E':r>0?'+'+r:''+r;
-const relClass = r => r<0?'under':r>0?'over':'even';
-const getPars  = g => { try{return typeof g.pars==='string'?JSON.parse(g.pars):(g.pars||[]);}catch{return[];} };
-const fmtDate  = iso => { if(!iso)return''; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
-const esc      = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const fmtScore=r=>r===0?'E':r>0?'+'+r:''+r;
+const relClass=r=>r<0?'under':r>0?'over':'even';
+const getPars=g=>{try{return typeof g.pars==='string'?JSON.parse(g.pars):(g.pars||[]);}catch{return[];}};
+const fmtDate=iso=>{if(!iso)return'';return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-function calcBoard(game) {
+function calcBoard(game){
   const pars=getPars(game);
   return S.users.map(user=>{
     const us=S.scores.filter(s=>s.gameId===game.id&&s.userId===user.id);
     const strokes=us.reduce((a,s)=>a+Number(s.strokes),0);
     const par=us.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
-    return{user,strokes,par,holes:us.length,rel:strokes-par};
+    const putts=us.reduce((a,s)=>a+(Number(s.putts)||0),0);
+    return{user,strokes,par,putts,holes:us.length,rel:strokes-par};
   }).filter(p=>p.holes>0).sort((a,b)=>a.rel-b.rel||a.strokes-b.strokes);
 }
 
 // ── RENDER ROOT ──
-function render() {
+function render(){
   const root=document.getElementById('root');
   if(S.loading){root.innerHTML='<div id="loading"><span>⛳</span> Loading…</div>';return;}
   if(!S.currentUser){renderLogin();return;}
-  const live=S.games.find(g=>g.status==='live');
   const onProfile=S.page==='profile';
   root.innerHTML=`
     <header>
@@ -312,7 +308,6 @@ function render() {
           <div><h1>SnakesTrap</h1><p>GOLF TOURNAMENT TRACKER</p></div>
         </div>
         <div class="header-right">
-          ${live?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':''}
           <div class="user-chip${onProfile?' active':''}" onclick="nav('profile')" title="View profile">
             🏌️ ${esc(S.currentUser.username)}
           </div>
@@ -327,17 +322,17 @@ function render() {
     </div></nav>
     <main id="page"></main>`;
   const pg=document.getElementById('page');
-  if     (S.page==='leaderboard') renderLeaderboard(pg);
-  else if(S.page==='score')       renderScore(pg);
-  else if(S.page==='profile')     renderProfile(pg);
-  else if(S.page==='games')       renderGames(pg);
+  if     (S.page==='leaderboard')renderLeaderboard(pg);
+  else if(S.page==='score')      renderScore(pg);
+  else if(S.page==='profile')    renderProfile(pg);
+  else if(S.page==='games')      renderGames(pg);
 }
 function nb(id,lbl){return `<button class="nav-btn${S.page===id?' active':''}" onclick="nav('${id}')">${lbl}</button>`;}
-function nav(p){S.page=p;SF={gameId:'',hole:'',strokes:'',loaded:false};render();}
+function nav(p){S.page=p;SF={gameId:'',hole:'',strokes:'',putts:'',loaded:false};render();}
 function signOut(){S.currentUser=null;localStorage.removeItem('gtf_session');S.page='leaderboard';render();}
 
 // ── LOGIN ──
-function renderLogin() {
+function renderLogin(){
   document.getElementById('root').innerHTML=`
     <div class="login-page">
       ${buildRainHTML()}
@@ -367,7 +362,7 @@ function renderLogin() {
   setTimeout(()=>document.getElementById('uname')?.focus(),80);
 }
 
-function renderPinJoin() {
+function renderPinJoin(){
   document.getElementById('root').innerHTML=`
     <div class="login-page">
       ${buildRainHTML()}
@@ -400,7 +395,7 @@ function renderPinJoin() {
 
 function switchMode(m){loginMode=m;renderLogin();setTimeout(()=>document.getElementById('uname')?.focus(),50);}
 
-function doAuth() {
+function doAuth(){
   const name=(document.getElementById('uname')?.value||'').trim();
   const err=document.getElementById('lerr');
   if(!name){err.innerHTML='<div class="error-msg">⚠️ Please enter a username</div>';return;}
@@ -409,7 +404,7 @@ function doAuth() {
     if(!u){err.innerHTML='<div class="error-msg">⚠️ Username not found — try registering!</div>';return;}
     S.currentUser=u;
     localStorage.setItem('gtf_session',JSON.stringify(u));
-  } else {
+  }else{
     if(S.users.find(u=>u.username.toLowerCase()===name.toLowerCase())){
       err.innerHTML='<div class="error-msg">⚠️ That username is already taken</div>';return;
     }
@@ -421,38 +416,43 @@ function doAuth() {
   renderPinJoin();
 }
 
-function doJoinPin() {
+function doJoinPin(){
   const pin=(document.getElementById('pin-input')?.value||'').trim().toUpperCase();
   if(!pin){skipPin();return;}
   const game=S.games.find(g=>String(g.pin).toUpperCase()===pin);
   if(!game){document.getElementById('perr').innerHTML='<div class="error-msg">⚠️ No game found with that PIN — check with your admin.</div>';return;}
-  S.page='score'; SF={gameId:game.id,hole:'',strokes:'',loaded:false}; render();
+  S.page='score';SF={gameId:game.id,hole:'',strokes:'',putts:'',loaded:false};render();
 }
 function skipPin(){S.page='leaderboard';render();}
 
-// ── LEADERBOARD ──
-function renderLeaderboard(el) {
-  const live=S.games.find(g=>g.status==='live');
+// ── LEADERBOARD — shows ALL live games ──
+function renderLeaderboard(el){
+  const uid=S.currentUser.id;
+  const liveGames=S.games.filter(g=>g.status==='live');
   const past=S.games.filter(g=>g.status==='finished').slice(-3).reverse();
-  let html=`<div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+  const hasLive=liveGames.length>0;
+
+  let html=`<div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
       <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
-      ${live?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
+      ${hasLive?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
     </div>
-    ${live?`<button class="btn btn-gold" style="padding:10px 20px;font-size:13px" onclick="nav('score')">✏️  Add Score</button>`:''}
+    ${hasLive?`<button class="btn btn-gold" style="padding:7px 14px;font-size:12px;box-shadow:0 2px 8px rgba(202,138,4,.35)" onclick="nav('score')">✏️ Add Score</button>`:''}
   </div>`;
-  if(!live&&!past.length){
+
+  if(!hasLive&&!past.length){
     html+=`<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game.</p></div>`;
   }
-  if(live) html+=buildBoard(live,true);
+  liveGames.forEach(g=>html+=buildBoard(g,true));
   past.forEach(g=>html+=buildBoard(g,false));
   el.innerHTML=html;
 }
 
-function buildBoard(game,isLive) {
+function buildBoard(game,isLive){
   const board=calcBoard(game);
   const pars=getPars(game);
   const pt=pars.reduce((a,b)=>a+b,0);
+  const hasPutts=board.some(p=>p.putts>0);
   const pinInline=(isLive&&game.pin)
     ?` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`
     :'';
@@ -462,19 +462,26 @@ function buildBoard(game,isLive) {
         <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)}</h2>
         <p style="color:#86efac;font-size:12px;line-height:1.6">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}${pinInline}</p>
       </div>
-      ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#6b7280;font-weight:700">FINAL</div>'}
+      ${isLive
+        ?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>'
+        :'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</div>'}
     </div>`;
   if(!board.length){
     html+=`<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;
-  } else {
-    html+=`<div class="card"><div class="lb-header"><span>POS</span><span>PLAYER</span><span style="text-align:center">HOLES</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>`;
+  }else{
+    const cols=hasPutts?'40px 1fr 52px 56px 52px 60px':'40px 1fr 52px 64px 64px';
+    html+=`<div class="card">
+      <div style="display:grid;grid-template-columns:${cols};padding:10px 18px;gap:4px;background:rgba(202,138,4,.12);font-size:10px;font-weight:800;color:#ca8a04;letter-spacing:.1em;border-bottom:1px solid rgba(202,138,4,.15)">
+        <span>POS</span><span>PLAYER</span><span style="text-align:center">HOLES</span><span style="text-align:center">STROKES</span>${hasPutts?'<span style="text-align:center">PUTTS</span>':''}<span style="text-align:right">SCORE</span>
+      </div>`;
     board.forEach((p,i)=>{
       const m=i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
-      html+=`<div class="lb-row${i===0?' gold':''}">
+      html+=`<div style="display:grid;grid-template-columns:${cols};padding:13px 18px;gap:4px;align-items:center;border-top:1px solid rgba(255,255,255,.05);${i===0?'background:rgba(202,138,4,.06)':''}">
         <span style="font-size:${i<3?18:14}px;font-weight:800;color:${i===0?'#fef08a':i===1?'#d1d5db':i===2?'#cd7f32':'#4b5563'}">${m}</span>
-        <span style="font-weight:${i===0?700:500};color:${i===0?'#fff':'#d1d5db'}">${esc(p.user.username)}</span>
+        <span style="font-weight:${i===0?700:500};color:${i===0?'#fff':'#d1d5db'};font-size:14px">${esc(p.user.username)}</span>
         <span style="text-align:center;color:#6b7280;font-size:12px">${p.holes}/${game.holes}</span>
-        <span style="text-align:center;font-weight:700">${p.strokes}</span>
+        <span style="text-align:center;font-weight:700;font-size:14px">${p.strokes}</span>
+        ${hasPutts?`<span style="text-align:center;color:#6b7280;font-size:12px">${p.putts||'—'}</span>`:''}
         <span style="text-align:right;font-weight:900;font-size:16px" class="${relClass(p.rel)}">${fmtScore(p.rel)}</span>
       </div>`;
     });
@@ -484,7 +491,7 @@ function buildBoard(game,isLive) {
 }
 
 // ── SCORE ENTRY ──
-function renderScore(el) {
+function renderScore(el){
   const liveGames=S.games.filter(g=>g.status==='live');
   if(!liveGames.length){
     el.innerHTML=`<h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px;margin-bottom:24px" class="fade-up">✏️ Score Entry</h1>
@@ -496,7 +503,7 @@ function renderScore(el) {
   const pars=selGame?getPars(selGame):[];
   const myS=selGame?S.scores.filter(s=>s.gameId===SF.gameId&&s.userId===S.currentUser.id).sort((a,b)=>a.hole-b.hole):[];
   const exist=SF.hole?myS.find(s=>s.hole===Number(SF.hole)):null;
-  if(exist&&!SF.loaded){SF.strokes=String(exist.strokes);SF.loaded=true;}
+  if(exist&&!SF.loaded){SF.strokes=String(exist.strokes);SF.putts=exist.putts!=null?String(exist.putts):'';SF.loaded=true;}
   const par=(SF.hole&&pars[Number(SF.hole)-1])?pars[Number(SF.hole)-1]:null;
   const numStr=parseInt(SF.strokes,10);
   const rel=(par&&numStr>0)?numStr-par:null;
@@ -504,19 +511,22 @@ function renderScore(el) {
 
   let scHtml='';
   if(selGame&&myS.length){
-    const tot=myS.reduce((a,s)=>a+s.strokes,0),ptr=myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    const tot=myS.reduce((a,s)=>a+s.strokes,0);
+    const ptr=myS.reduce((a,s)=>a+(pars[s.hole-1]||4),0);
+    const totP=myS.reduce((a,s)=>a+(Number(s.putts)||0),0);
+    const hasPutts=myS.some(s=>s.putts!=null&&s.putts>0);
     scHtml=`<div class="card">
       <div style="padding:14px 18px;background:rgba(202,138,4,.1);border-bottom:1px solid rgba(202,138,4,.15)">
         <div style="font-family:'Playfair Display',serif;color:#fef08a;font-size:15px">My Scorecard</div>
         <div style="color:#86efac;font-size:11px;margin-top:2px">${esc(selGame.name)}</div>
       </div>
-      <div class="sc-row sc-head"><span>HOLE</span><span style="text-align:center">PAR</span><span style="text-align:center">STROKES</span><span style="text-align:right">SCORE</span></div>
+      <div class="sc-row sc-head"><span>HOLE</span><span style="text-align:center">PAR</span><span style="text-align:center">STROKES</span><span style="text-align:center">PUTTS</span><span style="text-align:right">SCORE</span></div>
       <div style="max-height:250px;overflow-y:auto">
-        ${myS.map(s=>{const p=pars[s.hole-1]||4,r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
+        ${myS.map(s=>{const p=pars[s.hole-1]||4,r=s.strokes-p;return`<div class="sc-row sc-body"><span style="color:#9ca3af;font-weight:600">H${s.hole}</span><span style="text-align:center;color:#6b7280">${p}</span><span style="text-align:center;font-weight:700">${s.strokes}</span><span style="text-align:center;color:#6b7280">${s.putts!=null?s.putts:'—'}</span><span style="text-align:right;font-weight:800" class="${relClass(r)}">${fmtScore(r)}</span></div>`;}).join('')}
       </div>
-      <div class="sc-row sc-foot"><span style="color:#fef08a;font-weight:800">TOTAL</span><span style="text-align:center;color:#ca8a04;font-weight:700">${ptr}</span><span style="text-align:center;font-weight:800">${tot}</span><span style="text-align:right;font-weight:900;font-size:15px" class="${relClass(tot-ptr)}">${fmtScore(tot-ptr)}</span></div>
+      <div class="sc-row sc-foot"><span style="color:#fef08a;font-weight:800">TOTAL</span><span style="text-align:center;color:#ca8a04;font-weight:700">${ptr}</span><span style="text-align:center;font-weight:800">${tot}</span><span style="text-align:center;color:#6b7280;font-weight:700">${totP||'—'}</span><span style="text-align:right;font-weight:900;font-size:15px" class="${relClass(tot-ptr)}">${fmtScore(tot-ptr)}</span></div>
     </div>`;
-  } else {
+  }else{
     scHtml=`<div style="background:rgba(0,0,0,.2);border-radius:16px;padding:40px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:36px;margin-bottom:10px">${selGame?'📋 No holes entered yet':'📋 Select a game first'}</div></div>`;
   }
 
@@ -537,7 +547,8 @@ function renderScore(el) {
             <option value="">Select hole…</option>
             ${pars.map((p,i)=>{const h=i+1,done=myS.find(s=>s.hole===h);return`<option value="${h}"${SF.hole==h?' selected':''}>Hole ${h} · Par ${p}${done?' ✓':''}</option>`;}).join('')}
           </select></div>`:''}
-        ${selGame&&SF.hole?`<div class="form-group">
+        ${selGame&&SF.hole?`
+        <div class="form-group">
           <label class="form-label">STROKES ${exist?'<span style="color:#fbbf24">(editing)</span>':''}</label>
           <div class="stepper">
             <button class="step-btn" onclick="adjS(-1)">−</button>
@@ -545,7 +556,18 @@ function renderScore(el) {
               oninput="SF.strokes=this.value;SF.loaded=true;syncSaveBtn()">
             <button class="step-btn" onclick="adjS(1)">+</button>
             ${rel!==null?`<div style="display:flex;flex-direction:column"><span style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</span><span style="color:#4b5563;font-size:10px">vs par ${par}</span></div>`:''}
-          </div></div>`:''}
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">PUTTS <span style="color:#4b5563;font-weight:500">(optional)</span></label>
+          <div class="stepper">
+            <button class="step-btn" onclick="adjP(-1)">−</button>
+            <input class="step-val" type="number" min="0" max="10" value="${SF.putts||''}" id="pv"
+              oninput="SF.putts=this.value;SF.loaded=true">
+            <button class="step-btn" onclick="adjP(1)">+</button>
+            <span style="color:#4b5563;font-size:12px">on green</span>
+          </div>
+        </div>`:''}
         <button id="save-btn" class="btn btn-full" onclick="submitScore()"
           style="margin-top:4px;font-weight:800;font-size:15px;border:none;transition:all .2s;
           background:${canSave?'linear-gradient(135deg,#ca8a04,#a16207)':'rgba(255,255,255,.06)'};
@@ -559,9 +581,9 @@ function renderScore(el) {
     </div>`;
 }
 
-function syncSaveBtn() {
+function syncSaveBtn(){
   const inp=document.getElementById('sv');
-  if(inp) SF.strokes=inp.value;
+  if(inp)SF.strokes=inp.value;
   const ok=!!(SF.gameId&&SF.hole&&parseInt(SF.strokes,10)>0);
   const btn=document.getElementById('save-btn');
   if(!btn)return;
@@ -571,32 +593,39 @@ function syncSaveBtn() {
   btn.style.cursor=ok?'pointer':'not-allowed';
 }
 
-function sfGame(id){SF={gameId:id,hole:'',strokes:'',loaded:false};renderScore(document.getElementById('page'));}
-function sfHole(h){SF.hole=h;SF.strokes='';SF.loaded=false;renderScore(document.getElementById('page'));}
-function adjS(d) {
+function sfGame(id){SF={gameId:id,hole:'',strokes:'',putts:'',loaded:false};renderScore(document.getElementById('page'));}
+function sfHole(h){SF.hole=h;SF.strokes='';SF.putts='';SF.loaded=false;renderScore(document.getElementById('page'));}
+function adjS(d){
   const inp=document.getElementById('sv');
   const cur=inp?parseInt(inp.value,10):parseInt(SF.strokes,10);
   SF.strokes=String(Math.max(1,(isNaN(cur)?1:cur)+d));
-  SF.loaded=true;
-  if(inp)inp.value=SF.strokes;
-  syncSaveBtn();
-  renderScore(document.getElementById('page'));
+  SF.loaded=true;if(inp)inp.value=SF.strokes;
+  syncSaveBtn();renderScore(document.getElementById('page'));
 }
-function submitScore() {
-  const inp=document.getElementById('sv');
-  if(inp) SF.strokes=inp.value;
+function adjP(d){
+  const inp=document.getElementById('pv');
+  const cur=inp?parseInt(inp.value,10):parseInt(SF.putts,10);
+  SF.putts=String(Math.max(0,(isNaN(cur)?0:cur)+d));
+  SF.loaded=true;if(inp)inp.value=SF.putts;
+}
+function submitScore(){
+  const sv=document.getElementById('sv');
+  const pv=document.getElementById('pv');
+  if(sv)SF.strokes=sv.value;
+  if(pv)SF.putts=pv.value;
   const n=parseInt(SF.strokes,10);
+  const p=parseInt(SF.putts,10);
   if(!SF.gameId||!SF.hole||isNaN(n)||n<1)return;
-  const score={gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:n,timestamp:new Date().toISOString()};
+  const score={gameId:SF.gameId,userId:S.currentUser.id,hole:Number(SF.hole),strokes:n,putts:isNaN(p)?null:p,timestamp:new Date().toISOString()};
   saveScore(score);
-  SF.hole='';SF.strokes='';SF.loaded=false;
+  SF.hole='';SF.strokes='';SF.putts='';SF.loaded=false;
   const btn=document.getElementById('save-btn');
   if(btn){btn.textContent='✅  Saved!';btn.style.background='#16a34a';btn.style.boxShadow='none';}
   setTimeout(()=>renderScore(document.getElementById('page')),900);
 }
 
 // ── PROFILE ──
-function renderProfile(el) {
+function renderProfile(el){
   const uid=S.currentUser.id;
   const my=S.scores.filter(s=>s.userId===uid);
   const myGameIds=new Set([...my.map(s=>s.gameId),...S.games.filter(g=>g.createdBy===uid).map(g=>g.id)]);
@@ -650,17 +679,17 @@ function renderProfile(el) {
     :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No games yet — get out there!</p></div>`}`;
 }
 
-function exportCSV() {
+function exportCSV(){
   const my=S.scores.filter(s=>s.userId===S.currentUser.id);
-  const rows=[['Game','Course','Date','Hole','Par','Strokes','Score']];
-  S.games.forEach(g=>{const pars=getPars(g);my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{const p=pars[s.hole-1]||4;rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,fmtScore(s.strokes-p)]);});});
+  const rows=[['Game','Course','Date','Hole','Par','Strokes','Putts','Score']];
+  S.games.forEach(g=>{const pars=getPars(g);my.filter(s=>s.gameId===g.id).sort((a,b)=>a.hole-b.hole).forEach(s=>{const p=pars[s.hole-1]||4;rows.push([g.name,g.course,fmtDate(g.startTime),s.hole,p,s.strokes,s.putts??'',fmtScore(s.strokes-p)]);});});
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'));
   a.download=S.currentUser.username+'-scores.csv';a.click();
 }
 
 // ── GAMES TAB ──
-function renderGames(el) {
+function renderGames(el){
   const uid=S.currentUser.id;
   const joinSection=`
     <div class="join-card fade-up">
@@ -720,7 +749,7 @@ function renderGames(el) {
         <div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px">
             <span style="color:#f3f4f6;font-weight:700;font-size:16px">${esc(g.name)}</span>
-            <span class="status-badge status-${g.status}">${g.status==='live'?'● LIVE':g.status.toUpperCase()}</span>
+            <span class="status-badge status-${g.status}">${g.status==='live'?'● LIVE':g.status==='finished'?'✓ FINAL':'PENDING'}</span>
             ${isOwner?'<span style="background:rgba(202,138,4,.15);color:#fbbf24;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.06em">YOUR GAME</span>':''}
           </div>
           <div style="color:#4b5563;font-size:12px">${esc(g.course)} · ${g.holes} holes · Par ${pt}${g.startTime?' · Started '+fmtDate(g.startTime):''}${g.endTime?' · Ended '+fmtDate(g.endTime):''}</div>
@@ -728,7 +757,7 @@ function renderGames(el) {
         <div style="display:flex;gap:8px;flex-shrink:0;align-items:center">
           ${isOwner&&g.status==='pending'?`<button class="btn btn-green" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','live')">▶ Start</button><button class="btn btn-ghost" style="padding:8px 12px;font-size:13px" onclick="delGame('${g.id}')">🗑</button>`:''}
           ${isOwner&&g.status==='live'?`<button class="btn btn-red" style="padding:8px 16px;font-size:12px" onclick="setStatus('${g.id}','finished')">⏹ End Game</button>`:''}
-          ${g.status==='finished'?`<span style="color:#374151;font-size:12px">Completed</span>`:''}
+          ${g.status==='finished'?`<span style="color:#4ade80;font-size:12px;font-weight:600">✓ Complete</span>`:''}
         </div>
       </div>
       ${pinBlock}
@@ -747,20 +776,20 @@ function renderGames(el) {
     </div>`;
 }
 
-function joinByPin() {
+function joinByPin(){
   const pin=(document.getElementById('join-pin')?.value||'').trim().toUpperCase();
   const err=document.getElementById('jerr');
   if(!pin){err.innerHTML='<div class="error-msg">⚠️ Please enter a PIN</div>';return;}
   const game=S.games.find(g=>String(g.pin).toUpperCase()===pin);
   if(!game){err.innerHTML='<div class="error-msg">⚠️ No game found with that PIN</div>';return;}
-  S.page='score';SF={gameId:game.id,hole:'',strokes:'',loaded:false};render();
+  S.page='score';SF={gameId:game.id,hole:'',strokes:'',putts:'',loaded:false};render();
 }
 
 function toggleForm(){AF.open=!AF.open;renderGames(document.getElementById('page'));}
 function setHoles(n){AF.holes=Number(n);AF.pars=Array(Number(n)).fill(0).map((_,i)=>AF.pars[i]||4);renderGames(document.getElementById('page'));}
 function setPar(i,v){AF.pars[i]=Number(v);}
 
-function createGame() {
+function createGame(){
   const name=(document.getElementById('af-name')?.value||AF.name).trim();
   const course=(document.getElementById('af-course')?.value||AF.course).trim();
   if(!name||!course){alert('Please fill in game name and course.');return;}
@@ -771,17 +800,16 @@ function createGame() {
   renderGames(document.getElementById('page'));
 }
 
-function setStatus(id,status) {
+function setStatus(id,status){
   const updated=S.games.map(g=>g.id===id?{...g,status,...(status==='live'?{startTime:new Date().toISOString()}:{}),...(status==='finished'?{endTime:new Date().toISOString()}:{})}:g);
   persistGames(updated);render();
 }
-function delGame(id) {
+function delGame(id){
   if(!confirm('Delete this game?'))return;
   persistGames(S.games.filter(g=>g.id!==id));
   renderGames(document.getElementById('page'));
 }
 
-// ── BOOT ──
 render();
 loadAll();
 </script>
