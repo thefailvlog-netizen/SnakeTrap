@@ -361,6 +361,7 @@ function openGameDetail(gameId){
             if(!sc)return`<td style="color:#374151">—</td>`;
             const par=pars[h-1]||4;const rel=sc.strokes-par;
             let cls='hxh-par';
+            if(sc.strokes===1)return`<td><span class="hxh-eagle" title="Hole in one!">🏆1</span></td>`;
             if(rel<=-2)cls='hxh-eagle';
             else if(rel===-1)cls='hxh-birdie';
             else if(rel===1)cls='hxh-bogey';
@@ -373,22 +374,25 @@ function openGameDetail(gameId){
           return`<tr><td>${esc(user.username)}</td>${cells}<td><strong class="${relClass(totRel)}">${fmtScore(totRel)}</strong></td></tr>`;
         }).join('')}
         <tr>
-          <td style="color:#ca8a04">PAR</td>
-          ${holes.map(h=>`<td style="color:#6b7280">${pars[h-1]||4}</td>`).join('')}
-          <td style="color:#ca8a04"><strong>${pars.reduce((a,b)=>a+b,0)}</strong></td>
+          <td style="color:#d1d5db;font-weight:700">PAR</td>
+          ${holes.map(h=>`<td style="color:#d1d5db">${pars[h-1]||4}</td>`).join('')}
+          <td style="color:#d1d5db"><strong>${pars.reduce((a,b)=>a+b,0)}</strong></td>
         </tr>
       </tbody>
     </table></div>
-    <p style="color:#374151;font-size:10px">🦅 Eagle  🟢 Birdie  ⬜ Par  🔴 Bogey  🔴🔴 Double+</p>`;
+    <p style="color:#6b7280;font-size:10px;margin-top:6px">🏆 Ace  🦅 Eagle  🟢 Birdie  ⬜ Par  🔴 Bogey  🔴🔴 Double+</p>`;
   }
 
   const isLive=game.status==='live';
   openModal(`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
-        <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px">${esc(game.name)}</h2>
-        ${isLive?'<div class="live-badge" style="font-size:10px"><span class="live-dot"></span>LIVE</div>':'<span style="background:rgba(255,255,255,.07);border-radius:20px;padding:3px 12px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</span>'}
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px">${esc(game.name)}</h2>
+          ${isLive?'<div class="live-badge" style="font-size:10px"><span class="live-dot"></span>LIVE</div>':'<span style="background:rgba(255,255,255,.07);border-radius:20px;padding:3px 12px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</span>'}
+        </div>
+        ${isLive?`<button class="btn btn-gold" style="padding:7px 14px;font-size:12px;flex-shrink:0" onclick="closeModal();nav('score')">✏️ Add Score</button>`:''}
       </div>
       <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${pars.reduce((a,b)=>a+b,0)}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
     </div>
@@ -524,11 +528,11 @@ function buildBoard(game,isLive){
   const hasPutts=board.some(p=>p.putts>0);
   const pinInline=(isLive&&game.pin)?` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`:'';
   // Finished games are clickable to show detail
-  const clickable=!isLive?`onclick="openGameDetail('${game.id}')" style="cursor:pointer"`:'';
+  const clickable=`onclick="openGameDetail('${game.id}')" style="cursor:pointer"`;
   let html=`<div style="margin-bottom:30px">
-    <div ${clickable} style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;${!isLive?'cursor:pointer':''}" ${isLive?'':''}>
+    <div ${clickable} style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;cursor:pointer">
       <div>
-        <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)}${!isLive?' <span style="font-size:13px;color:#6b7280;font-weight:400">↗</span>':''}</h2>
+        <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)} <span style="font-size:13px;color:#6b7280;font-weight:400">↗</span></h2>
         <p style="color:#86efac;font-size:12px;line-height:1.6">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}${pinInline}</p>
       </div>
       ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</div>'}
@@ -553,7 +557,7 @@ function buildBoard(game,isLive){
     });
     html+=`</div>`;
   }
-  if(!isLive){html+=`<p style="color:#374151;font-size:11px;margin-top:6px;text-align:right;cursor:pointer" onclick="openGameDetail('${game.id}')">Tap to see hole-by-hole →</p>`;}
+  html+=`<p style="color:#374151;font-size:11px;margin-top:6px;text-align:right;cursor:pointer" onclick="openGameDetail('${game.id}')">Tap to see ${isLive?'live scorecard':'hole-by-hole'} →</p>`;
   return html+`</div>`;
 }
 
