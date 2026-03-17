@@ -36,7 +36,7 @@
     .logo p  { color:#4ade80; font-size:9px; letter-spacing:.08em; margin-top:1px; display:none; }
     @media(min-width:480px){ .logo p { display:block; } .logo h1 { font-size:18px; } .logo-icon { font-size:28px; } }
     .header-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-    .live-badge { display:flex; align-items:center; gap:5px; background:#dc2626; border-radius:20px; padding:4px 10px; font-size:10px; font-weight:800; letter-spacing:.08em; animation:pulseLive 1.9s ease-in-out infinite; white-space:nowrap; }
+    .live-badge { display:inline-flex; align-items:center; gap:5px; background:#dc2626; border-radius:20px; padding:4px 10px; font-size:10px; font-weight:800; letter-spacing:.08em; animation:pulseLive 1.9s ease-in-out infinite; white-space:nowrap; width:fit-content; flex-shrink:0; }
     .live-dot { width:6px; height:6px; background:#fff; border-radius:50%; animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
     .user-chip { display:flex; align-items:center; gap:5px; background:rgba(0,0,0,.35); border-radius:10px; padding:5px 10px; font-size:12px; color:#d1fae5; font-weight:600; cursor:pointer; border:1px solid transparent; transition:border-color .2s; user-select:none; white-space:nowrap; max-width:120px; overflow:hidden; text-overflow:ellipsis; }
     .user-chip:hover { border-color:rgba(202,138,4,.4); }
@@ -385,16 +385,18 @@ function openGameDetail(gameId){
 
   const isLive=game.status==='live';
   openModal(`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px">${esc(game.name)}</h2>
-          ${isLive?'<div class="live-badge" style="font-size:10px"><span class="live-dot"></span>LIVE</div>':'<span style="background:rgba(255,255,255,.07);border-radius:20px;padding:3px 12px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</span>'}
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+          <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:19px;line-height:1.2">${esc(game.name)}</h2>
+          ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<span style="background:rgba(255,255,255,.07);border-radius:20px;padding:3px 10px;font-size:10px;color:#4ade80;font-weight:700;white-space:nowrap">✓ FINAL</span>'}
         </div>
-        ${isLive?`<button class="btn btn-gold" style="padding:7px 14px;font-size:12px;flex-shrink:0" onclick="closeModal();nav('score')">✏️ Add Score</button>`:''}
+        <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${pars.reduce((a,b)=>a+b,0)}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
       </div>
-      <p style="color:#86efac;font-size:12px">${esc(game.course)} · ${game.holes} holes · Par ${pars.reduce((a,b)=>a+b,0)}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        ${isLive?`<button class="btn btn-gold" style="padding:6px 10px;font-size:11px;white-space:nowrap" onclick="closeModal();nav('score')">✏️ +Score</button>`:''}
+        <button onclick="closeModal()" style="background:rgba(255,255,255,.08);border:none;border-radius:8px;color:#9ca3af;font-size:14px;width:30px;height:30px;cursor:pointer;flex-shrink:0;font-family:inherit;line-height:1">✕</button>
+      </div>
     </div>
     ${lbHtml}
     ${hxhHtml||`<p style="color:#374151;font-size:13px;text-align:center">No scores yet</p>`}
@@ -509,10 +511,7 @@ function renderLeaderboard(el){
   const past=sortGames(S.games.filter(g=>g.status==='finished')).slice(0,3);
   const hasLive=liveGames.length>0;
   let html=`<div class="fade-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
-      ${hasLive?'<span style="font-size:12px;color:#86efac;background:rgba(22,163,74,.15);padding:3px 10px;border-radius:20px;font-weight:600">Game in progress</span>':''}
-    </div>
+    <h1 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:24px">🏆 Leaderboard</h1>
     ${hasLive?`<button class="btn btn-gold" style="padding:7px 14px;font-size:12px;box-shadow:0 2px 8px rgba(202,138,4,.35)" onclick="nav('score')">✏️ Add Score</button>`:''}
   </div>`;
   if(!hasLive&&!past.length){html+=`<div class="empty"><div class="icon">⛳</div><h2>No games yet</h2><p style="max-width:260px;margin:8px auto 0;line-height:1.6">An admin needs to create and start a game.</p></div>`;}
@@ -526,16 +525,18 @@ function buildBoard(game,isLive){
   const pars=getPars(game);
   const pt=pars.reduce((a,b)=>a+b,0);
   const hasPutts=board.some(p=>p.putts>0);
-  const pinInline=(isLive&&game.pin)?` · <span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`:'';
+  const pinInline=(isLive&&game.pin)?`<span class="pin-inline">🔑 <span class="pin-val">${esc(game.pin)}</span> <button class="pin-mini-copy" id="mc-${game.id}" onclick="copyPinMini('${esc(game.pin)}','mc-${game.id}')" title="Copy PIN">📋</button></span>`:'';
   // Finished games are clickable to show detail
   const clickable=`onclick="openGameDetail('${game.id}')" style="cursor:pointer"`;
   let html=`<div style="margin-bottom:30px">
     <div ${clickable} style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;cursor:pointer">
-      <div>
+      <div style="flex:1;min-width:0">
         <h2 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:20px;margin-bottom:4px">${esc(game.name)} <span style="font-size:13px;color:#6b7280;font-weight:400">↗</span></h2>
-        <p style="color:#86efac;font-size:12px;line-height:1.6">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}${pinInline}</p>
+        <p style="color:#86efac;font-size:12px;line-height:1.6">${esc(game.course)} · ${game.holes} holes · Par ${pt}${game.startTime?' · '+fmtDate(game.startTime):''}</p>
       </div>
-      ${isLive?'<div class="live-badge"><span class="live-dot"></span>LIVE</div>':'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#4ade80;font-weight:700">✓ FINAL</div>'}
+      ${isLive
+        ?'<div class="live-badge" style="align-self:flex-start;flex-shrink:0"><span class="live-dot"></span>LIVE</div>'
+        :'<div style="background:rgba(255,255,255,.07);border-radius:20px;padding:4px 14px;font-size:11px;color:#4ade80;font-weight:700;align-self:flex-start;flex-shrink:0;white-space:nowrap">✓ FINAL</div>'}
     </div>`;
   if(!board.length){html+=`<div style="background:rgba(0,0,0,.2);border-radius:14px;padding:36px;text-align:center;color:#374151;border:1px dashed rgba(255,255,255,.07)"><div style="font-size:32px;margin-bottom:8px">🏌️</div>No scores yet — get out there!</div>`;}
   else{
@@ -557,7 +558,11 @@ function buildBoard(game,isLive){
     });
     html+=`</div>`;
   }
-  html+=`<p style="color:#374151;font-size:11px;margin-top:6px;text-align:right;cursor:pointer" onclick="openGameDetail('${game.id}')">Tap to see ${isLive?'live scorecard':'hole-by-hole'} →</p>`;
+  // PIN + tap hint on same line below board
+  html+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:8px">
+    <div>${isLive&&game.pin?pinInline:''}</div>
+    <p style="color:#6b7280;font-size:11px;cursor:pointer;flex-shrink:0" onclick="openGameDetail('${game.id}')">Tap to see ${isLive?'live scorecard':'hole-by-hole'} →</p>
+  </div>`;
   return html+`</div>`;
 }
 
@@ -674,7 +679,15 @@ function renderProfile(el){
           ${rel!==null?`<div style="font-weight:900;font-size:20px;line-height:1" class="${relClass(rel)}">${fmtScore(rel)}</div><div style="color:#6b7280;font-size:12px;margin-top:3px">${pos?'#'+pos+' · ':' '}${tot} strokes</div>`:`<div style="color:#6b7280;font-size:12px">Organiser only</div>`}
         </div>
       </div>`).join('')}`
-    :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No games yet — get out there!</p></div>`}`;
+    :`<div class="empty"><div class="icon">📋</div><p style="color:#4b5563">No games yet — get out there!</p></div>`}
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)">
+      <h3 style="font-family:'Playfair Display',serif;color:#fef08a;font-size:15px;margin-bottom:10px">💬 Support</h3>
+      <a href="mailto:thefailvlog@gmail.com?subject=SnakeTrap%20App%20Support"
+        style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;color:#9ca3af;font-size:13px;font-weight:600;text-decoration:none;transition:border-color .2s"
+        onmouseover="this.style.borderColor='rgba(202,138,4,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
+        ✉️ Email the builder
+      </a>
+    </div>`;
 }
 function exportCSV(){
   const my=S.scores.filter(s=>s.userId===S.currentUser.id);
